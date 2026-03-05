@@ -55,6 +55,7 @@ import StaffTournaments from './pages/staff/StaffTournaments'
 import StaffPOS from './pages/staff/StaffPOS'
 import StaffRefunds from './pages/staff/StaffRefunds'
 import StaffMaintenance from './pages/staff/StaffMaintenance'
+import StaffEquipment from './pages/staff/StaffEquipment'
 
 // Customer
 import CustomerDashboard from './pages/customer/CustomerDashboard'
@@ -125,7 +126,7 @@ export default function App() {
             <Route path="pos" element={<StaffPOS />} />
             <Route path="refunds" element={<StaffRefunds />} />
             <Route path="maintenance" element={<StaffMaintenance />} />
-            <Route path="equipment" element={<StaffMaintenance />} />
+            <Route path="equipment" element={<StaffEquipment />} />
           </Route>
 
           {/* Customer Dashboard */}
