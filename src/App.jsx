@@ -60,6 +60,7 @@ import StaffMaintenance from './pages/staff/StaffMaintenance'
 import CustomerDashboard from './pages/customer/CustomerDashboard'
 import CustomerBookings from './pages/customer/CustomerBookings'
 import CustomerTeams from './pages/customer/CustomerTeams'
+import CustomerMatches from './pages/customer/CustomerMatches'
 import CustomerTournaments from './pages/customer/CustomerTournaments'
 import CustomerWallet from './pages/customer/CustomerWallet'
 import CustomerProfile from './pages/customer/CustomerProfile'
@@ -132,7 +133,7 @@ export default function App() {
             <Route index element={<CustomerDashboard />} />
             <Route path="bookings" element={<CustomerBookings />} />
             <Route path="teams" element={<CustomerTeams />} />
-            <Route path="matches" element={<CustomerTeams />} />
+            <Route path="matches" element={<CustomerMatches />} />
             <Route path="tournaments" element={<CustomerTournaments />} />
             <Route path="wallet" element={<CustomerWallet />} />
             <Route path="profile" element={<CustomerProfile />} />
