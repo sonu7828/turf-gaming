@@ -39,7 +39,8 @@ import SportsManagement from './pages/owner/SportsManagement'
 import SlotManagement from './pages/owner/SlotManagement'
 import BookingManagement from './pages/owner/BookingManagement'
 import TournamentManagement from './pages/owner/TournamentManagement'
-import TeamsPlayers from './pages/owner/TeamsPlayers'
+import TeamManagement from './pages/owner/TeamManagement'
+import PlayerManagement from './pages/owner/PlayerManagement'
 import PlayerBids from './pages/owner/PlayerBids'
 import WalletPage from './pages/owner/WalletPage'
 import ReportsPage from './pages/owner/ReportsPage'
@@ -105,8 +106,8 @@ export default function App() {
             <Route path="slots" element={<SlotManagement />} />
             <Route path="bookings" element={<BookingManagement />} />
             <Route path="tournaments" element={<TournamentManagement />} />
-            <Route path="teams" element={<TeamsPlayers />} />
-            <Route path="players" element={<TeamsPlayers />} />
+            <Route path="teams" element={<TeamManagement />} />
+            <Route path="players" element={<PlayerManagement />} />
             <Route path="bids" element={<PlayerBids />} />
             <Route path="wallet" element={<WalletPage />} />
             <Route path="reports" element={<ReportsPage />} />

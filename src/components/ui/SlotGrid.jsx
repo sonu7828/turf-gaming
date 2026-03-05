@@ -8,8 +8,8 @@ export default function SlotGrid({ slots = [], onSelect, selectedSlot }) {
                 return (
                     <button
                         key={slot.id}
-                        onClick={() => !isBooked && !isBlocked && onSelect?.(slot)}
-                        disabled={isBooked || isBlocked}
+                        onClick={() => !isBooked && onSelect?.(slot)}
+                        disabled={isBooked}
                         className={`px-3 py-2.5 rounded-xl text-xs font-medium transition-all duration-200 border cursor-pointer disabled:cursor-not-allowed ${isSelected ? 'bg-primary-600 text-white border-primary-600 shadow-soft-md' :
                                 isBooked ? 'bg-surface-100 text-surface-400 border-surface-200' :
                                     isBlocked ? 'bg-red-50 text-danger-500 border-red-200' :
