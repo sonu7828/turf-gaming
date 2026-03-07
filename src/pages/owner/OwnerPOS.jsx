@@ -8,7 +8,7 @@ import StatCard from '../../components/ui/StatCard'
 import Badge from '../../components/ui/Badge'
 import { HiPlus, HiTrash, HiPrinter, HiDownload, HiRefresh } from 'react-icons/hi'
 
-export default function StaffPOS() {
+export default function OwnerPOS() {
     const { addToast } = useToast()
     const [cart, setCart] = useState([])
     const [paymentMethod, setPaymentMethod] = useState('')
@@ -58,6 +58,7 @@ export default function StaffPOS() {
         }
 
         setCart([...cart, newItem])
+        // Reset only partial fields to keep turf/sport for next booking if needed
         setBooking({ ...booking, slot: '', price: '' })
         addToast({ title: 'Added', message: 'Booking added to bill', type: 'success' })
     }
@@ -109,7 +110,7 @@ export default function StaffPOS() {
             total,
             method: paymentMethod,
             date: new Date().toLocaleString(),
-            id: `STF-INV-${Math.floor(Math.random() * 90000) + 10000}`
+            id: `INV-${Math.floor(Math.random() * 90000) + 10000}`
         }
 
         setLastBill(billData)
@@ -150,7 +151,7 @@ export default function StaffPOS() {
 
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 no-print">
                 <div>
-                    <h1 className="text-2xl font-bold text-surface-900">POS Billing</h1>
+                    <h1 className="text-2xl font-bold text-surface-900">Point of Sale (POS)</h1>
                     <p className="text-surface-500 text-sm mt-1">Manage walk-in bookings and counter sales</p>
                 </div>
                 {isSuccess && (
@@ -199,9 +200,9 @@ export default function StaffPOS() {
                 <>
                 {/* Stats */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 no-print">
-                    <StatCard label="Today's Sales" value="₹2,840" change="+15%" trend="up" icon="💰" />
-                    <StatCard label="Bookings" value="6" icon="📅" />
-                    <StatCard label="Items Sold" value="18" icon="📦" />
+                    <StatCard label="Today's POS Sales" value="₹4,250" change="+12%" trend="up" icon="💰" />
+                    <StatCard label="Walk-in Bookings" value="8" change="+2" trend="up" icon="📅" />
+                    <StatCard label="Items Sold" value="24" icon="📦" />
                 </div>
 
                 <div className="grid lg:grid-cols-3 gap-6 no-print">
@@ -323,13 +324,12 @@ export default function StaffPOS() {
                 </>
             )}
 
-            {/* Hidden Printable Invoice */}
+            {/* Hidden Printable Invoice - This appears only when printing */}
             {lastBill && (
                 <div id="printable-bill" style={{ display: 'none' }} className="print-only-block bg-white p-8 font-sans">
                     <div className="text-center border-b-2 pb-6 mb-6">
                         <h1 className="text-2xl font-bold text-gray-900">SGBOS TURF MANAGEMENT</h1>
-                        <p className="text-gray-500 text-sm">Staff Billing Terminal</p>
-                        <p className="text-gray-500 mt-2">Invoice ID: #{lastBill.id}</p>
+                        <p className="text-gray-500">Invoice ID: #{lastBill.id}</p>
                         <p className="text-gray-500">{lastBill.date}</p>
                     </div>
                     
@@ -349,8 +349,8 @@ export default function StaffPOS() {
                                     <tr key={item.id} className="border-b">
                                         <td className="py-4 text-gray-800">{item.name}</td>
                                         <td className="py-4 text-center">{item.qty}</td>
-                                        <td className="py-4 text-right">₹{item.price}</td>
-                                        <td className="py-4 text-right font-semibold">₹{item.price * item.qty}</td>
+                                        <td className="py-4 text-right whitespace-nowrap">₹{item.price}</td>
+                                        <td className="py-4 text-right whitespace-nowrap font-semibold">₹{item.price * item.qty}</td>
                                     </tr>
                                 ))}
                             </tbody>
@@ -376,7 +376,7 @@ export default function StaffPOS() {
                     
                     <div className="mt-12 text-center text-gray-400 text-sm">
                         <p>Thank you for visit!</p>
-                        <p>Staff Terminal Generated Invoice.</p>
+                        <p>Computer generated invoice.</p>
                     </div>
                 </div>
             )}

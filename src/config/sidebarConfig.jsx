@@ -19,6 +19,7 @@ const sidebarConfig = {
         { label: 'Sports', icon: <HiBolt />, path: '/owner/sports' },
         { label: 'Slots', icon: <HiCalendar />, path: '/owner/slots' },
         { label: 'Bookings', icon: <HiTicket />, path: '/owner/bookings' },
+        { label: 'POS', icon: <HiCreditCard />, path: '/owner/pos' },
         { label: 'Tournaments', icon: <HiTrophy />, path: '/owner/tournaments' },
         { label: 'Teams', icon: <HiUserGroup />, path: '/owner/teams' },
         { label: 'Players', icon: <HiUser />, path: '/owner/players' },

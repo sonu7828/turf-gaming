@@ -47,6 +47,7 @@ import ReportsPage from './pages/owner/ReportsPage'
 import InventoryPage from './pages/owner/InventoryPage'
 import MaintenancePage from './pages/owner/MaintenancePage'
 import StaffManagement from './pages/owner/StaffManagement'
+import OwnerPOS from './pages/owner/OwnerPOS'
 
 // Staff
 import StaffDashboard from './pages/staff/StaffDashboard'
@@ -116,6 +117,7 @@ export default function App() {
             <Route path="inventory" element={<InventoryPage />} />
             <Route path="maintenance" element={<MaintenancePage />} />
             <Route path="staff" element={<StaffManagement />} />
+            <Route path="pos" element={<OwnerPOS />} />
           </Route>
 
           {/* Staff Dashboard */}
