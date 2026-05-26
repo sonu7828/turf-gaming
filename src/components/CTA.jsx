@@ -19,7 +19,7 @@ export default function CTA() {
                         <span className="text-gradient">Like a Pro</span>
                     </h2>
                     <p className="text-slate-400 text-lg max-w-xl mx-auto leading-relaxed">
-                        Join 500+ facilities already using SGBOS to streamline operations,
+                        Join 500+ facilities already using SportMatrix to streamline operations,
                         boost revenue, and deliver exceptional customer experiences.
                     </p>
                     <div className="flex flex-wrap justify-center gap-4 pt-4">

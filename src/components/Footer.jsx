@@ -15,11 +15,9 @@ export default function Footer() {
             <div className="max-w-7xl mx-auto px-6 py-16">
                 <div className="grid md:grid-cols-2 lg:grid-cols-6 gap-12">
                     <div className="lg:col-span-2 space-y-5">
-                        <div className="flex items-center gap-2">
-                            <div className="w-9 h-9 rounded-lg bg-emerald-500 flex items-center justify-center font-bold text-white text-sm">
-                                SG
-                            </div>
-                            <span className="text-lg font-bold text-white tracking-tight">SGBOS</span>
+                        <div className="flex items-center gap-2.5 mb-6">
+                            <div className="w-10 h-10 rounded-xl bg-primary-600 flex items-center justify-center font-bold text-white text-sm">SM</div>
+                            <span className="text-lg font-bold text-white tracking-tight">SportMatrix</span>
                         </div>
                         <p className="text-sm text-slate-400 leading-relaxed max-w-xs">
                             The complete digital operating system for sports turfs, gaming arenas,
@@ -61,7 +59,7 @@ export default function Footer() {
 
                 <div className="mt-16 pt-8 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4">
                     <p className="text-sm text-slate-600">
-                        © {new Date().getFullYear()} SGBOS. All rights reserved.
+                        © {new Date().getFullYear()} SportMatrix. All rights reserved.
                     </p>
                     <p className="text-sm text-slate-600">
                         Sports & Gaming Business Operating System

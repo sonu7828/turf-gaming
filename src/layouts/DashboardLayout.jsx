@@ -13,9 +13,10 @@ export default function DashboardLayout({ role = 'owner' }) {
     return (
         <div className="min-h-screen bg-surface-50 flex">
             <aside className={`fixed lg:sticky top-0 left-0 h-screen w-64 bg-white border-r border-surface-200 flex flex-col z-50 transition-transform duration-300 ${sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}`}>
-                <div className="h-16 flex items-center gap-2.5 px-5 border-b border-surface-100 shrink-0">
-                    <div className="w-8 h-8 rounded-lg bg-primary-600 flex items-center justify-center font-bold text-white text-xs">SG</div>
-                    <span className="font-bold text-surface-900 tracking-tight">SGBOS</span>
+                {/* Sidebar Header */}
+                <div className="p-6 flex items-center gap-3 border-b border-surface-200">
+                    <div className="w-8 h-8 rounded-lg bg-primary-600 flex items-center justify-center font-bold text-white text-sm">SM</div>
+                    <span className="font-bold text-surface-900 tracking-tight">SportMatrix</span>
                     <button onClick={() => setSidebarOpen(false)} className="lg:hidden ml-auto p-1 rounded-lg hover:bg-surface-100 cursor-pointer">
                         <HiX className="w-5 h-5 text-surface-500" />
                     </button>

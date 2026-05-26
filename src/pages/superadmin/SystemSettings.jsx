@@ -30,7 +30,7 @@ export default function SystemSettings() {
                     <div className="space-y-4">
                         <Input label="Provider" placeholder="Twilio" />
                         <Input label="API Key" placeholder="Enter API key" />
-                        <Input label="Sender ID" placeholder="SGBOS" />
+                        <Input label="Sender ID" placeholder="SportMatrix" />
                         <Button>Save Config</Button>
                     </div>
                 </Card>

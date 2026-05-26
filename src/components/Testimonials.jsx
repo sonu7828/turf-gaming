@@ -7,7 +7,7 @@ const testimonials = [
         name: 'Rajesh Kumar',
         role: 'Turf Owner, Chennai',
         quote:
-            'SGBOS transformed how we manage our three turf locations. Revenue tracking and slot management are now effortless. Our booking rate increased by 40% in the first quarter.',
+            'SportMatrix transformed how we manage our three turf locations. Revenue tracking and slot management are now effortless. Our booking rate increased by 40% in the first quarter.',
         avatar: 'RK',
         rating: 5,
     },
@@ -40,7 +40,7 @@ export default function Testimonials() {
                 </h2>
                 <GreenDivider className="!my-4" />
                 <p className="text-slate-400 text-lg max-w-2xl mx-auto">
-                    Hear from facility owners and managers who transformed their business with SGBOS.
+                    Hear from facility owners and managers who transformed their business with SportMatrix.
                 </p>
             </div>
 

@@ -1,14 +1,13 @@
-import { useState } from 'react'
-import Card from '../../components/ui/Card'
-import Button from '../../components/ui/Button'
+import { useState, useEffect } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
+import { HiArrowLeft } from 'react-icons/hi'
 import SlotGrid from '../../components/ui/SlotGrid'
-import Badge from '../../components/ui/Badge'
 
 const addOns = [
-    { id: 1, name: 'Water Bottles (6)', price: 120 },
-    { id: 2, name: 'Energy Drinks (4)', price: 200 },
-    { id: 3, name: 'Equipment Rental', price: 300 },
-    { id: 4, name: 'Photographer', price: 500 },
+    { id: 1, name: 'Premium Hydration Pack (6)', price: 120 },
+    { id: 2, name: 'Energy Elixir (4)', price: 200 },
+    { id: 3, name: 'Pro Equipment Authorization', price: 300 },
+    { id: 4, name: 'Match Recording / Drone', price: 500 },
 ]
 
 const generateSlots = () => {
@@ -20,87 +19,200 @@ const generateSlots = () => {
 }
 
 export default function SlotBookingPage() {
+    const { id } = useParams()
+    const navigate = useNavigate()
     const [selectedDate, setSelectedDate] = useState('2026-03-15')
     const [selectedSlot, setSelectedSlot] = useState(null)
     const [selectedAddOns, setSelectedAddOns] = useState([])
-    const [sport, setSport] = useState('Cricket')
+    const [sport, setSport] = useState('Football')
     const slots = generateSlots()
 
-    const toggleAddOn = (id) => {
-        setSelectedAddOns(prev => prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id])
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [])
+
+    const toggleAddOn = (addOnId) => {
+        setSelectedAddOns(prev => prev.includes(addOnId) ? prev.filter(x => x !== addOnId) : [...prev, addOnId])
     }
 
     const slotPrice = selectedSlot !== null ? slots[selectedSlot]?.price || 0 : 0
-    const addOnTotal = selectedAddOns.reduce((sum, id) => sum + (addOns.find(a => a.id === id)?.price || 0), 0)
+    const addOnTotal = selectedAddOns.reduce((sum, addOnId) => sum + (addOns.find(a => a.id === addOnId)?.price || 0), 0)
     const total = slotPrice + addOnTotal
 
     return (
-        <div className="max-w-7xl mx-auto px-6 py-12">
-            <h1 className="text-3xl font-bold text-surface-900 mb-2">Book a Slot</h1>
-            <p className="text-surface-500 mb-10">Select your date, time slot, and add-ons</p>
+        <div className="min-h-screen bg-slate-950 pt-24 pb-16 relative">
+            {/* Background Map Overlay */}
+            <div className="absolute inset-x-0 top-0 h-[50vh] z-0 pointer-events-none opacity-20">
+                <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-20" />
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-slate-950/80 to-slate-950" />
+            </div>
 
-            <div className="grid lg:grid-cols-3 gap-8">
-                <div className="lg:col-span-2 space-y-6">
-                    {/* Sport & Date */}
-                    <Card>
-                        <h2 className="text-lg font-semibold text-surface-900 mb-4">Select Sport & Date</h2>
-                        <div className="flex flex-wrap gap-2 mb-5">
-                            {['Cricket', 'Football', 'Badminton'].map(s => (
-                                <button key={s} onClick={() => setSport(s)} className={`px-4 py-2 rounded-xl text-sm font-medium transition-all cursor-pointer ${sport === s ? 'bg-primary-600 text-white shadow-soft-md' : 'bg-surface-100 text-surface-600 hover:bg-surface-200'}`}>{s}</button>
-                            ))}
-                        </div>
-                        <input type="date" value={selectedDate} onChange={e => setSelectedDate(e.target.value)} className="px-4 py-2.5 border border-surface-200 rounded-xl text-sm outline-none focus:border-primary-500 w-full sm:w-auto" />
-                    </Card>
+            <div className="max-w-7xl mx-auto px-6 relative z-10">
+                <button
+                    onClick={() => navigate(`/turfs/${id || 1}`)}
+                    className="inline-flex items-center gap-2 text-xs font-bold tracking-widest uppercase text-slate-400 hover:text-emerald-400 transition-colors mb-8 group"
+                >
+                    <HiArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+                    ABORT BOOKING
+                </button>
 
-                    {/* Slot Grid */}
-                    <Card>
-                        <h2 className="text-lg font-semibold text-surface-900 mb-2">Select Time Slot</h2>
-                        <p className="text-sm text-surface-400 mb-4">Prices shown are per hour · Peak hours: 4PM–8PM</p>
-                        <div className="flex gap-4 mb-4 text-xs text-surface-500">
-                            <span className="flex items-center gap-1.5"><span className="w-3 h-3 rounded bg-white border border-surface-200" /> Available</span>
-                            <span className="flex items-center gap-1.5"><span className="w-3 h-3 rounded bg-primary-600" /> Selected</span>
-                            <span className="flex items-center gap-1.5"><span className="w-3 h-3 rounded bg-surface-200" /> Booked</span>
-                        </div>
-                        <SlotGrid slots={slots} selectedSlot={selectedSlot} onSelect={s => setSelectedSlot(s.id)} />
-                    </Card>
-
-                    {/* Add-ons */}
-                    <Card>
-                        <h2 className="text-lg font-semibold text-surface-900 mb-4">Add-ons</h2>
-                        <div className="grid sm:grid-cols-2 gap-3">
-                            {addOns.map(a => (
-                                <button key={a.id} onClick={() => toggleAddOn(a.id)} className={`flex items-center justify-between px-4 py-3 rounded-xl border text-sm transition-all cursor-pointer ${selectedAddOns.includes(a.id) ? 'border-primary-300 bg-primary-50 text-primary-700' : 'border-surface-200 bg-white text-surface-700 hover:border-surface-300'}`}>
-                                    <span className="font-medium">{a.name}</span>
-                                    <span className="font-semibold">₹{a.price}</span>
-                                </button>
-                            ))}
-                        </div>
-                    </Card>
+                <div className="mb-10">
+                    <h1 className="text-4xl md:text-5xl font-black text-white italic tracking-tighter uppercase mb-2">Initialize Deployment</h1>
+                    <p className="text-slate-400 font-medium">Configure parameters for your upcoming session.</p>
                 </div>
 
-                {/* Booking Summary */}
-                <div>
-                    <div className="sticky top-20">
-                        <Card className="space-y-4">
-                            <h3 className="text-lg font-semibold text-surface-900">Booking Summary</h3>
-                            <div className="space-y-3 text-sm">
-                                <div className="flex justify-between"><span className="text-surface-500">Sport</span><span className="font-medium text-surface-900">{sport}</span></div>
-                                <div className="flex justify-between"><span className="text-surface-500">Date</span><span className="font-medium text-surface-900">{selectedDate}</span></div>
-                                <div className="flex justify-between"><span className="text-surface-500">Slot</span><span className="font-medium text-surface-900">{selectedSlot !== null ? slots[selectedSlot]?.time : '—'}</span></div>
-                                <div className="flex justify-between"><span className="text-surface-500">Slot Price</span><span className="font-medium text-surface-900">₹{slotPrice}</span></div>
-                                {selectedAddOns.length > 0 && (
-                                    <>
-                                        <hr className="border-surface-100" />
-                                        <p className="text-xs font-semibold text-surface-500 uppercase">Add-ons</p>
-                                        {selectedAddOns.map(id => { const a = addOns.find(x => x.id === id); return a ? <div key={id} className="flex justify-between"><span className="text-surface-500">{a.name}</span><span className="text-surface-700">₹{a.price}</span></div> : null })}
-                                    </>
-                                )}
-                                <hr className="border-surface-100" />
-                                <div className="flex justify-between text-base"><span className="font-semibold text-surface-900">Total</span><span className="font-bold text-primary-600">₹{total}</span></div>
+                <div className="grid lg:grid-cols-3 gap-8 xl:gap-12">
+                    <div className="lg:col-span-2 space-y-8">
+                        {/* Sport & Date */}
+                        <div className="bg-slate-900/60 backdrop-blur-xl border border-white/10 p-6 sm:p-8 rounded-sm shadow-2xl">
+                            <h2 className="text-[10px] font-black tracking-[0.3em] uppercase text-emerald-400 mb-6 flex items-center gap-2">
+                                <span className="h-px w-4 bg-emerald-500/50" /> PRIMARY PARAMETERS
+                            </h2>
+                            <div className="flex flex-col sm:flex-row gap-6">
+                                <div className="flex-1">
+                                    <label className="text-[9px] font-bold tracking-widest text-slate-500 uppercase mb-3 block">Discipline Strategy</label>
+                                    <div className="flex flex-wrap gap-2">
+                                        {['Cricket', 'Football', 'Badminton'].map(s => (
+                                            <button
+                                                key={s}
+                                                onClick={() => setSport(s)}
+                                                className={`px-4 py-2 rounded-sm text-xs font-bold tracking-widest uppercase transition-all cursor-pointer border ${sport === s
+                                                        ? 'bg-emerald-500 text-slate-950 border-emerald-400 shadow-[0_0_15px_rgba(16,185,129,0.3)]'
+                                                        : 'bg-slate-950/50 text-slate-400 border-white/10 hover:border-emerald-500/50 hover:text-white'
+                                                    }`}
+                                            >
+                                                {s}
+                                            </button>
+                                        ))}
+                                    </div>
+                                </div>
+                                <div className="sm:w-48">
+                                    <label className="text-[9px] font-bold tracking-widest text-slate-500 uppercase mb-3 block">Deployment Date</label>
+                                    <input
+                                        type="date"
+                                        value={selectedDate}
+                                        onChange={e => setSelectedDate(e.target.value)}
+                                        className="w-full px-4 py-2 border border-white/10 bg-slate-950/50 rounded-sm text-sm font-medium text-white outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-colors [color-scheme:dark]"
+                                    />
+                                </div>
                             </div>
-                            <Button fullWidth size="lg" disabled={selectedSlot === null}>Proceed to Payment</Button>
-                            <p className="text-xs text-surface-400 text-center">Free cancellation up to 2 hours before</p>
-                        </Card>
+                        </div>
+
+                        {/* Slot Grid */}
+                        <div className="bg-slate-900/60 backdrop-blur-xl border border-white/10 p-6 sm:p-8 rounded-sm shadow-2xl">
+                            <h2 className="text-[10px] font-black tracking-[0.3em] uppercase text-emerald-400 mb-2 flex items-center gap-2">
+                                <span className="h-px w-4 bg-emerald-500/50" /> SELECT TIME VECTOR
+                            </h2>
+                            <p className="text-[10px] text-slate-500 font-bold uppercase tracking-widest mb-6">Rates per hour • Peak surge: 16:00 - 20:00</p>
+
+                            <div className="flex flex-wrap gap-x-6 gap-y-3 mb-8 text-[10px] font-bold tracking-widest uppercase">
+                                <span className="flex items-center gap-2 text-slate-400"><span className="w-2.5 h-2.5 rounded-sm bg-slate-800 border-white/20 border" /> Available</span>
+                                <span className="flex items-center gap-2 text-emerald-400"><span className="w-2.5 h-2.5 rounded-sm bg-emerald-500 shadow-[0_0_8px_#10b981]" /> Selected</span>
+                                <span className="flex items-center gap-2 text-slate-600"><span className="w-2.5 h-2.5 rounded-sm bg-slate-900 border border-white/5" /> Booked</span>
+                            </div>
+
+                            <SlotGrid slots={slots} selectedSlot={selectedSlot} onSelect={s => setSelectedSlot(s.id)} />
+                        </div>
+
+                        {/* Add-ons */}
+                        <div className="bg-slate-900/60 backdrop-blur-xl border border-white/10 p-6 sm:p-8 rounded-sm shadow-2xl">
+                            <h2 className="text-[10px] font-black tracking-[0.3em] uppercase text-emerald-400 mb-6 flex items-center gap-2">
+                                <span className="h-px w-4 bg-emerald-500/50" /> AUTHORIZE ADD-ONS
+                            </h2>
+                            <div className="grid sm:grid-cols-2 gap-4">
+                                {addOns.map(a => {
+                                    const isSelected = selectedAddOns.includes(a.id)
+                                    return (
+                                        <button
+                                            key={a.id}
+                                            onClick={() => toggleAddOn(a.id)}
+                                            className={`flex justify-between items-center text-left px-4 py-4 rounded-sm border transition-all cursor-pointer ${isSelected
+                                                    ? 'border-emerald-500 bg-emerald-500/10 shadow-[0_0_15px_rgba(16,185,129,0.15)]'
+                                                    : 'border-white/10 bg-slate-950/50 hover:border-emerald-500/30'
+                                                }`}
+                                        >
+                                            <div className="flex items-center gap-3">
+                                                <div className={`w-4 h-4 rounded-sm border flex items-center justify-center transition-colors ${isSelected ? 'bg-emerald-500 border-emerald-500' : 'border-slate-600'}`}>
+                                                    {isSelected && <span className="text-slate-950 text-[10px] font-bold">✓</span>}
+                                                </div>
+                                                <span className={`text-[10px] font-bold tracking-wider uppercase ${isSelected ? 'text-emerald-400' : 'text-slate-400'}`}>{a.name}</span>
+                                            </div>
+                                            <span className={`font-black tabular-nums ${isSelected ? 'text-emerald-400' : 'text-slate-300'}`}>₹{a.price}</span>
+                                        </button>
+                                    )
+                                })}
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Booking Summary */}
+                    <div>
+                        <div className="sticky top-28">
+                            <div className="relative">
+                                <div className="absolute -inset-1 bg-gradient-to-b from-emerald-500/20 to-teal-500/0 rounded-sm blur" />
+                                <div className="relative bg-slate-950 border border-emerald-500/20 rounded-sm p-6 sm:p-8 shadow-2xl">
+                                    <h3 className="text-xl font-black italic tracking-tighter uppercase text-white border-b border-white/10 pb-4 mb-6">FINAL AUTHORIZATION</h3>
+
+                                    <div className="space-y-4 text-[10px] font-bold tracking-widest uppercase mb-8">
+                                        <div className="flex justify-between items-center">
+                                            <span className="text-slate-500">Discipline</span>
+                                            <span className="text-white bg-slate-900 px-2 py-1 rounded-sm border border-white/10">{sport}</span>
+                                        </div>
+                                        <div className="flex justify-between items-center">
+                                            <span className="text-slate-500">Date</span>
+                                            <span className="text-white bg-slate-900 px-2 py-1 rounded-sm border border-white/10">{selectedDate}</span>
+                                        </div>
+                                        <div className="flex justify-between items-center">
+                                            <span className="text-slate-500">Time Vector</span>
+                                            <span className="text-emerald-400 bg-emerald-500/10 px-2 py-1 rounded-sm border border-emerald-500/30">
+                                                {selectedSlot !== null ? slots[selectedSlot]?.time : 'AWAITING SELECTION'}
+                                            </span>
+                                        </div>
+                                        <div className="flex justify-between items-center">
+                                            <span className="text-slate-500">Venue Fee</span>
+                                            <span className="text-white text-sm tabular-nums">₹{slotPrice}</span>
+                                        </div>
+
+                                        {selectedAddOns.length > 0 && (
+                                            <>
+                                                <div className="h-px w-full bg-white/10 my-4" />
+                                                <p className="text-emerald-500 mb-2">Authorized Add-ons</p>
+                                                {selectedAddOns.map(id => {
+                                                    const a = addOns.find(x => x.id === id);
+                                                    return a ? (
+                                                        <div key={id} className="flex justify-between items-center text-slate-400">
+                                                            <span>{a.name}</span>
+                                                            <span className="text-white text-sm tabular-nums text-right">₹{a.price}</span>
+                                                        </div>
+                                                    ) : null
+                                                })}
+                                            </>
+                                        )}
+                                    </div>
+
+                                    <div className="h-px w-full bg-white/20 mb-6" />
+
+                                    <div className="flex items-end justify-between mb-8">
+                                        <span className="text-[10px] font-black tracking-[0.2em] text-slate-400 uppercase">Total Estimate</span>
+                                        <span className="font-black text-4xl text-emerald-400 tabular-nums leading-none">₹{total}</span>
+                                    </div>
+
+                                    <button
+                                        disabled={selectedSlot === null}
+                                        className={`w-full py-4 font-black italic tracking-[0.2em] uppercase text-xs rounded-sm transition-all duration-300 ${selectedSlot === null
+                                                ? 'bg-slate-900 text-slate-600 border border-white/5 cursor-not-allowed'
+                                                : 'bg-emerald-500 text-slate-950 hover:bg-emerald-400 shadow-[0_0_20px_rgba(16,185,129,0.3)] cursor-pointer'
+                                            }`}
+                                    >
+                                        CONFIRM AND DEPLOY
+                                    </button>
+
+                                    <p className="text-[9px] font-bold text-slate-600 uppercase tracking-widest text-center mt-6">
+                                        Free cancellation up to 2 hours prior to deployment.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -10,14 +10,17 @@ export default function SlotGrid({ slots = [], onSelect, selectedSlot }) {
                         key={slot.id}
                         onClick={() => !isBooked && !isBlocked && onSelect?.(slot)}
                         disabled={isBooked || isBlocked}
-                        className={`px-3 py-2.5 rounded-xl text-xs font-medium transition-all duration-200 border cursor-pointer disabled:cursor-not-allowed ${isSelected ? 'bg-primary-600 text-white border-primary-600 shadow-soft-md' :
-                                isBooked ? 'bg-surface-100 text-surface-400 border-surface-200' :
-                                    isBlocked ? 'bg-red-50 text-danger-500 border-red-200' :
-                                        'bg-white text-surface-700 border-surface-200 hover:border-primary-300 hover:bg-primary-50'
+                        className={`px-3 py-2.5 rounded-sm text-xs font-bold tracking-wider transition-all duration-300 border cursor-pointer disabled:cursor-not-allowed ${isSelected
+                                ? 'bg-emerald-500 text-slate-950 border-emerald-400 shadow-[0_0_15px_rgba(16,185,129,0.3)]'
+                                : isBooked
+                                    ? 'bg-slate-900/50 text-slate-600 border-white/5 opacity-50'
+                                    : isBlocked
+                                        ? 'bg-red-500/10 text-red-500/50 border-red-500/20 opacity-50'
+                                        : 'bg-slate-800 text-slate-300 border-white/10 hover:border-emerald-500/50 hover:bg-slate-700 hover:text-white hover:shadow-[0_0_10px_rgba(16,185,129,0.1)]'
                             }`}
                     >
-                        <span className="block">{slot.time}</span>
-                        {slot.price && <span className="block text-[10px] mt-0.5 opacity-75">₹{slot.price}</span>}
+                        <span className="block tabular-nums">{slot.time}</span>
+                        {slot.price && <span className="block text-[9px] mt-0.5 opacity-70 tabular-nums font-medium">₹{slot.price}</span>}
                     </button>
                 )
             })}

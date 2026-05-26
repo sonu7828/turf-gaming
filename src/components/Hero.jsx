@@ -7,117 +7,74 @@ export default function Hero() {
     }
 
     return (
-        <section className="relative min-h-screen flex items-center pt-18 overflow-hidden">
-            <div className="absolute inset-0 pointer-events-none">
-                <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl" />
-                <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-emerald-500/5 rounded-full blur-3xl" />
-                <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-b from-emerald-500/3 via-transparent to-transparent" />
+        <section className="relative min-h-screen flex items-center pt-24 pb-12 overflow-hidden bg-[#020617]">
+            {/* Cinematic Background */}
+            <div className="absolute inset-0 z-0 pointer-events-none">
+                <div
+                    className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20 mix-blend-luminosity"
+                    style={{ backgroundImage: "url('https://images.unsplash.com/photo-1489944440615-453fc2b6a9a9?auto=format&fit=crop&q=80&w=2000')" }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-b from-[#020617]/90 via-[#020617]/60 to-[#020617]" />
+                <div className="absolute inset-0 bg-gradient-to-r from-[#020617] via-[#020617]/80 to-transparent" />
+
+                {/* Glowing light beams from bottom/top */}
+                <div className="absolute bottom-0 left-[20%] w-[30%] h-[60%] bg-emerald-500/10 blur-[120px] rounded-full" />
+                <div className="absolute top-0 right-[10%] w-[40%] h-[50%] bg-cyan-500/10 blur-[100px] rounded-full" />
             </div>
 
             <div className="max-w-7xl mx-auto px-6 w-full relative z-10">
                 <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+                    {/* Left: Content */}
                     <div className="space-y-8">
                         <div>
-                            <span className="uppercase tracking-wider text-emerald-400 text-xs font-semibold inline-block mb-6 bg-emerald-500/10 border border-emerald-500/20 rounded-full px-4 py-1.5">
-                                🚀 All-in-One Sports Platform
+                            <span className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-md mb-6 shadow-[0_0_20px_rgba(16,185,129,0.15)]">
+                                <span className="relative flex h-2 w-2">
+                                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                                    <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                                </span>
+                                <span className="text-[11px] font-bold text-emerald-300 tracking-[0.2em] uppercase mt-0.5">
+                                    Next-Gen Sports Ecosystem
+                                </span>
                             </span>
-                            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight">
-                                The Complete{' '}
-                                <span className="text-gradient">Operating System</span>{' '}
-                                for Sports & Gaming
+
+                            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black text-white leading-[1.1] tracking-tight drop-shadow-2xl">
+                                DOMINATE <br />
+                                YOUR <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-400 drop-shadow-[0_0_30px_rgba(52,211,153,0.3)]">ARENA</span>
                             </h1>
                         </div>
-                        <p className="text-lg text-slate-400 max-w-xl leading-relaxed">
-                            Centralize bookings, tournaments, player management, and revenue analytics
-                            for your sports turfs, gaming arenas, and esports facilities — all from one
-                            powerful platform.
+
+                        <p className="text-lg sm:text-xl text-slate-300 max-w-xl font-light leading-relaxed drop-shadow-md">
+                            The ultimate operating system for sports turfs and gaming arenas. Connect players, automate bookings, and scale your sports business like never before.
                         </p>
-                        <div className="flex flex-wrap gap-4 mt-8">
-                            <PrimaryButton onClick={() => scrollTo('cta')}>
-                                Start Free Trial
-                            </PrimaryButton>
-                            <SecondaryButton onClick={() => scrollTo('features')}>
-                                Explore Features
-                            </SecondaryButton>
-                        </div>
-                        <div className="flex items-center gap-6 pt-4">
-                            <div className="flex -space-x-2">
-                                {[1, 2, 3, 4].map((i) => (
-                                    <div
-                                        key={i}
-                                        className="w-9 h-9 rounded-full bg-gradient-to-br from-slate-700 to-slate-800 border-2 border-slate-950 flex items-center justify-center text-xs text-slate-400 font-medium"
-                                    >
-                                        {String.fromCharCode(64 + i)}
-                                    </div>
-                                ))}
-                            </div>
-                            <p className="text-sm text-slate-500">
-                                Trusted by <span className="text-white font-semibold">500+</span> facilities worldwide
-                            </p>
+
+                        <div className="flex flex-wrap gap-5 pt-2">
+                            <button
+                                onClick={() => scrollTo('cta')}
+                                className="group relative px-8 py-4 rounded-full bg-emerald-500 text-slate-950 font-bold tracking-wide overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-[0_0_40px_rgba(16,185,129,0.4)]"
+                            >
+                                <span className="relative flex items-center gap-2">
+                                    Launch Platform
+                                    <svg className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                                    </svg>
+                                </span>
+                            </button>
+                            <button
+                                onClick={() => scrollTo('features')}
+                                className="px-8 py-4 rounded-full text-white font-semibold tracking-wide border border-white/20 hover:border-white/50 hover:bg-white/5 transition-all duration-300 backdrop-blur-sm"
+                            >
+                                Explore Tech
+                            </button>
                         </div>
                     </div>
 
-                    <div className="relative flex justify-center lg:justify-end">
-                        <div className="absolute inset-0 bg-emerald-500/10 rounded-full blur-3xl scale-75" />
-                        <div className="relative float-animation">
-                            <div className="w-full max-w-lg bg-slate-900/80 backdrop-blur-xl rounded-2xl border border-white/10 shadow-2xl shadow-emerald-500/10 p-6 space-y-4">
-                                <div className="flex items-center justify-between mb-2">
-                                    <div className="flex items-center gap-2">
-                                        <div className="w-3 h-3 rounded-full bg-emerald-500" />
-                                        <span className="text-sm font-semibold text-white">Dashboard Overview</span>
-                                    </div>
-                                    <span className="text-xs text-slate-500">Live</span>
-                                </div>
-
-                                <div className="grid grid-cols-3 gap-3">
-                                    {[
-                                        { label: 'Revenue', value: '₹4.8L', change: '+12%' },
-                                        { label: 'Bookings', value: '1,247', change: '+8%' },
-                                        { label: 'Players', value: '3,892', change: '+15%' },
-                                    ].map((stat) => (
-                                        <div key={stat.label} className="bg-white/5 rounded-xl p-3 text-center">
-                                            <p className="text-xs text-slate-500 mb-1">{stat.label}</p>
-                                            <p className="text-lg font-bold text-white">{stat.value}</p>
-                                            <p className="text-xs text-emerald-400">{stat.change}</p>
-                                        </div>
-                                    ))}
-                                </div>
-
-                                <div className="space-y-2">
-                                    <div className="flex items-center justify-between text-xs text-slate-400">
-                                        <span>Slot Occupancy</span>
-                                        <span>78%</span>
-                                    </div>
-                                    <div className="w-full bg-white/5 rounded-full h-2">
-                                        <div className="bg-gradient-to-r from-emerald-500 to-emerald-400 h-2 rounded-full" style={{ width: '78%' }} />
-                                    </div>
-                                </div>
-
-                                <div className="space-y-2">
-                                    {[
-                                        { time: '10:00 AM', sport: 'Cricket', court: 'Turf A', status: 'Confirmed' },
-                                        { time: '11:30 AM', sport: 'Football', court: 'Turf B', status: 'Pending' },
-                                        { time: '02:00 PM', sport: 'Badminton', court: 'Court 1', status: 'Confirmed' },
-                                    ].map((booking) => (
-                                        <div key={booking.time} className="flex items-center justify-between bg-white/3 rounded-lg px-3 py-2">
-                                            <div className="flex items-center gap-3">
-                                                <span className="text-xs text-slate-500 w-16">{booking.time}</span>
-                                                <span className="text-sm text-white">{booking.sport}</span>
-                                            </div>
-                                            <div className="flex items-center gap-3">
-                                                <span className="text-xs text-slate-500">{booking.court}</span>
-                                                <span className={`text-xs px-2 py-0.5 rounded-full ${booking.status === 'Confirmed' ? 'bg-emerald-500/15 text-emerald-400' : 'bg-amber-500/15 text-amber-400'}`}>
-                                                    {booking.status}
-                                                </span>
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    {/* Right side left empty as requested */}
+                    <div className="hidden lg:block relative w-full h-[400px] lg:h-[600px]"></div>
                 </div>
             </div>
+
+            {/* Fade out to black at the bottom */}
+            <div className="absolute bottom-0 inset-x-0 h-40 bg-gradient-to-t from-[#020617] to-transparent pointer-events-none" />
         </section>
     )
 }

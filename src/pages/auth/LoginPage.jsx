@@ -19,9 +19,9 @@ export default function LoginPage() {
                 <div className="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full -translate-y-32 translate-x-32" />
                 <div className="absolute bottom-0 left-0 w-72 h-72 bg-white/5 rounded-full translate-y-24 -translate-x-24" />
                 <div className="relative z-10 text-white max-w-md">
-                    <div className="flex items-center gap-2.5 mb-8">
-                        <div className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center font-bold text-white">SG</div>
-                        <span className="text-xl font-bold">SGBOS</span>
+                    <div className="flex items-center justify-center gap-3">
+                        <div className="w-12 h-12 rounded-xl bg-primary-600 flex items-center justify-center font-bold text-white text-xl">SM</div>
+                        <span className="text-xl font-bold">SportMatrix</span>
                     </div>
                     <h1 className="text-4xl font-bold mb-4 leading-tight">Sports & Gaming Business Operating System</h1>
                     <p className="text-primary-200 text-lg leading-relaxed">Manage bookings, tournaments, players, and revenue analytics for your sports facilities from one platform.</p>
@@ -38,9 +38,9 @@ export default function LoginPage() {
 
             <div className="flex-1 flex items-center justify-center p-8">
                 <div className="w-full max-w-md">
-                    <div className="lg:hidden flex items-center gap-2.5 mb-8">
-                        <div className="w-9 h-9 rounded-xl bg-primary-600 flex items-center justify-center font-bold text-white text-sm">SG</div>
-                        <span className="text-lg font-bold text-surface-900">SGBOS</span>
+                    <div className="flex flex-col items-center mb-8">
+                        <div className="w-8 h-8 rounded-lg bg-primary-600 flex items-center justify-center font-bold text-white text-sm">SM</div>
+                        <span className="text-lg font-bold text-surface-900">SportMatrix</span>
                     </div>
                     <h2 className="text-2xl font-bold text-surface-900 mb-1">Welcome back</h2>
                     <p className="text-surface-500 text-sm mb-8">Enter your credentials to access your dashboard</p>

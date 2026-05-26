@@ -19,9 +19,9 @@ export default function RegisterPage() {
     return (
         <div className="min-h-screen bg-surface-50 flex items-center justify-center p-8">
             <div className="w-full max-w-md">
-                <div className="flex items-center gap-2.5 mb-8">
-                    <div className="w-9 h-9 rounded-xl bg-primary-600 flex items-center justify-center font-bold text-white text-sm">SG</div>
-                    <span className="text-lg font-bold text-surface-900">SGBOS</span>
+                <div className="flex flex-col items-center mb-8">
+                    <div className="w-10 h-10 rounded-xl bg-primary-600 flex items-center justify-center font-bold text-white text-lg">SM</div>
+                    <span className="text-lg font-bold text-surface-900">SportMatrix</span>
                 </div>
                 <h2 className="text-2xl font-bold text-surface-900 mb-1">Create your account</h2>
                 <p className="text-surface-500 text-sm mb-8">Start managing your sports facility today</p>

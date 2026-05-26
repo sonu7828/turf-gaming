@@ -58,6 +58,16 @@ Create reusable:
 ● Pagination component
 ● Loading spinner
 ● Toast notification
+## Media Fixes
+- [x] Replace Football image with a verified Unsplash stadium image
+
+## Brand Identity Update
+- [x] Rename "SGBOS" to "SportMatrix" across all layouts, auth, components, and pages
+- [x] Update logo initials from "SG" to "SM"
+
+## Pages Redesigns
+- [x] **All Turfs**: Full width expansion, dark theme, premium sports styling and layout. Fixed broken images.
+- [x] **All Turfs Layout**: Restructured layout to move filters to the top header space and make cards span full width across 4 columns.
 ⚠ Reusable design system banaye bina pages mat banaye.
 STEP 1.3 — Tailwind Design Rules
 Define:
