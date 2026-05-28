@@ -72,7 +72,7 @@ export default function SlotBookingPage() {
                                 <div className="flex-1">
                                     <label className="text-[9px] font-bold tracking-widest text-slate-500 uppercase mb-3 block">Discipline Strategy</label>
                                     <div className="flex flex-wrap gap-2">
-                                        {['Cricket', 'Football', 'Badminton'].map(s => (
+                                        {['Cricket', 'Football', 'Box Cricket', 'Gaming Zone'].map(s => (
                                             <button
                                                 key={s}
                                                 onClick={() => setSport(s)}

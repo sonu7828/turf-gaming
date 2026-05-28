@@ -9,7 +9,7 @@ const turfData = {
     sports: [
         { name: 'Cricket', price: 800, peakPrice: 1200 },
         { name: 'Football', price: 900, peakPrice: 1400 },
-        { name: 'Badminton', price: 400, peakPrice: 600 },
+        { name: 'Box Cricket', price: 1000, peakPrice: 1500 },
     ],
     amenities: ['Floodlights', 'Secured Parking', 'Pro Locker Rooms', 'Hydration Station', 'Med-Bay', 'High-Speed Wi-Fi'],
     media: [

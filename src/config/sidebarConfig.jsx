@@ -17,12 +17,13 @@ const sidebarConfig = {
     owner: [
         { label: 'Dashboard', icon: <HiHome />, path: '/owner' },
         { label: 'Sports', icon: <HiBolt />, path: '/owner/sports' },
+        { label: 'Gaming Zone', icon: <HiBolt />, path: '/owner/gaming' },
         { label: 'Slots', icon: <HiCalendar />, path: '/owner/slots' },
         { label: 'Bookings', icon: <HiTicket />, path: '/owner/bookings' },
+        { label: 'POS Billing', icon: <HiCreditCard />, path: '/owner/pos' },
+        { label: 'Billing History', icon: <HiClipboardList />, path: '/owner/billing-history' },
         { label: 'Tournaments', icon: <HiTrophy />, path: '/owner/tournaments' },
         { label: 'Teams', icon: <HiUserGroup />, path: '/owner/teams' },
-        { label: 'Players', icon: <HiUser />, path: '/owner/players' },
-        { label: 'Player Bids', icon: <HiCash />, path: '/owner/bids' },
         { label: 'Wallet', icon: <HiWallet />, path: '/owner/wallet' },
         { label: 'Reports', icon: <HiChartBar />, path: '/owner/reports' },
         { label: 'Inventory', icon: <HiCube />, path: '/owner/inventory' },
@@ -46,7 +47,6 @@ const sidebarConfig = {
         { label: 'Tournaments', icon: <HiDocumentText />, path: '/customer/tournaments' },
         { label: 'Wallet', icon: <HiWallet />, path: '/customer/wallet' },
         { label: 'Profile', icon: <HiUser />, path: '/customer/profile' },
-        { label: 'Hire Applications', icon: <HiShieldCheck />, path: '/customer/hire' },
     ],
 }
 

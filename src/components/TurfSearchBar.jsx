@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect, useCallback } from 'react'
-import { IoRefreshOutline, IoLocationOutline, IoCalendarOutline, IoTimeOutline, IoPeopleOutline, IoSearchOutline } from 'react-icons/io5'
+import { IoRefreshOutline, IoLocationOutline, IoCalendarOutline, IoTimeOutline } from 'react-icons/io5'
 
 /* ── Location Data ── */
 const locationSuggestions = [
@@ -21,9 +21,7 @@ const allLocations = locationSuggestions.flatMap(loc => [
 const sportsOptions = [
     { name: 'Football', icon: '⚽' },
     { name: 'Cricket', icon: '🏏' },
-    { name: 'Badminton', icon: '🏸' },
     { name: 'Box Cricket', icon: '🏟️' },
-    { name: 'Pickleball', icon: '🎾' },
     { name: 'Gaming Zone', icon: '🎮' },
 ]
 
@@ -75,10 +73,6 @@ export default function TurfSearchBar({ onSearch, values, onChange, onClear }) {
     const [timeOpen, setTimeOpen] = useState(false)
     const timeRef = useRef(null)
 
-    /* ── Players State ── */
-    const [playersOpen, setPlayersOpen] = useState(false)
-    const playersRef = useRef(null)
-
     /* Sync external location value */
     useEffect(() => { setLocInput(location) }, [location])
 
@@ -88,7 +82,6 @@ export default function TurfSearchBar({ onSearch, values, onChange, onClear }) {
             if (locRef.current && !locRef.current.contains(e.target)) setLocOpen(false)
             if (dateRef.current && !dateRef.current.contains(e.target)) setDateOpen(false)
             if (timeRef.current && !timeRef.current.contains(e.target)) setTimeOpen(false)
-            if (playersRef.current && !playersRef.current.contains(e.target)) setPlayersOpen(false)
         }
         document.addEventListener('mousedown', handler)
         return () => document.removeEventListener('mousedown', handler)
@@ -144,79 +137,57 @@ export default function TurfSearchBar({ onSearch, values, onChange, onClear }) {
         emit('time', time === t ? '' : t)
     }
 
-    const changePlayers = (delta) => {
-        const next = Math.max(2, Math.min(22, players + delta))
-        emit('players', next, false)
-    }
-
-    const matchSizes = [
-        { label: '5v5', total: 10 },
-        { label: '7v7', total: 14 },
-        { label: '11v11', total: 22 }
-    ]
-
     const todayStr = getDateString(0)
     const selectedTime = timeSlots.find(t => t.value === time)
 
     return (
-        <div className="w-full max-w-[1280px] mx-auto px-4 relative z-40 select-none">
-            {/* ── MakeMyTrip STYLE SEARCH CARD ── */}
-            <div className="relative bg-white shadow-[0_20px_60px_rgba(0,0,0,0.15)] rounded-[2rem] p-0 flex flex-col md:flex-row items-stretch group/card transition-all duration-500">
-                
-                {/* Reset Button (Subtle, Top Right) */}
-                <button 
-                    onClick={onClear}
-                    className="absolute -top-10 right-0 text-white/60 hover:text-white text-[10px] font-black uppercase tracking-widest flex items-center gap-2 px-4 py-2 hover:bg-white/10 rounded-full transition-all"
-                >
-                    <IoRefreshOutline className="w-4 h-4" />
-                    Reset
-                </button>
+        <div className="w-full max-w-[1100px] mx-auto px-4 relative z-40 select-none">
+            {/* ── MAKE MY TRIP STYLE PREMIUM DARK GLASS CAPSULE ── */}
+            <div className="relative bg-[#0B0F19]/70 backdrop-blur-xl border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.6)] rounded-full p-2 flex flex-col md:flex-row items-stretch group/card transition-all duration-500">
 
-                {/* Section Base Class */}
                 {/* 1. LOCATION */}
-                <div ref={locRef} className="flex-[1.8] min-w-0 relative group/sec border-r border-gray-100 last:border-r-0">
-                    <div 
-                        className={`transition-all duration-300 cursor-pointer h-full px-10 py-8 flex flex-col justify-center ${locOpen ? 'bg-blue-50/30' : 'hover:bg-gray-50'}`}
+                <div ref={locRef} className="flex-[1.5] min-w-0 relative group/sec border-r border-white/10">
+                    <div
+                        className={`transition-all duration-300 cursor-pointer h-full px-8 py-4 flex flex-col justify-center rounded-l-full ${locOpen ? 'bg-purple-600/10' : 'hover:bg-white/5'}`}
                         onClick={() => { setLocOpen(true); setTimeout(() => locInputRef.current?.focus(), 50) }}
                     >
-                        <div className="flex items-center gap-2 mb-1">
-                            <IoLocationOutline className="text-blue-600 w-4 h-4" />
-                            <span className="text-[10px] font-black uppercase tracking-widest text-gray-400">Location</span>
+                        <div className="flex items-center gap-2 mb-1.5">
+                            <IoLocationOutline className="text-purple-400 w-4.5 h-4.5" />
+                            <span className="text-[9px] font-black uppercase tracking-widest text-slate-400">Location</span>
                         </div>
                         <div className="flex items-center gap-1 overflow-hidden">
-                            {location ? (
-                                <span className="text-xl md:text-2xl font-black text-gray-800 truncate">{location}</span>
+                            {locOpen ? (
+                                <input
+                                    ref={locInputRef}
+                                    type="text"
+                                    className="text-lg font-black text-white bg-slate-950 border border-purple-500/60 shadow-[0_0_12px_rgba(168,85,247,0.35)] rounded-xl outline-none w-full px-3 py-1 focus:border-purple-500 placeholder:text-slate-500"
+                                    placeholder="Explore Venues..."
+                                    value={locInput}
+                                    onChange={(e) => { setLocInput(e.target.value); setLocOpen(true); setLocHighlight(-1); emit('location', e.target.value, false) }}
+                                    onFocus={() => setLocOpen(true)}
+                                    onKeyDown={handleLocKeyDown}
+                                />
                             ) : (
-                                <span className="text-xl md:text-2xl font-black text-gray-300 truncate">Where are you going?</span>
+                                <span className={`text-lg md:text-xl font-black truncate ${location ? 'text-white' : 'text-slate-500'}`}>
+                                    {location || 'Explore Venues...'}
+                                </span>
                             )}
                         </div>
                     </div>
                     {locOpen && (
-                        <div className="absolute top-full left-0 w-full md:w-[320px] bg-white border border-gray-200 text-gray-800 rounded-2xl mt-4 overflow-hidden shadow-2xl z-[60]">
-                            <div className="p-4 border-b border-gray-100">
-                                <input
-                                    ref={locInputRef}
-                                    type="text"
-                                    className="text-lg font-bold text-gray-800 bg-gray-50 border border-gray-200 rounded-lg outline-none w-full p-3 focus:ring-1 focus:ring-blue-500 placeholder:text-gray-400"
-                                    placeholder="Search city or area"
-                                    value={locInput}
-                                    onChange={(e) => { setLocInput(e.target.value); setLocOpen(true); setLocHighlight(-1) }}
-                                    onFocus={() => setLocOpen(true)}
-                                    onKeyDown={handleLocKeyDown}
-                                />
-                            </div>
+                        <div className="absolute top-full left-0 w-full md:w-[320px] bg-slate-950/95 border border-white/10 text-white rounded-2xl mt-4 overflow-hidden shadow-2xl z-[60] backdrop-blur-xl">
                             {filteredLocations.length === 0 ? (
-                                <div className="p-4 text-center text-gray-400 font-bold">No locations found</div>
+                                <div className="p-4 text-center text-slate-500 font-bold text-xs">No locations found</div>
                             ) : (
                                 filteredLocations.map((loc, i) => (
                                     <div
                                         key={loc}
-                                        className={`flex items-center gap-3 px-5 py-3 cursor-pointer transition-all ${i === locHighlight ? 'bg-blue-50 text-blue-600' : 'hover:bg-gray-50 text-gray-700'}`}
+                                        className={`flex items-center gap-3 px-5 py-3 cursor-pointer transition-all ${i === locHighlight ? 'bg-purple-600/20 text-purple-400 font-black' : 'hover:bg-white/5 text-slate-300'}`}
                                         onClick={() => selectLocation(loc)}
                                         onMouseEnter={() => setLocHighlight(i)}
                                     >
-                                        <IoLocationOutline className="w-4 h-4" />
-                                        <span className="font-bold text-sm">{loc}</span>
+                                        <IoLocationOutline className="w-4 h-4 text-purple-500" />
+                                        <span className="font-semibold text-xs">{loc}</span>
                                     </div>
                                 ))
                             )}
@@ -225,64 +196,64 @@ export default function TurfSearchBar({ onSearch, values, onChange, onClear }) {
                 </div>
 
                 {/* 2. DATE */}
-                <div ref={dateRef} className="flex-1 min-w-0 relative group/sec border-r border-gray-100 last:border-r-0">
-                    <div 
-                        className={`transition-all duration-300 cursor-pointer h-full px-10 py-8 flex flex-col justify-center ${dateOpen ? 'bg-blue-50/30' : 'hover:bg-gray-50'}`}
+                <div ref={dateRef} className="flex-1 min-w-0 relative group/sec border-r border-white/10">
+                    <div
+                        className={`transition-all duration-300 cursor-pointer h-full px-6 py-4 flex flex-col justify-center ${dateOpen ? 'bg-purple-600/10' : 'hover:bg-white/5'}`}
                         onClick={() => setDateOpen(!dateOpen)}
                     >
-                        <div className="flex items-center gap-2 mb-1">
-                            <IoCalendarOutline className="text-blue-600 w-4 h-4" />
-                            <span className="text-[10px] font-black uppercase tracking-widest text-gray-400">Date</span>
+                        <div className="flex items-center gap-2 mb-1.5">
+                            <IoCalendarOutline className="text-purple-400 w-4.5 h-4.5" />
+                            <span className="text-[9px] font-black uppercase tracking-widest text-slate-400">Date</span>
                         </div>
-                        <div className="text-xl md:text-2xl font-black text-gray-800">{date ? formatDate(date) : 'Add a date'}</div>
+                        <div className="text-lg md:text-xl font-black text-white">{date ? formatDate(date) : 'Choose Date'}</div>
                     </div>
                     {dateOpen && (
-                        <div className="absolute top-full left-0 md:left-1/2 md:-translate-x-1/2 w-[300px] bg-white border border-gray-200 p-5 rounded-2xl mt-4 shadow-2xl z-[60]">
+                        <div className="absolute top-full left-0 md:left-1/2 md:-translate-x-1/2 w-[300px] bg-slate-950/95 border border-white/10 p-5 rounded-2xl mt-4 shadow-2xl z-[60] backdrop-blur-xl text-white">
                             <div className="flex gap-2 mb-4 flex-wrap">
                                 {[
                                     { l: 'Today', v: getDateString(0) },
                                     { l: 'Tomorrow', v: getDateString(1) },
                                     { l: 'Weekend', v: getWeekendDate() }
                                 ].map(opt => (
-                                    <button 
+                                    <button
                                         key={opt.l}
-                                        className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${date === opt.v ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}
+                                        className={`px-3 py-1.5 rounded-lg text-xs font-black transition-all ${date === opt.v ? 'bg-purple-600 text-white shadow-lg shadow-purple-500/25' : 'bg-slate-900 text-slate-400 hover:bg-slate-800 hover:text-white'}`}
                                         onClick={() => selectDate(opt.v)}
                                     >
                                         {opt.l}
                                     </button>
                                 ))}
                             </div>
-                            <input 
-                                type="date" 
-                                className="w-full bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 text-gray-800 outline-none focus:ring-1 focus:ring-blue-500 [color-scheme:light]" 
-                                value={date} 
-                                min={todayStr} 
-                                onChange={(e) => selectDate(e.target.value)} 
+                            <input
+                                type="date"
+                                className="w-full bg-slate-900 border border-white/10 rounded-lg px-3 py-2 text-white outline-none focus:ring-1 focus:ring-purple-500 [color-scheme:dark]"
+                                value={date}
+                                min={todayStr}
+                                onChange={(e) => selectDate(e.target.value)}
                             />
                         </div>
                     )}
                 </div>
 
                 {/* 3. TIME SLOT */}
-                <div ref={timeRef} className="flex-1 min-w-0 relative group/sec border-r border-gray-100 last:border-r-0">
-                    <div 
-                        className={`transition-all duration-300 cursor-pointer h-full px-10 py-8 flex flex-col justify-center ${timeOpen ? 'bg-blue-50/30' : 'hover:bg-gray-50'}`}
+                <div ref={timeRef} className="flex-1 min-w-0 relative group/sec border-r border-white/10">
+                    <div
+                        className={`transition-all duration-300 cursor-pointer h-full px-6 py-4 flex flex-col justify-center ${timeOpen ? 'bg-purple-600/10' : 'hover:bg-white/5'}`}
                         onClick={() => setTimeOpen(!timeOpen)}
                     >
-                        <div className="flex items-center gap-2 mb-1">
-                            <IoTimeOutline className="text-blue-600 w-4 h-4" />
-                            <span className="text-[10px] font-black uppercase tracking-widest text-gray-400">Time</span>
+                        <div className="flex items-center gap-2 mb-1.5">
+                            <IoTimeOutline className="text-purple-400 w-4.5 h-4.5" />
+                            <span className="text-[9px] font-black uppercase tracking-widest text-slate-400">Time Slot</span>
                         </div>
-                        <div className="text-xl md:text-2xl font-black text-gray-800 tracking-tight">{selectedTime ? selectedTime.label : 'Any time'}</div>
+                        <div className="text-lg md:text-xl font-black text-white tracking-tight">{selectedTime ? selectedTime.label : 'Any Time'}</div>
                     </div>
                     {timeOpen && (
-                        <div className="absolute top-full left-0 md:left-1/2 md:-translate-x-1/2 w-[280px] bg-white border border-gray-200 p-3 rounded-2xl mt-4 shadow-2xl z-[60]">
+                        <div className="absolute top-full right-0 w-[280px] bg-slate-950/95 border border-white/10 p-3 rounded-2xl mt-4 shadow-2xl z-[60] backdrop-blur-xl">
                             <div className="grid grid-cols-2 gap-2">
                                 {timeSlots.map(t => (
-                                    <button 
-                                        key={t.value} 
-                                        className={`flex flex-col items-center p-2.5 rounded-xl transition-all ${time === t.value ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`} 
+                                    <button
+                                        key={t.value}
+                                        className={`flex flex-col items-center p-2.5 rounded-xl transition-all ${time === t.value ? 'bg-purple-600 text-white shadow-lg shadow-purple-500/25' : 'bg-slate-900 text-slate-400 hover:bg-slate-800 hover:text-white'}`}
                                         onClick={() => selectTime(t.value)}
                                     >
                                         <span className="text-xs font-black uppercase tracking-wider">{t.label}</span>
@@ -293,82 +264,22 @@ export default function TurfSearchBar({ onSearch, values, onChange, onClear }) {
                         </div>
                     )}
                 </div>
-
-                {/* 4. PLAYERS */}
-                <div ref={playersRef} className="flex-1 min-w-0 relative group/sec last:rounded-r-2xl">
-                    <div 
-                        className={`transition-all duration-300 cursor-pointer h-full px-10 py-8 flex flex-col justify-center ${playersOpen ? 'bg-blue-50/30' : 'hover:bg-gray-50'}`}
-                        onClick={() => setPlayersOpen(!playersOpen)}
+                {/* ── ACTION BUTTONS ── */}
+                <div className="flex items-center gap-4 px-4 py-3 shrink-0">
+                    <button 
+                        onClick={onClear} 
+                        className="w-12 h-12 flex items-center justify-center rounded-full bg-slate-800/80 hover:bg-slate-700 transition-colors border border-white/10 cursor-pointer"
+                        title="Reset Search"
                     >
-                        <div className="flex items-center gap-2 mb-1">
-                            <IoPeopleOutline className="text-blue-600 w-4 h-4" />
-                            <span className="text-[10px] font-black uppercase tracking-widest text-gray-400">Players</span>
-                        </div>
-                        <div className="flex items-baseline gap-1">
-                            <span className="text-xl md:text-2xl font-black text-gray-800">{players}</span>
-                            <span className="text-[10px] font-black text-gray-400 uppercase tracking-tighter">Total</span>
-                        </div>
-                    </div>
-                    {playersOpen && (
-                        <div className="absolute top-full right-0 w-[240px] bg-white border border-gray-200 p-5 rounded-2xl mt-4 shadow-2xl z-[60]">
-                            <div className="text-[10px] font-black tracking-widest uppercase text-gray-400 mb-3 text-center">Adjust Players</div>
-                            <div className="flex items-center justify-between mb-6 bg-gray-100 rounded-xl p-1">
-                                <button 
-                                    className="w-10 h-10 rounded-lg bg-gray-200 text-gray-700 text-xl font-bold hover:bg-blue-100 hover:text-blue-600 transition-all disabled:opacity-20" 
-                                    onClick={(e) => { e.stopPropagation(); changePlayers(-1) }} 
-                                    disabled={players <= 2}
-                                >
-                                    −
-                                </button>
-                                <div className="flex flex-col items-center">
-                                    <span className="text-2xl font-black text-gray-800 leading-tight">{players}</span>
-                                    <span className="text-[9px] font-black text-blue-600 uppercase tracking-tighter">Total</span>
-                                </div>
-                                <button 
-                                    className="w-10 h-10 rounded-lg bg-gray-200 text-gray-700 text-xl font-bold hover:bg-blue-100 hover:text-blue-600 transition-all disabled:opacity-20" 
-                                    onClick={(e) => { e.stopPropagation(); changePlayers(1) }} 
-                                    disabled={players >= 22}
-                                >
-                                    +
-                                </button>
-                            </div>
-                            
-                            <div className="text-[10px] font-black tracking-widest uppercase text-gray-400 mb-3 text-center">Match Size</div>
-                            <div className="flex flex-wrap gap-2 justify-center mb-6">
-                                {matchSizes.map(m => (
-                                    <button 
-                                        key={m.label} 
-                                        className={`px-3 py-2 rounded-xl text-xs font-black transition-all border ${players === m.total ? 'bg-blue-600 border-blue-600 text-white shadow-[0_5px_15px_rgba(37,99,235,0.3)]' : 'bg-gray-100 border-gray-100 text-gray-600 hover:bg-gray-200 hover:border-gray-200'}`} 
-                                        onClick={(e) => { e.stopPropagation(); emit('players', m.total, false); }}
-                                    >
-                                        {m.label}
-                                    </button>
-                                ))}
-                            </div>
-
-                            <button
-                                className="w-full py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-black text-xs uppercase tracking-[0.2em] shadow-[0_10px_20px_rgba(37,99,235,0.2)] transition-all active:scale-[0.95]"
-                                onClick={(e) => { 
-                                    e.stopPropagation(); 
-                                    setPlayersOpen(false);
-                                }}
-                            >
-                                Okay
-                            </button>
-                        </div>
-                    )}
+                        <IoRefreshOutline className="w-5 h-5 text-slate-400 hover:text-white" />
+                    </button>
+                    <button
+                        onClick={() => onSearch?.({ location, sport, date, time, players })}
+                        className="h-12 px-10 bg-[#8b5cf6] hover:bg-[#7c3aed] text-white font-black text-xs uppercase tracking-[0.2em] rounded-full transition-all shadow-[0_0_20px_rgba(139,92,246,0.3)] hover:shadow-[0_0_25px_rgba(139,92,246,0.5)] flex items-center justify-center cursor-pointer"
+                    >
+                        SEARCH
+                    </button>
                 </div>
-            </div>
-
-            {/* ── FLOATING MAIN SEARCH BUTTON ── */}
-            <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 z-50">
-                <button
-                    onClick={() => onSearch?.({ location, sport, date, time, players })}
-                    className="group relative px-16 py-4 bg-gradient-to-r from-blue-600 to-blue-500 rounded-full shadow-[0_15px_30px_rgba(37,99,235,0.4)] hover:shadow-[0_20px_40px_rgba(37,99,235,0.6)] transition-all duration-300 hover:scale-105 active:scale-95 flex items-center justify-center overflow-hidden"
-                >
-                    <span className="text-xl font-black text-white uppercase tracking-[0.4em] relative z-10 pl-[0.4em]">Search</span>
-                    <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 shadow-inner" />
-                </button>
             </div>
         </div>
     )

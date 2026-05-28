@@ -7,7 +7,6 @@ const navLinks = [
     { label: 'Home', to: '/' },
     { label: 'Turfs', to: '/turfs' },
     { label: 'Tournaments', to: '/tournaments' },
-    { label: 'Players', to: '/marketplace' },
     { label: 'Membership', to: '/membership' },
     { label: 'Contact', to: '/contact' },
 ]
@@ -36,7 +35,7 @@ export default function WebsiteLayout({ children }) {
                     {/* Column 1: Logo */}
                     <div className="flex justify-start">
                         <NavLink to="/" className="flex items-center gap-2.5 group">
-                            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-500 to-emerald-600 flex items-center justify-center font-black text-white text-sm shadow-[0_0_15px_rgba(16,185,129,0.4)] group-hover:scale-105 transition-transform">SM</div>
+                            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center font-black text-white text-sm shadow-[0_0_15px_rgba(16,185,129,0.4)] group-hover:scale-105 transition-transform">SM</div>
                             <span className="text-xl font-black text-white tracking-[-0.05em] leading-none uppercase italic" style={{ textShadow: '0 2px 10px rgba(0,0,0,0.5)' }}>SportMatrix<span className="text-emerald-500 text-2xl font-black">.</span></span>
                         </NavLink>
                     </div>
@@ -59,8 +58,8 @@ export default function WebsiteLayout({ children }) {
                     <div className="hidden lg:flex justify-end items-center gap-4">
                         <Button variant="outline" size="sm" onClick={() => navigate('/login')} className="font-black text-[10px] tracking-widest uppercase px-5 border-white/30 text-white hover:bg-white hover:text-slate-950 hover:border-white transition-all shadow-lg backdrop-blur-sm">Log In</Button>
                         <div className="relative group">
-                            <div className="absolute inset-0 bg-emerald-500 opacity-0 blur-xl rounded-sm group-hover:opacity-40 transition-opacity duration-500" />
-                            <Button size="sm" onClick={() => navigate('/register')} className="relative bg-emerald-500 text-slate-950 font-black text-[10px] tracking-widest uppercase px-6 border border-emerald-400 rounded-sm shadow-[0_0_20px_rgba(16,185,129,0.2)] hover:bg-emerald-400 hover:border-emerald-300 transition-all transform hover:scale-[1.02]">Get Started</Button>
+                            <div className="absolute inset-0 bg-blue-600 opacity-0 blur-xl rounded-sm group-hover:opacity-40 transition-opacity duration-500" />
+                            <Button size="sm" onClick={() => navigate('/register')} className="relative bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-black text-[10px] tracking-widest uppercase px-6 border border-blue-500 rounded-sm shadow-[0_0_20px_rgba(37,99,235,0.2)] hover:from-blue-500 hover:to-indigo-500 transition-all transform hover:scale-[1.02]">Get Started</Button>
                         </div>
                     </div>
 
@@ -75,15 +74,15 @@ export default function WebsiteLayout({ children }) {
                 {mobileOpen && (
                     <div className="lg:hidden bg-slate-950 border-t border-white/10 px-6 pb-6 pt-3 space-y-1 fade-up shadow-2xl">
                         {navLinks.map((link) => (
-                            <NavLink key={link.to} to={link.to} onClick={() => setMobileOpen(false)} className={({ isActive }) => `block px-4 py-3 rounded-sm text-[11px] font-black uppercase tracking-widest ${isActive ? 'bg-emerald-500/10 text-emerald-400 border-l-2 border-emerald-500' : 'text-slate-400 hover:bg-white/5 hover:text-white'}`}>
+                            <NavLink key={link.to} to={link.to} onClick={() => setMobileOpen(false)} className={({ isActive }) => `block px-4 py-3 rounded-sm text-[11px] font-black uppercase tracking-widest ${isActive ? 'bg-blue-500/10 text-blue-400 border-l-2 border-blue-500' : 'text-slate-400 hover:bg-white/5 hover:text-white'}`}>
                                 {({ isActive }) => (
                                     <>{link.label}</>
                                 )}
                             </NavLink>
                         ))}
                         <div className="pt-5 space-y-3 border-t border-white/10 mt-3">
-                            <button className="w-full py-3 border border-white/20 text-white font-black text-[10px] tracking-widest uppercase rounded-sm hover:bg-white hover:text-slate-950 transition-all" onClick={() => { navigate('/login'); setMobileOpen(false) }}>Log In</button>
-                            <button className="w-full py-3 bg-emerald-500 text-slate-950 font-black text-[10px] tracking-widest uppercase rounded-sm hover:bg-emerald-400 transition-all" onClick={() => { navigate('/register'); setMobileOpen(false) }}>Get Started</button>
+                             <button className="w-full py-3 border border-white/20 text-white font-black text-[10px] tracking-widest uppercase rounded-sm hover:bg-white hover:text-slate-950 transition-all" onClick={() => { navigate('/login'); setMobileOpen(false) }}>Log In</button>
+                            <button className="w-full py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-black text-[10px] tracking-widest uppercase rounded-sm hover:from-blue-500 hover:to-indigo-500 transition-all animate-pulse" onClick={() => { navigate('/register'); setMobileOpen(false) }}>Get Started</button>
                         </div>
                     </div>
                 )}
@@ -96,20 +95,20 @@ export default function WebsiteLayout({ children }) {
                     <div className="grid md:grid-cols-2 lg:grid-cols-6 gap-10">
                         <div className="lg:col-span-2 space-y-4">
                             <div className="flex items-center gap-2.5">
-                                <div className="w-9 h-9 rounded-xl bg-emerald-500 flex items-center justify-center font-bold text-white text-sm">SM</div>
+                                <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center font-bold text-white text-sm">SM</div>
                                 <span className="text-lg font-bold text-white tracking-tight">SportMatrix</span>
                             </div>
                             <p className="text-sm text-slate-400 max-w-xs leading-relaxed">The complete digital operating system for sports turfs, gaming arenas, and esports facilities.</p>
                         </div>
                         {[
                             { title: 'Cities', links: ['Mumbai', 'Delhi', 'Bangalore', 'Pune', 'Hyderabad', 'Chennai'] },
-                            { title: 'Sports', links: ['Football', 'Cricket', 'Badminton', 'Box Cricket', 'Pickleball'] },
+                            { title: 'Sports', links: ['Football', 'Cricket', 'Box Cricket', 'Gaming Zone'] },
                             { title: 'For Owners', links: ['List Your Turf', 'Owner Dashboard', 'Pricing'] },
                             { title: 'Support', links: ['Help Center', 'Contact Us', 'Terms', 'Privacy'] },
                         ].map((col) => (
                             <div key={col.title}>
                                 <h4 className="text-sm font-semibold text-white mb-4">{col.title}</h4>
-                                <ul className="space-y-2.5">{col.links.map((l) => <li key={l}><span className="text-sm text-slate-400 hover:text-emerald-400 cursor-pointer transition-colors">{l}</span></li>)}</ul>
+                                 <ul className="space-y-2.5">{col.links.map((l) => <li key={l}><span className="text-sm text-slate-400 hover:text-blue-400 cursor-pointer transition-colors">{l}</span></li>)}</ul>
                             </div>
                         ))}
                     </div>

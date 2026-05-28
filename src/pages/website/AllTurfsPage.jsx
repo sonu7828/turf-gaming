@@ -4,19 +4,19 @@ import { HiLocationMarker, HiStar, HiSearch, HiFilter, HiX, HiCheckCircle, HiArr
 
 const allTurfs = [
     { id: 1, name: 'SportZone Arena', location: 'Andheri West, Mumbai', city: 'Mumbai', sport: 'Cricket', sports: ['Cricket', 'Box Cricket'], rating: 4.8, reviews: 124, price: 800, amenities: ['Floodlights', 'Parking', 'Washroom', 'Drinking Water'], image: 'https://images.unsplash.com/photo-1531415074968-036ba1b575da?auto=format&fit=crop&q=80&w=1200' },
-    { id: 2, name: 'PlayField Hub', location: 'Andheri East, Mumbai', city: 'Mumbai', sport: 'Badminton', sports: ['Badminton'], rating: 4.6, reviews: 89, price: 600, amenities: ['Parking', 'Washroom', 'AC'], image: 'https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?auto=format&fit=crop&q=80&w=1200' },
-    { id: 3, name: 'GameVault Center', location: 'Koramangala, Bangalore', city: 'Bangalore', sport: 'Multi-Sport', sports: ['Football', 'Cricket', 'Badminton'], rating: 4.9, reviews: 203, price: 1200, amenities: ['Floodlights', 'Parking', 'Washroom', 'Seating', 'Drinking Water'], image: 'https://images.unsplash.com/photo-1504450758481-7338eba7524a?auto=format&fit=crop&q=80&w=1200' },
+    { id: 2, name: 'PlayField Hub', location: 'Andheri East, Mumbai', city: 'Mumbai', sport: 'Gaming Zone', sports: ['Gaming Zone'], rating: 4.6, reviews: 89, price: 600, amenities: ['Parking', 'Washroom', 'AC'], image: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&q=80&w=1200' },
+    { id: 3, name: 'GameVault Center', location: 'Koramangala, Bangalore', city: 'Bangalore', sport: 'Multi-Sport', sports: ['Football', 'Cricket', 'Gaming Zone'], rating: 4.9, reviews: 203, price: 1200, amenities: ['Floodlights', 'Parking', 'Washroom', 'Seating', 'Drinking Water'], image: 'https://images.unsplash.com/photo-1504450758481-7338eba7524a?auto=format&fit=crop&q=80&w=1200' },
     { id: 4, name: 'ProKick Stadium', location: 'Indiranagar, Bangalore', city: 'Bangalore', sport: 'Football', sports: ['Football'], rating: 4.7, reviews: 156, price: 900, amenities: ['Floodlights', 'Parking', 'Washroom'], image: 'https://images.unsplash.com/photo-1575361204480-aadea25e6e68?auto=format&fit=crop&q=80&w=1200' },
-    { id: 5, name: 'SmashCourt', location: 'Connaught Place, Delhi', city: 'Delhi', sport: 'Badminton', sports: ['Badminton', 'Pickleball'], rating: 4.5, reviews: 72, price: 700, amenities: ['Parking', 'AC', 'Seating'], image: 'https://images.unsplash.com/photo-1554068865-24cecd4e34b8?auto=format&fit=crop&q=80&w=1200' },
-    { id: 6, name: 'NetPoint Arena', location: 'Saket, Delhi', city: 'Delhi', sport: 'Badminton', sports: ['Badminton'], rating: 4.4, reviews: 65, price: 500, amenities: ['Parking', 'Washroom'], image: 'https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?auto=format&fit=crop&q=80&w=1200' },
+    { id: 5, name: 'SmashCourt', location: 'Connaught Place, Delhi', city: 'Delhi', sport: 'Gaming Zone', sports: ['Gaming Zone'], rating: 4.5, reviews: 72, price: 700, amenities: ['Parking', 'AC', 'Seating'], image: 'https://images.unsplash.com/photo-1554068865-24cecd4e34b8?auto=format&fit=crop&q=80&w=1200' },
+    { id: 6, name: 'NetPoint Arena', location: 'Saket, Delhi', city: 'Delhi', sport: 'Football', sports: ['Football'], rating: 4.4, reviews: 65, price: 500, amenities: ['Parking', 'Washroom'], image: 'https://images.unsplash.com/photo-1575361204480-aadea25e6e68?auto=format&fit=crop&q=80&w=1200' },
     { id: 7, name: 'DunkZone', location: 'Bandra, Mumbai', city: 'Mumbai', sport: 'Multi-Sport', sports: ['Football', 'Box Cricket'], rating: 4.3, reviews: 48, price: 750, amenities: ['Floodlights', 'Parking'], image: 'https://images.unsplash.com/photo-1504450758481-7338eba7524a?auto=format&fit=crop&q=80&w=1200' },
     { id: 8, name: 'PixelArena', location: 'HSR Layout, Bangalore', city: 'Bangalore', sport: 'Multi-Sport', sports: ['Football', 'Cricket', 'Box Cricket'], rating: 4.8, reviews: 178, price: 1500, amenities: ['Floodlights', 'Parking', 'Washroom', 'Seating', 'Drinking Water', 'AC'], image: 'https://images.unsplash.com/photo-1529900748604-07564a03e7a6?auto=format&fit=crop&q=80&w=1200' },
     { id: 9, name: 'StrikeZone Cricket', location: 'Noida, Delhi', city: 'Delhi', sport: 'Cricket', sports: ['Cricket', 'Box Cricket'], rating: 4.6, reviews: 92, price: 850, amenities: ['Floodlights', 'Parking', 'Washroom', 'Drinking Water'], image: 'https://images.unsplash.com/photo-1531415074968-036ba1b575da?auto=format&fit=crop&q=80&w=1200' },
     { id: 10, name: 'Royal Cricket Ground', location: 'Vijay Nagar, Indore', city: 'Indore', sport: 'Cricket', sports: ['Cricket', 'Box Cricket'], rating: 4.7, reviews: 110, price: 600, amenities: ['Floodlights', 'Parking', 'Drinking Water'], image: 'https://images.unsplash.com/photo-1531415074968-036ba1b575da?auto=format&fit=crop&q=80&w=1200' },
-    { id: 11, name: 'Champion Badminton Hub', location: 'Baner, Pune', city: 'Pune', sport: 'Badminton', sports: ['Badminton'], rating: 4.7, reviews: 95, price: 800, amenities: ['AC', 'Parking', 'Washroom', 'Drinking Water'], image: 'https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?auto=format&fit=crop&q=80&w=1200' },
+    { id: 11, name: 'Champion Gaming Hub', location: 'Baner, Pune', city: 'Pune', sport: 'Gaming Zone', sports: ['Gaming Zone'], rating: 4.7, reviews: 95, price: 800, amenities: ['AC', 'Parking', 'Washroom', 'Drinking Water'], image: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&q=80&w=1200' },
     { id: 12, name: 'Pune Football Arena', location: 'Kothrud, Pune', city: 'Pune', sport: 'Football', sports: ['Football'], rating: 4.5, reviews: 67, price: 1000, amenities: ['Floodlights', 'Parking', 'Washroom', 'Seating'], image: 'https://images.unsplash.com/photo-1575361204480-aadea25e6e68?auto=format&fit=crop&q=80&w=1200' },
-    { id: 13, name: 'Spike Basketball Court', location: 'Bhawarkua, Indore', city: 'Indore', sport: 'Basketball', sports: ['Basketball', 'Multi-Sport'], rating: 4.6, reviews: 45, price: 500, amenities: ['Floodlights', 'Parking', 'Washroom'], image: 'https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&q=80&w=1200' },
-    { id: 14, name: 'Indore Sports Complex', location: 'LIG Colony, Indore', city: 'Indore', sport: 'Multi-Sport', sports: ['Football', 'Badminton'], rating: 4.9, reviews: 120, price: 800, amenities: ['Floodlights', 'Parking', 'Seating', 'Washroom', 'AC'], image: 'https://images.unsplash.com/photo-1504450758481-7338eba7524a?auto=format&fit=crop&q=80&w=1200' },
+    { id: 13, name: 'Spike Box Cricket Court', location: 'Bhawarkua, Indore', city: 'Indore', sport: 'Box Cricket', sports: ['Box Cricket', 'Multi-Sport'], rating: 4.6, reviews: 45, price: 500, amenities: ['Floodlights', 'Parking', 'Washroom'], image: 'https://images.unsplash.com/photo-1543351611-58f69d7c1781?auto=format&fit=crop&q=80&w=1200' },
+    { id: 14, name: 'Indore Sports Complex', location: 'LIG Colony, Indore', city: 'Indore', sport: 'Multi-Sport', sports: ['Football', 'Gaming Zone'], rating: 4.9, reviews: 120, price: 800, amenities: ['Floodlights', 'Parking', 'Seating', 'Washroom', 'AC'], image: 'https://images.unsplash.com/photo-1504450758481-7338eba7524a?auto=format&fit=crop&q=80&w=1200' },
     { id: 15, name: 'Rajiv Gandhi Stadium Turf', location: 'Navlakha, Indore', city: 'Indore', sport: 'Football', sports: ['Football', 'Cricket'], rating: 4.5, reviews: 88, price: 700, amenities: ['Floodlights', 'Parking', 'Seating', 'Drinking Water'], image: 'https://images.unsplash.com/photo-1575361204480-aadea25e6e68?auto=format&fit=crop&q=80&w=1200' },
     { id: 16, name: 'PowerPlay Box Cricket', location: 'Nipania, Indore', city: 'Indore', sport: 'Box Cricket', sports: ['Box Cricket'], rating: 4.8, reviews: 150, price: 900, amenities: ['Floodlights', 'Parking', 'AC', 'Drinking Water'], image: 'https://images.unsplash.com/photo-1531415074968-036ba1b575da?auto=format&fit=crop&q=80&w=1200' },
 ]
@@ -24,9 +24,8 @@ const allTurfs = [
 const sportSlugs = {
     football: 'Football',
     cricket: 'Cricket',
-    badminton: 'Badminton',
     'box-cricket': 'Box Cricket',
-    pickleball: 'Pickleball',
+    'gaming-zone': 'Gaming Zone',
     'multi-sport': 'Multi-Sport',
 }
 
@@ -155,7 +154,7 @@ export default function AllTurfsPage() {
                                     className="w-full pl-14 pr-10 py-5 bg-white/5 md:bg-transparent rounded-2xl md:rounded-none text-base font-bold text-white appearance-none outline-none cursor-pointer focus:bg-slate-900"
                                 >
                                     <option value="" className="bg-slate-900">All Sports</option>
-                                    {['Football', 'Cricket', 'Badminton', 'Box Cricket', 'Pickleball', 'Multi-Sport'].map(s => (
+                                    {['Football', 'Cricket', 'Box Cricket', 'Gaming Zone', 'Multi-Sport'].map(s => (
                                         <option key={s} value={s} className="bg-slate-900">{s}</option>
                                     ))}
                                 </select>

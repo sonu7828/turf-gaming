@@ -16,19 +16,19 @@ const plans = [
         price: '999',
         period: '/MO',
         desc: 'COMMANDER TIER SELECTION',
-        color: 'from-emerald-500 to-teal-600',
-        accent: 'emerald',
+        color: 'from-blue-500 to-indigo-600',
+        accent: 'blue',
         popular: true,
-        features: ['15 Field Bookings / Month', 'Squad / Team Authorization', 'Tournament Combat Entry', 'Priority Tactical Support', 'Advanced Performance Stats', 'Talent Marketplace Access']
+        features: ['15 Field Bookings / Month', 'Squad / Team Authorization', 'Tournament Combat Entry', 'Priority Tactical Support', 'Advanced Performance Stats', '1 Free Tournament Entry Pass']
     },
     {
         name: 'Gold',
         price: '1,999',
         period: '/MO',
         desc: 'ELITE OPERATOR CLEARANCE',
-        color: 'from-amber-400 to-orange-500',
-        accent: 'amber',
-        features: ['Unlimited Tactical Bookings', 'Full Arsenal Access', 'Elite Analytics Engine', '24/7 VIP Command Link', 'Private Tourney Hosting', 'Marketplace Priority Listing', 'Neural API Access']
+        color: 'from-purple-500 to-pink-500',
+        accent: 'purple',
+        features: ['Unlimited Tactical Bookings', 'Full Arsenal Access', 'Elite Analytics Engine', '24/7 VIP Command Link', 'Private Tourney Hosting', 'Priority Tournament Hosting', 'Neural API Access']
     },
 ]
 
@@ -137,7 +137,7 @@ export default function MembershipPage() {
                                     {[
                                         { f: 'Tactical Bookings / MO', b: '05', s: '15', g: 'UNLIMITED' },
                                         { f: 'Squad Authorization', b: '---', s: '✓', g: '✓' },
-                                        { f: 'Marketplace Access', b: 'READ ONLY', s: 'ACTIVE', g: 'PRIORITY' },
+                                        { f: 'Tournament Perks', b: 'SPECTATE', s: 'FREE PASS (1)', g: 'FREE PASS (3) + HOST' },
                                         { f: 'Neural Analytics', b: 'BASIC', s: 'ADVANCED', g: 'FULL RSA' },
                                         { f: 'Command Support', b: 'TICKET', s: 'PRIORITY', g: '24/7 VIP' },
                                     ].map((row, i) => (

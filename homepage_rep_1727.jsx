@@ -1,0 +1,1 @@
+"import CategoryBar from '../../components/CategoryBar'\n\n/* ── DATA ── */"

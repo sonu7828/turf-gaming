@@ -15,7 +15,7 @@ const testimonials = [
         name: 'Priya Sharma',
         role: 'Gaming Arena Manager, Mumbai',
         quote:
-            'The tournament engine is a game-changer. We run weekly esports competitions now with automated brackets, and the player marketplace brought in an amazing community.',
+            'The tournament engine is a game-changer. We run weekly esports competitions now with automated brackets, and the competitive gaming ecosystem brought in an amazing community.',
         avatar: 'PS',
         rating: 5,
     },

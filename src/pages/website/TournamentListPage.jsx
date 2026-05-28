@@ -6,9 +6,9 @@ const tournaments = [
     { id: 1, name: 'Premier Cricket League', sport: 'Cricket', date: 'Mar 15, 2026', prize: '50,000', entryFee: '500', teams: 16, spotsLeft: 4, status: 'Registration Open', image: 'https://images.unsplash.com/photo-1540747913346-19e32fc3e97e?auto=format&fit=crop&q=80&w=800' },
     { id: 2, name: 'Urban Football Cup', sport: 'Football', date: 'Mar 22, 2026', prize: '30,000', entryFee: '400', teams: 16, spotsLeft: 2, status: 'Registration Open', image: 'https://images.unsplash.com/photo-1543326727-cf6c39e8f84c?auto=format&fit=crop&q=80&w=800' },
     { id: 3, name: 'Cyber Cup Championship', sport: 'Esports', date: 'Apr 5, 2026', prize: '1,00,000', entryFee: '1000', teams: 32, spotsLeft: 8, status: 'Registration Open', image: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&q=80&w=800' },
-    { id: 4, name: 'Badminton Elite Doubles', sport: 'Badminton', date: 'Apr 12, 2026', prize: '15,000', entryFee: '300', teams: 16, spotsLeft: 0, status: 'Registration Closed', image: 'https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?auto=format&fit=crop&q=80&w=800' },
-    { id: 5, name: 'Hoops Challenge League', sport: 'Basketball', date: 'Apr 20, 2026', prize: '25,000', entryFee: '600', teams: 8, spotsLeft: 3, status: 'Registration Open', image: 'https://images.unsplash.com/photo-1504450758481-7338eba7524a?auto=format&fit=crop&q=80&w=800' },
-    { id: 6, name: 'Smash Tennis Open', sport: 'Tennis', date: 'May 1, 2026', prize: '20,000', entryFee: '500', teams: 32, spotsLeft: 15, status: 'Upcoming', image: 'https://images.unsplash.com/photo-1592709823125-a191f07a2a5e?auto=format&fit=crop&q=80&w=800' },
+    { id: 4, name: 'Gaming Warzone Masters', sport: 'Gaming Zone', date: 'Apr 12, 2026', prize: '1,50,000', entryFee: '1500', teams: 32, spotsLeft: 0, status: 'Registration Closed', image: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&q=80&w=800' },
+    { id: 5, name: 'Football Super Cup', sport: 'Football', date: 'Apr 20, 2026', prize: '25,000', entryFee: '600', teams: 8, spotsLeft: 3, status: 'Registration Open', image: 'https://images.unsplash.com/photo-1575361204480-aadea25e6e68?auto=format&fit=crop&q=80&w=800' },
+    { id: 6, name: 'Box Cricket Elite Clash', sport: 'Box Cricket', date: 'May 1, 2026', prize: '20,000', entryFee: '500', teams: 32, spotsLeft: 15, status: 'Upcoming', image: 'https://images.unsplash.com/photo-1624526267942-ab0ff8a3e972?auto=format&fit=crop&q=80&w=800' },
 ]
 
 export default function TournamentListPage() {

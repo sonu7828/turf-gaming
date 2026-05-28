@@ -1,0 +1,1 @@
+"        if (appliedFilters.location) {\n            const searchTerms = appliedFilters.location.toLowerCase().trim().split(/\\s+/);\n            const combinedString = `${t.city} ${t.location}`.toLowerCase();\n            const matchesLocation = searchTerms.every(term => combinedString.includes(term));\n            if (!matchesLocation) return false;\n        }"

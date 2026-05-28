@@ -17,7 +17,6 @@ import TurfDetailPage from './pages/website/TurfDetailPage'
 import SlotBookingPage from './pages/website/SlotBookingPage'
 import TournamentListPage from './pages/website/TournamentListPage'
 import TournamentDetailPage from './pages/website/TournamentDetailPage'
-import PlayerMarketplacePage from './pages/website/PlayerMarketplacePage'
 import MembershipPage from './pages/website/MembershipPage'
 import ContactPage from './pages/website/ContactPage'
 
@@ -40,12 +39,14 @@ import SlotManagement from './pages/owner/SlotManagement'
 import BookingManagement from './pages/owner/BookingManagement'
 import TournamentManagement from './pages/owner/TournamentManagement'
 import TeamsPlayers from './pages/owner/TeamsPlayers'
-import PlayerBids from './pages/owner/PlayerBids'
 import WalletPage from './pages/owner/WalletPage'
 import ReportsPage from './pages/owner/ReportsPage'
 import InventoryPage from './pages/owner/InventoryPage'
 import MaintenancePage from './pages/owner/MaintenancePage'
 import StaffManagement from './pages/owner/StaffManagement'
+import OwnerPOS from './pages/owner/OwnerPOS'
+import BillingHistory from './pages/owner/BillingHistory'
+import GamingZoneManager from './pages/owner/GamingZoneManager'
 
 // Staff
 import StaffDashboard from './pages/staff/StaffDashboard'
@@ -62,7 +63,6 @@ import CustomerTeams from './pages/customer/CustomerTeams'
 import CustomerTournaments from './pages/customer/CustomerTournaments'
 import CustomerWallet from './pages/customer/CustomerWallet'
 import CustomerProfile from './pages/customer/CustomerProfile'
-import CustomerHire from './pages/customer/CustomerHire'
 
 export default function App() {
   return (
@@ -80,7 +80,6 @@ export default function App() {
           <Route path="/booking/:id" element={<WebsiteLayout><SlotBookingPage /></WebsiteLayout>} />
           <Route path="/tournaments" element={<WebsiteLayout><TournamentListPage /></WebsiteLayout>} />
           <Route path="/tournaments/:id" element={<WebsiteLayout><TournamentDetailPage /></WebsiteLayout>} />
-          <Route path="/marketplace" element={<WebsiteLayout><PlayerMarketplacePage /></WebsiteLayout>} />
           <Route path="/membership" element={<WebsiteLayout><MembershipPage /></WebsiteLayout>} />
           <Route path="/contact" element={<WebsiteLayout><ContactPage /></WebsiteLayout>} />
 
@@ -102,12 +101,14 @@ export default function App() {
           <Route path="/owner" element={<DashboardLayout role="owner" />}>
             <Route index element={<OwnerDashboard />} />
             <Route path="sports" element={<SportsManagement />} />
+            <Route path="gaming" element={<GamingZoneManager />} />
             <Route path="slots" element={<SlotManagement />} />
             <Route path="bookings" element={<BookingManagement />} />
+            <Route path="pos" element={<OwnerPOS />} />
+            <Route path="billing-history" element={<BillingHistory />} />
             <Route path="tournaments" element={<TournamentManagement />} />
             <Route path="teams" element={<TeamsPlayers />} />
             <Route path="players" element={<TeamsPlayers />} />
-            <Route path="bids" element={<PlayerBids />} />
             <Route path="wallet" element={<WalletPage />} />
             <Route path="reports" element={<ReportsPage />} />
             <Route path="inventory" element={<InventoryPage />} />
@@ -135,7 +136,6 @@ export default function App() {
             <Route path="tournaments" element={<CustomerTournaments />} />
             <Route path="wallet" element={<CustomerWallet />} />
             <Route path="profile" element={<CustomerProfile />} />
-            <Route path="hire" element={<CustomerHire />} />
           </Route>
 
           {/* 404 */}
