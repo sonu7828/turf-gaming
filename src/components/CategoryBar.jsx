@@ -1,12 +1,9 @@
-import { IoFootball, IoGameController } from 'react-icons/io5'
+import { IoFootball } from 'react-icons/io5'
 import { GiCricketBat } from 'react-icons/gi'
-import { MdStadium } from 'react-icons/md'
 
 const categories = [
     { id: 'football', label: 'Football', icon: IoFootball },
     { id: 'cricket', label: 'Cricket', icon: GiCricketBat },
-    { id: 'box-cricket', label: 'Box Cricket', icon: MdStadium },
-    { id: 'gaming-zone', label: 'Gaming Zone', icon: IoGameController, badge: 'New' },
 ]
 
 export default function CategoryBar({ activeId, onSelect }) {

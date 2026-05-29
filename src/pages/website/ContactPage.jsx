@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { HiMail, HiPhone, HiLocationMarker, HiPaperAirplane, HiStatusOnline, HiShieldCheck } from 'react-icons/hi'
+import { FaTwitter, FaInstagram, FaLinkedin, FaDiscord } from 'react-icons/fa'
 
 export default function ContactPage() {
     useEffect(() => {
@@ -9,120 +10,149 @@ export default function ContactPage() {
     const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' })
 
     return (
-        <div className="min-h-screen bg-slate-950 pt-24 pb-20 relative overflow-hidden">
-            {/* Background Aesthetics */}
-            <div className="absolute inset-x-0 top-0 h-[50vh] z-0 pointer-events-none">
-                <div className="absolute inset-0 bg-gradient-to-b from-slate-900/40 via-slate-950/90 to-slate-950" />
-                <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-emerald-500/5 rounded-full blur-[120px]" />
+        <div className="min-h-screen bg-[#030510] pt-32 pb-24 relative overflow-hidden">
+            {/* Highly Aesthetic Mesh Gradients & Glowing Spheres */}
+            <div className="absolute inset-0 z-0 pointer-events-none select-none">
+                {/* Elegant subtle dotted mesh overlay */}
+                <div className="absolute inset-0 bg-[radial-gradient(rgba(99,102,241,0.05)_1px,transparent_1px)] bg-[size:28px_28px] opacity-80" />
+                
+                {/* Stunning Premium Mesh Glow Blobs */}
+                <div className="absolute -top-40 left-1/4 w-[750px] h-[750px] bg-gradient-to-tr from-emerald-500/10 via-indigo-500/10 to-purple-500/5 rounded-full blur-[140px] opacity-80 animate-float" />
+                <div className="absolute top-1/4 right-0 w-[550px] h-[550px] bg-gradient-to-bl from-cyan-500/10 via-indigo-600/10 to-teal-500/5 rounded-full blur-[120px] opacity-70 animate-float-delayed" />
+                <div className="absolute bottom-10 left-10 w-[500px] h-[500px] bg-gradient-to-tr from-purple-600/10 to-emerald-500/5 rounded-full blur-[130px] opacity-60" />
+                
+                {/* Aesthetic Floating Particles */}
+                <div className="absolute top-[20%] left-[15%] w-2 h-2 rounded-full bg-emerald-400/40 blur-[2px] animate-pulse" />
+                <div className="absolute bottom-[30%] right-[20%] w-3 h-3 rounded-full bg-indigo-400/40 blur-[2px] animate-pulse" style={{ animationDelay: '1.5s' }} />
+                <div className="absolute top-[60%] right-[10%] w-2 h-2 rounded-full bg-cyan-400/30 blur-[2px] animate-pulse" style={{ animationDelay: '3s' }} />
             </div>
 
             <div className="max-w-[1400px] mx-auto px-4 sm:px-6 relative z-10">
-                {/* Header */}
-                <div className="text-center mb-16">
-                    <div className="inline-flex items-center gap-2 px-3 py-1 bg-emerald-500/10 border border-emerald-500/30 rounded-full mb-4">
-                        <HiStatusOnline className="w-3 h-3 text-emerald-500 animate-pulse" />
-                        <span className="text-[9px] font-black tracking-widest text-emerald-500 uppercase">Communication Array Active</span>
-                    </div>
-                    <h1 className="text-4xl lg:text-5xl font-black text-white italic tracking-tighter uppercase drop-shadow-lg mb-4">TACTICAL RESPONSE CENTER</h1>
-                    <p className="text-slate-400 font-medium max-w-2xl mx-auto text-sm leading-relaxed">
-                        Establish a secure connection with SportMatrix Headquarters. Our tactical support team is standing by to assist with your deployment inquiries.
-                    </p>
+                {/* Gorgeous Aesthetic Header */}
+                <div className="text-center mb-12 relative">
+                    <h1 className="text-3xl sm:text-4xl lg:text-6xl font-extrabold text-white tracking-tight uppercase relative">
+                        <span className="bg-gradient-to-r from-white via-slate-100 to-emerald-400 bg-clip-text text-transparent">Get In Touch With SportMatrix</span>
+                        <span className="absolute -bottom-3 left-1/2 -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-emerald-500 to-indigo-500 rounded-full" />
+                    </h1>
                 </div>
 
                 <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto items-start">
-                    {/* Contact Form */}
-                    <div className="bg-slate-900 border border-white/10 rounded-sm p-8 shadow-2xl relative overflow-hidden group">
-                        <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/5 rounded-full blur-3xl group-hover:bg-emerald-500/10 transition-colors" />
+                    {/* Beautiful Frosted Glass Form Card */}
+                    <div className="bg-white/[0.02] backdrop-blur-3xl border border-white/10 rounded-3xl p-8 lg:p-10 shadow-[0_8px_32px_rgba(0,0,0,0.37)] relative overflow-hidden group transition-all duration-500 hover:border-emerald-500/30 hover:shadow-[0_0_40px_rgba(16,185,129,0.08)]">
+                        {/* Top subtle color indicator line */}
+                        <div className="absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-emerald-400 via-indigo-500 to-cyan-400 opacity-60" />
+                        <div className="absolute -top-24 -right-24 w-48 h-48 bg-emerald-500/10 rounded-full blur-3xl group-hover:bg-emerald-500/20 transition-all duration-700 pointer-events-none" />
 
-                        <h2 className="text-xl font-black text-white italic tracking-tighter uppercase mb-8 flex items-center gap-3">
-                            <span className="w-1 h-6 bg-emerald-500 rounded-full" />
-                            INTEL INQUIRY
-                        </h2>
+                        {/* Form Header */}
+                        <div className="flex items-center justify-between border-b border-white/10 pb-5 mb-8">
+                            <h2 className="text-xl font-bold text-white tracking-tight uppercase flex items-center gap-3">
+                                <span className="w-1.5 h-5 bg-gradient-to-b from-emerald-400 to-indigo-500 rounded-full" />
+                                Send Us A Message
+                            </h2>
+                            <span className="text-[9px] font-bold text-slate-400 bg-white/[0.04] px-3 py-1 border border-white/10 rounded-full uppercase tracking-wider">
+                                SECURE CHANNEL
+                            </span>
+                        </div>
 
                         <form className="space-y-6 relative z-10" onSubmit={e => e.preventDefault()}>
-                            <div className="space-y-2">
-                                <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest ml-1">Operator Identity</label>
+                            {/* Full Name */}
+                            <div className="space-y-2 group/input">
+                                <label className="text-[11px] font-semibold text-slate-300 uppercase tracking-wider ml-1 group-focus-within/input:text-emerald-400 transition-colors duration-300">
+                                    Full Name
+                                </label>
                                 <input
                                     type="text"
-                                    placeholder="ENTER FULL NAME"
+                                    placeholder="Enter your full name"
                                     value={form.name}
                                     onChange={e => setForm({ ...form, name: e.target.value })}
-                                    className="w-full bg-slate-950 border border-white/5 rounded-sm px-4 py-4 text-xs font-bold text-white uppercase tracking-widest focus:outline-none focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/20 transition-all placeholder:text-slate-700"
-                                />
-                            </div>
-                            <div className="space-y-2">
-                                <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest ml-1">Digital Signal (Email)</label>
-                                <input
-                                    type="email"
-                                    placeholder="OPERATOR@SGBOS.COM"
-                                    value={form.email}
-                                    onChange={e => setForm({ ...form, email: e.target.value })}
-                                    className="w-full bg-slate-950 border border-white/5 rounded-sm px-4 py-4 text-xs font-bold text-white uppercase tracking-widest focus:outline-none focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/20 transition-all placeholder:text-slate-700"
-                                />
-                            </div>
-                            <div className="space-y-2">
-                                <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest ml-1">Mission Subject</label>
-                                <input
-                                    type="text"
-                                    placeholder="BRIEF DESCRIPTION"
-                                    value={form.subject}
-                                    onChange={e => setForm({ ...form, subject: e.target.value })}
-                                    className="w-full bg-slate-950 border border-white/5 rounded-sm px-4 py-4 text-xs font-bold text-white uppercase tracking-widest focus:outline-none focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/20 transition-all placeholder:text-slate-700"
-                                />
-                            </div>
-                            <div className="space-y-2">
-                                <label className="text-[10px] font-black text-slate-500 uppercase tracking-widest ml-1">Transmission Content</label>
-                                <textarea
-                                    rows={5}
-                                    placeholder="DESCRIBE MISSION OBJECTIVES OR INQUIRIES..."
-                                    value={form.message}
-                                    onChange={e => setForm({ ...form, message: e.target.value })}
-                                    className="w-full bg-slate-950 border border-white/5 rounded-sm px-4 py-4 text-xs font-bold text-white uppercase tracking-widest focus:outline-none focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/20 transition-all resize-none placeholder:text-slate-700"
+                                    className="w-full bg-slate-950/40 border border-white/10 focus:border-emerald-500/50 rounded-2xl px-4 py-4 text-xs font-bold text-white tracking-wide focus:outline-none focus:ring-4 focus:ring-emerald-500/5 transition-all duration-300 placeholder:text-slate-600 focus:placeholder:text-slate-500"
                                 />
                             </div>
 
+                            {/* Email Address */}
+                            <div className="space-y-2 group/input">
+                                <label className="text-[11px] font-semibold text-slate-300 uppercase tracking-wider ml-1 group-focus-within/input:text-emerald-400 transition-colors duration-300">
+                                    Email Address
+                                </label>
+                                <input
+                                    type="email"
+                                    placeholder="yourname@company.com"
+                                    value={form.email}
+                                    onChange={e => setForm({ ...form, email: e.target.value })}
+                                    className="w-full bg-slate-950/40 border border-white/10 focus:border-emerald-500/50 rounded-2xl px-4 py-4 text-xs font-bold text-white tracking-wide focus:outline-none focus:ring-4 focus:ring-emerald-500/5 transition-all duration-300 placeholder:text-slate-600 focus:placeholder:text-slate-500"
+                                />
+                            </div>
+
+                            {/* Subject */}
+                            <div className="space-y-2 group/input">
+                                <label className="text-[11px] font-semibold text-slate-300 uppercase tracking-wider ml-1 group-focus-within/input:text-emerald-400 transition-colors duration-300">
+                                    Subject
+                                </label>
+                                <input
+                                    type="text"
+                                    placeholder="How can we help you?"
+                                    value={form.subject}
+                                    onChange={e => setForm({ ...form, subject: e.target.value })}
+                                    className="w-full bg-slate-950/40 border border-white/10 focus:border-emerald-500/50 rounded-2xl px-4 py-4 text-xs font-bold text-white tracking-wide focus:outline-none focus:ring-4 focus:ring-emerald-500/5 transition-all duration-300 placeholder:text-slate-600 focus:placeholder:text-slate-500"
+                                />
+                            </div>
+
+                            {/* Your Message */}
+                            <div className="space-y-2 group/input">
+                                <label className="text-[11px] font-semibold text-slate-300 uppercase tracking-wider ml-1 group-focus-within/input:text-emerald-400 transition-colors duration-300">
+                                    Your Message
+                                </label>
+                                <textarea
+                                    rows={5}
+                                    placeholder="Describe your inquiry in detail..."
+                                    value={form.message}
+                                    onChange={e => setForm({ ...form, message: e.target.value })}
+                                    className="w-full bg-slate-950/40 border border-white/10 focus:border-emerald-500/50 rounded-2xl px-4 py-4 text-xs font-bold text-white tracking-wide focus:outline-none focus:ring-4 focus:ring-emerald-500/5 transition-all duration-300 resize-none placeholder:text-slate-600 focus:placeholder:text-slate-500"
+                                />
+                            </div>
+
+                            {/* Beautiful Vibrant Submit Button */}
                             <button
                                 type="submit"
-                                className="w-full py-5 bg-emerald-500 text-slate-950 font-black italic text-xs tracking-[0.3em] uppercase rounded-sm hover:bg-emerald-400 transition-all shadow-[0_0_20px_rgba(16,185,129,0.2)] hover:shadow-[0_0_30px_rgba(16,185,129,0.4)] transform active:scale-[0.98] flex items-center justify-center gap-3"
+                                className="w-full py-4.5 bg-gradient-to-r from-emerald-500 to-indigo-500 text-slate-950 font-bold text-xs tracking-[0.2em] uppercase rounded-2xl hover:opacity-95 transition-all duration-300 shadow-[0_0_30px_rgba(16,185,129,0.25)] hover:scale-[1.01] active:scale-[0.98] flex items-center justify-center gap-3 cursor-pointer group/btn relative overflow-hidden"
                             >
+                                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/15 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-1000 ease-out pointer-events-none" />
                                 <HiPaperAirplane className="w-4 h-4 rotate-90" />
-                                EXECUTE TRANSMISSION
+                                SEND MESSAGE
                             </button>
                         </form>
                     </div>
 
-                    {/* Contact Info */}
+                    {/* Aesthetic Info Cards */}
                     <div className="space-y-6">
                         {[
-                            { icon: <HiLocationMarker />, title: 'GLOBAL HEADQUARTERS', details: ['Sector 24, Cyber City', 'Mumbai, MH 400001, India'], accent: 'text-emerald-500' },
-                            { icon: <HiMail />, title: 'SECURE COMMUNICATIONS', details: ['operations@sportmatrix.com', 'tactical@sportmatrix.com'], accent: 'text-amber-500' },
-                            { icon: <HiPhone />, title: 'DIRECT COMMAND LINE', details: ['+91 (022) 2890-5000', '0800-TACTICAL-SM'], accent: 'text-teal-400' },
-                            { icon: <HiShieldCheck />, title: 'AVAILABILITY WINDOW', details: ['MON-FRI: 0900 - 1800 IST', 'SAT: 1000 - 1400 IST'], accent: 'text-slate-400' },
+                            { icon: <HiLocationMarker />, title: 'OUR HEADQUARTERS', details: ['Sector 24, Cyber City, BKC', 'Mumbai, MH 40051, India'], accent: 'from-emerald-400 to-teal-500 text-emerald-400' },
+                            { icon: <HiMail />, title: 'EMAIL INQUIRIES', details: ['support@sportmatrix.com', 'operations@sportmatrix.com'], accent: 'from-amber-400 to-orange-500 text-amber-400' },
+                            { icon: <HiPhone />, title: 'DIRECT PHONE HOTLINE', details: ['+91 (022) 2890-5000', '1800-SPORT-MATRIX'], accent: 'from-cyan-400 to-blue-500 text-cyan-400' },
+                            { icon: <HiShieldCheck />, title: 'OPERATING HOURS', details: ['MON-FRI: 09:00 AM - 06:00 PM IST', 'SAT: 10:00 AM - 02:00 PM IST'], accent: 'from-slate-400 to-slate-500 text-slate-300' },
                         ].map((c, i) => (
-                            <div key={i} className="group bg-slate-900 border border-white/5 hover:border-white/20 p-6 rounded-sm transition-all duration-300 flex items-start gap-6 relative overflow-hidden">
-                                <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/0 to-white/5 translate-x-full group-hover:translate-x-0 transition-transform duration-700" />
+                            <div key={i} className="group bg-white/[0.02] backdrop-blur-3xl border border-white/10 hover:border-emerald-500/30 p-6 rounded-3xl transition-all duration-300 flex items-start gap-6 relative overflow-hidden hover:-translate-y-1 hover:shadow-[0_8px_32px_rgba(16,185,129,0.06)]">
+                                {/* Sweep glow overlay */}
+                                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out pointer-events-none" />
 
-                                <div className={`w-14 h-14 rounded-sm bg-slate-950 border border-white/10 flex items-center justify-center text-2xl shrink-0 group-hover:border-white/30 transition-colors shadow-lg ${c.accent}`}>
-                                    {c.icon}
+                                {/* Icon container with gradient ring */}
+                                <div className={`relative flex items-center justify-center w-14 h-14 shrink-0 rounded-2xl bg-slate-950 border border-white/10 transition-all duration-300 group-hover:scale-105 shadow-md`}>
+                                    <div className={`text-xl bg-gradient-to-br ${c.accent} bg-clip-text text-transparent`}>
+                                        {c.icon}
+                                    </div>
+                                    <div className="absolute inset-0 rounded-2xl bg-white/[0.02]" />
                                 </div>
-                                <div className="relative z-10">
-                                    <h3 className="text-sm font-black text-white italic tracking-tighter uppercase mb-2 group-hover:text-emerald-400 transition-colors">{c.title}</h3>
+                                
+                                <div className="relative z-10 pt-0.5">
+                                    <h3 className="text-sm font-bold text-white tracking-tight uppercase mb-2 group-hover:text-emerald-400 transition-colors duration-300">{c.title}</h3>
                                     {c.details.map(d => (
-                                        <p key={d} className="text-xs font-bold text-slate-500 uppercase tracking-widest mb-1 group-hover:text-slate-400 transition-colors">{d}</p>
+                                        <p key={d} className="text-xs font-semibold text-slate-400 tracking-wide mb-1 group-hover:text-slate-300 transition-colors duration-300">{d}</p>
                                     ))}
                                 </div>
                             </div>
                         ))}
 
-                        {/* Social Meta */}
-                        <div className="bg-emerald-500/5 border border-emerald-500/20 p-8 rounded-sm mt-8">
-                            <h4 className="text-[10px] font-black text-emerald-500 uppercase tracking-[0.4em] mb-4 text-center">Protocol Integration</h4>
-                            <div className="flex justify-center gap-8">
-                                {['TWITTER', 'INSTAGRAM', 'LINKEDIN', 'DISCORD'].map(s => (
-                                    <a key={s} href="#" className="text-[9px] font-black text-slate-500 hover:text-white transition-colors tracking-widest uppercase italic">{s}</a>
-                                ))}
-                            </div>
-                        </div>
+
                     </div>
                 </div>
             </div>

@@ -21,8 +21,6 @@ const allLocations = locationSuggestions.flatMap(loc => [
 const sportsOptions = [
     { name: 'Football', icon: '⚽' },
     { name: 'Cricket', icon: '🏏' },
-    { name: 'Box Cricket', icon: '🏟️' },
-    { name: 'Gaming Zone', icon: '🎮' },
 ]
 
 /* ── Time Slots ── */
@@ -143,12 +141,12 @@ export default function TurfSearchBar({ onSearch, values, onChange, onClear }) {
     return (
         <div className="w-full max-w-[1100px] mx-auto px-4 relative z-40 select-none">
             {/* ── MAKE MY TRIP STYLE PREMIUM DARK GLASS CAPSULE ── */}
-            <div className="relative bg-[#0B0F19]/70 backdrop-blur-xl border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.6)] rounded-full p-2 flex flex-col md:flex-row items-stretch group/card transition-all duration-500">
+            <div className="relative bg-[#0B0F19]/70 backdrop-blur-xl border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.6)] rounded-3xl md:rounded-full p-2 flex flex-col md:flex-row items-stretch group/card transition-all duration-500">
 
                 {/* 1. LOCATION */}
-                <div ref={locRef} className="flex-[1.5] min-w-0 relative group/sec border-r border-white/10">
+                <div ref={locRef} className="flex-[1.5] min-w-0 relative group/sec border-b md:border-b-0 md:border-r border-white/10">
                     <div
-                        className={`transition-all duration-300 cursor-pointer h-full px-8 py-4 flex flex-col justify-center rounded-l-full ${locOpen ? 'bg-purple-600/10' : 'hover:bg-white/5'}`}
+                        className={`transition-all duration-300 cursor-pointer h-full px-6 md:px-8 py-4 flex flex-col justify-center rounded-t-2xl md:rounded-l-full md:rounded-tr-none ${locOpen ? 'bg-purple-600/10' : 'hover:bg-white/5'}`}
                         onClick={() => { setLocOpen(true); setTimeout(() => locInputRef.current?.focus(), 50) }}
                     >
                         <div className="flex items-center gap-2 mb-1.5">
@@ -196,7 +194,7 @@ export default function TurfSearchBar({ onSearch, values, onChange, onClear }) {
                 </div>
 
                 {/* 2. DATE */}
-                <div ref={dateRef} className="flex-1 min-w-0 relative group/sec border-r border-white/10">
+                <div ref={dateRef} className="flex-1 min-w-0 relative group/sec border-b md:border-b-0 md:border-r border-white/10">
                     <div
                         className={`transition-all duration-300 cursor-pointer h-full px-6 py-4 flex flex-col justify-center ${dateOpen ? 'bg-purple-600/10' : 'hover:bg-white/5'}`}
                         onClick={() => setDateOpen(!dateOpen)}
@@ -236,7 +234,7 @@ export default function TurfSearchBar({ onSearch, values, onChange, onClear }) {
                 </div>
 
                 {/* 3. TIME SLOT */}
-                <div ref={timeRef} className="flex-1 min-w-0 relative group/sec border-r border-white/10">
+                <div ref={timeRef} className="flex-1 min-w-0 relative group/sec border-b md:border-b-0 md:border-r border-white/10">
                     <div
                         className={`transition-all duration-300 cursor-pointer h-full px-6 py-4 flex flex-col justify-center ${timeOpen ? 'bg-purple-600/10' : 'hover:bg-white/5'}`}
                         onClick={() => setTimeOpen(!timeOpen)}
@@ -265,7 +263,7 @@ export default function TurfSearchBar({ onSearch, values, onChange, onClear }) {
                     )}
                 </div>
                 {/* ── ACTION BUTTONS ── */}
-                <div className="flex items-center gap-4 px-4 py-3 shrink-0">
+                <div className="flex items-center gap-3 px-4 py-3 shrink-0">
                     <button 
                         onClick={onClear} 
                         className="w-12 h-12 flex items-center justify-center rounded-full bg-slate-800/80 hover:bg-slate-700 transition-colors border border-white/10 cursor-pointer"
@@ -275,7 +273,7 @@ export default function TurfSearchBar({ onSearch, values, onChange, onClear }) {
                     </button>
                     <button
                         onClick={() => onSearch?.({ location, sport, date, time, players })}
-                        className="h-12 px-10 bg-[#8b5cf6] hover:bg-[#7c3aed] text-white font-black text-xs uppercase tracking-[0.2em] rounded-full transition-all shadow-[0_0_20px_rgba(139,92,246,0.3)] hover:shadow-[0_0_25px_rgba(139,92,246,0.5)] flex items-center justify-center cursor-pointer"
+                        className="h-12 flex-1 md:flex-initial px-10 bg-[#8b5cf6] hover:bg-[#7c3aed] text-white font-black text-xs uppercase tracking-[0.2em] rounded-full transition-all shadow-[0_0_20px_rgba(139,92,246,0.3)] hover:shadow-[0_0_25px_rgba(139,92,246,0.5)] flex items-center justify-center cursor-pointer"
                     >
                         SEARCH
                     </button>
