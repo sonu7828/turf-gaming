@@ -11,12 +11,12 @@ export default function SlotGrid({ slots = [], onSelect, selectedSlot }) {
                         onClick={() => !isBooked && !isBlocked && onSelect?.(slot)}
                         disabled={isBooked || isBlocked}
                         className={`px-3 py-2.5 rounded-sm text-xs font-bold tracking-wider transition-all duration-300 border cursor-pointer disabled:cursor-not-allowed ${isSelected
-                                ? 'bg-emerald-500 text-slate-950 border-emerald-400 shadow-[0_0_15px_rgba(16,185,129,0.3)]'
-                                : isBooked
-                                    ? 'bg-slate-900/50 text-slate-600 border-white/5 opacity-50'
-                                    : isBlocked
-                                        ? 'bg-red-500/10 text-red-500/50 border-red-500/20 opacity-50'
-                                        : 'bg-slate-800 text-slate-300 border-white/10 hover:border-emerald-500/50 hover:bg-slate-700 hover:text-white hover:shadow-[0_0_10px_rgba(16,185,129,0.1)]'
+                            ? 'bg-emerald-500 text-slate-950 border-emerald-400 shadow-[0_0_15px_rgba(16,185,129,0.3)]'
+                            : isBooked
+                                ? 'bg-slate-900/50 text-slate-600 border-white/5 opacity-50'
+                                : isBlocked
+                                    ? 'bg-red-500/10 text-red-500/50 border-red-500/20 opacity-50'
+                                    : 'bg-slate-800 text-slate-300 border-white/10 hover:border-emerald-500/50 hover:bg-slate-700 hover:text-white hover:shadow-[0_0_10px_rgba(16,185,129,0.1)]'
                             }`}
                     >
                         <span className="block tabular-nums">{slot.time}</span>

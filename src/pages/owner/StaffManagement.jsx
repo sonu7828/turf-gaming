@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import DataTable from '../../components/ui/DataTable'
 import Badge from '../../components/ui/Badge'
 import Button from '../../components/ui/Button'
@@ -20,7 +20,7 @@ export default function StaffManagement() {
     const [staff, setStaff] = useState(initialStaff)
     const [modal, setModal] = useState(false)
     const [editMode, setEditMode] = useState(false)
-    
+
     // Form inputs state
     const [currentStaff, setCurrentStaff] = useState({
         name: '',
@@ -70,29 +70,29 @@ export default function StaffManagement() {
     const columns = [
         { key: 'name', label: 'Employee Name' },
         { key: 'email', label: 'Email Payout' },
-        { 
-            key: 'role', 
-            label: 'Assigned Role', 
-            render: v => <Badge variant={v === 'Manager' ? 'primary' : v === 'Cashier' ? 'success' : 'warning'}>{v}</Badge> 
+        {
+            key: 'role',
+            label: 'Assigned Role',
+            render: v => <Badge variant={v === 'Manager' ? 'primary' : v === 'Cashier' ? 'success' : 'warning'}>{v}</Badge>
         },
         { key: 'phone', label: 'Phone Number' },
-        { 
-            key: 'shift', 
-            label: 'Shift Slot', 
+        {
+            key: 'shift',
+            label: 'Shift Slot',
             render: v => (
                 <span className="flex items-center gap-1.5 text-xs font-bold text-surface-650">
                     <HiOutlineClock className="text-primary-500" /> {v} Shift
                 </span>
             )
         },
-        { 
-            key: 'status', 
-            label: 'Active status', 
-            render: v => <Badge variant={v === 'Active' ? 'success' : 'default'} dot>{v}</Badge> 
+        {
+            key: 'status',
+            label: 'Active status',
+            render: v => <Badge variant={v === 'Active' ? 'success' : 'default'} dot>{v}</Badge>
         },
-        { 
-            key: 'action', 
-            label: '', 
+        {
+            key: 'action',
+            label: '',
             render: (_, r) => (
                 <div className="flex gap-2">
                     <Button size="sm" variant="outline" onClick={() => handleEdit(r)} className="cursor-pointer">
@@ -105,7 +105,7 @@ export default function StaffManagement() {
                         <HiTrash className="w-4 h-4" />
                     </button>
                 </div>
-            ) 
+            )
         },
     ]
 
@@ -132,31 +132,31 @@ export default function StaffManagement() {
             {/* Add/Edit Modal */}
             <Modal isOpen={modal} onClose={() => setModal(false)} title={editMode ? 'Edit Staff Roster' : 'Register New Employee'} size="md">
                 <div className="space-y-4 animate-in fade-in">
-                    <Input 
-                        label="Full Employee Name" 
-                        placeholder="e.g. Ramesh Patil" 
+                    <Input
+                        label="Full Employee Name"
+                        placeholder="e.g. Ramesh Patil"
                         value={currentStaff.name}
                         onChange={(e) => setCurrentStaff({ ...currentStaff, name: e.target.value })}
                     />
-                    
+
                     <div className="grid grid-cols-2 gap-4">
-                        <Input 
-                            label="Email Address" 
-                            placeholder="staff@email.com" 
+                        <Input
+                            label="Email Address"
+                            placeholder="staff@email.com"
                             value={currentStaff.email}
                             onChange={(e) => setCurrentStaff({ ...currentStaff, email: e.target.value })}
                         />
-                        <Input 
-                            label="Contact Phone" 
-                            placeholder="+91 98765..." 
+                        <Input
+                            label="Contact Phone"
+                            placeholder="+91 98765..."
                             value={currentStaff.phone}
                             onChange={(e) => setCurrentStaff({ ...currentStaff, phone: e.target.value })}
                         />
                     </div>
 
                     <div className="grid grid-cols-2 gap-4">
-                        <Select 
-                            label="Assigned Operation Role" 
+                        <Select
+                            label="Assigned Operation Role"
                             value={currentStaff.role}
                             onChange={(e) => setCurrentStaff({ ...currentStaff, role: e.target.value })}
                             options={[
@@ -166,8 +166,8 @@ export default function StaffManagement() {
                             ]}
                         />
 
-                        <Select 
-                            label="Scheduled Shift Timings" 
+                        <Select
+                            label="Scheduled Shift Timings"
                             value={currentStaff.shift}
                             onChange={(e) => setCurrentStaff({ ...currentStaff, shift: e.target.value })}
                             options={[
@@ -187,6 +187,16 @@ export default function StaffManagement() {
                     </div>
                 </div>
             </Modal>
+
+            <ConfirmDialog
+                isOpen={deleteConfirm.open}
+                onClose={() => setDeleteConfirm({ open: false, id: null, name: '' })}
+                onConfirm={handleRemove}
+                title="Remove Staff Member"
+                message={`Are you sure you want to remove ${deleteConfirm.name}? They will no longer have access to the dashboard.`}
+                variant="danger"
+                confirmText="Remove"
+            />
         </div>
     )
 }

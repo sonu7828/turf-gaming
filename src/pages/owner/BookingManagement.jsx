@@ -23,7 +23,7 @@ export default function BookingManagement() {
     const [filterStatus, setFilterStatus] = useState('All')
     const [searchQuery, setSearchQuery] = useState('')
     const [filterDate, setFilterDate] = useState('')
-    
+
     // Details drawer modal
     const [detailModal, setDetailModal] = useState(false)
     const [selectedBooking, setSelectedBooking] = useState(null)
@@ -56,19 +56,19 @@ export default function BookingManagement() {
         { key: 'date', label: 'Date' },
         { key: 'time', label: 'Time' },
         { key: 'amount', label: 'Amount' },
-        { 
-            key: 'type', 
-            label: 'Type', 
-            render: v => <Badge variant={v === 'Online' ? 'primary' : 'default'}>{v}</Badge> 
+        {
+            key: 'type',
+            label: 'Type',
+            render: v => <Badge variant={v === 'Online' ? 'primary' : 'default'}>{v}</Badge>
         },
-        { 
-            key: 'status', 
-            label: 'Status', 
-            render: v => <Badge variant={v === 'Confirmed' ? 'success' : v === 'Pending' ? 'warning' : 'danger'} dot>{v}</Badge> 
+        {
+            key: 'status',
+            label: 'Status',
+            render: v => <Badge variant={v === 'Confirmed' ? 'success' : v === 'Pending' ? 'warning' : 'danger'} dot>{v}</Badge>
         },
-        { 
-            key: 'action', 
-            label: '', 
+        {
+            key: 'action',
+            label: '',
             render: (_, r) => (
                 <div className="flex gap-2">
                     <Button size="sm" variant="outline" onClick={() => handleOpenDetail(r)} className="cursor-pointer">
@@ -109,23 +109,23 @@ export default function BookingManagement() {
                 <div className="flex flex-wrap items-center gap-3 w-full md:w-auto">
                     <div className="flex items-center gap-2 bg-surface-50 border border-surface-200 rounded-2xl px-3 py-2 w-full md:w-60 shadow-inner">
                         <HiSearch className="w-4 h-4 text-surface-400" />
-                        <input 
-                            placeholder="Search name or ID..." 
+                        <input
+                            placeholder="Search name or ID..."
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
-                            className="bg-transparent outline-none text-xs text-surface-700 w-full placeholder:text-surface-400 font-semibold" 
+                            className="bg-transparent outline-none text-xs text-surface-700 w-full placeholder:text-surface-400 font-semibold"
                         />
                     </div>
-                    
-                    <input 
-                        type="date" 
+
+                    <input
+                        type="date"
                         value={filterDate}
                         onChange={(e) => setFilterDate(e.target.value)}
-                        className="px-3 py-2 bg-surface-50 border border-surface-200 rounded-2xl text-xs font-semibold outline-none focus:border-emerald-500 shadow-soft" 
+                        className="px-3 py-2 bg-surface-50 border border-surface-200 rounded-2xl text-xs font-semibold outline-none focus:border-emerald-500 shadow-soft"
                     />
-                    
+
                     {(searchQuery || filterDate || filterStatus !== 'All') && (
-                        <button 
+                        <button
                             onClick={() => { setSearchQuery(''); setFilterDate(''); setFilterStatus('All'); }}
                             className="text-xs font-bold text-red-500 hover:text-red-650"
                         >

@@ -1,11 +1,12 @@
 import { useState } from 'react'
-import DataTable from '../../components/ui/DataTable'
+import { HiTrash, HiPlus, HiPencil, HiCheckCircle, HiBan } from 'react-icons/hi'
+
 import Button from '../../components/ui/Button'
-import Badge from '../../components/ui/Badge'
+
 import Modal from '../../components/ui/Modal'
 import Input from '../../components/ui/Input'
 import Select from '../../components/ui/Select'
-import { HiPlus, HiPencil, HiTrash, HiCheckCircle, HiBan } from 'react-icons/hi'
+import Badge from '../../components/ui/Badge'
 
 const initialSports = [
     { id: 1, name: 'Cricket', icon: '🏏', price: '800', peakPrice: '1200', status: 'Active', bookings: 245, courts: 2 },
@@ -194,6 +195,6 @@ export default function SportsManagement() {
                     </div>
                 </div>
             </Modal>
-        </div>
+        </div >
     )
 }

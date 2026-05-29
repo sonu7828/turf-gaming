@@ -163,14 +163,14 @@ export default function AllTurfsPage() {
                     </div>
                 </div>
 
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
-                    <div className="flex flex-col lg:flex-row gap-10">
+                <div className="w-full px-2 sm:px-4 py-4">
+                    <div className="flex flex-col lg:flex-row gap-1">
                         {/* Sidebar Filters - Desktop Glass Card */}
-                        <div className={`
-                            ${showFilters ? 'fixed inset-0 z-50 p-6 bg-slate-950/90 backdrop-blur-md' : 'hidden'} 
-                            lg:static lg:block lg:w-[320px] lg:shrink-0 lg:bg-transparent lg:p-0 lg:z-auto
-                        `}>
-                            <div className="bg-white/5 backdrop-blur-3xl border border-white/10 rounded-[2.5rem] p-8 lg:sticky lg:top-28 space-y-10 shadow-2xl">
+                         <div className={`
+                             ${showFilters ? 'fixed inset-0 z-50 p-6 bg-slate-950/90 backdrop-blur-md' : 'hidden'} 
+                             lg:static lg:block lg:w-[260px] lg:shrink-0 lg:bg-transparent lg:p-0 lg:z-auto
+                         `}>
+                             <div className="bg-white/5 backdrop-blur-3xl border border-white/10 rounded-[2.5rem] p-4 lg:sticky lg:top-28 space-y-10 shadow-2xl">
                                 <div className="flex items-center justify-between">
                                     <h3 className="text-xl font-black text-white uppercase tracking-wider">Filters</h3>
                                     <div className="flex items-center gap-3">
@@ -278,16 +278,16 @@ export default function AllTurfsPage() {
                                     <button onClick={clearFilters} className="px-10 py-4 bg-white text-slate-950 font-black uppercase tracking-widest rounded-2xl hover:bg-emerald-500 hover:text-white transition-all transform hover:scale-110 active:scale-95">Clear All Filters</button>
                                 </div>
                             ) : (
-                                <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-8">
+                                <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-4">
                                     {filtered.map((t, i) => (
                                         <div 
                                             key={t.id} 
-                                            className="group relative bg-white/5 backdrop-blur-3xl border border-white/10 rounded-[2.5rem] overflow-hidden transition-all duration-700 hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.6)] hover:-translate-y-3 flex flex-col h-full"
+                                             className="group relative bg-white/5 backdrop-blur-3xl border border-white/10 rounded-xl overflow-hidden transition-all duration-700 hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.6)] hover:-translate-y-3 flex flex-col h-full"
                                             style={{ animationDelay: `${i * 100}ms` }}
                                             onClick={() => navigate(`/turfs/${t.id}`)}
                                         >
                                             {/* Card Image */}
-                                            <div className="relative h-64 overflow-hidden">
+                                                 <div className="relative h-48 overflow-hidden">
                                                 <img src={t.image} alt={t.name} className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" />
                                                 <div className="absolute inset-0 bg-gradient-to-t from-[#020617] via-transparent to-transparent opacity-80" />
                                                 
@@ -305,7 +305,7 @@ export default function AllTurfsPage() {
                                             </div>
 
                                             {/* Card Content */}
-                                            <div className="p-8 flex flex-col flex-grow">
+                                             <div className="p-4 flex flex-col flex-grow">
                                                 <h3 className="text-2xl font-black text-white mb-2 group-hover:text-emerald-400 transition-colors">{t.name}</h3>
                                                 <p className="flex items-center gap-2 text-white/40 font-bold text-sm mb-6">
                                                     <HiLocationMarker className="w-4 h-4 text-emerald-500" /> {t.location}

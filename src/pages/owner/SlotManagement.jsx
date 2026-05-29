@@ -1,7 +1,6 @@
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import Card from '../../components/ui/Card'
 import Button from '../../components/ui/Button'
-import Badge from '../../components/ui/Badge'
 import Modal from '../../components/ui/Modal'
 import Input from '../../components/ui/Input'
 import Select from '../../components/ui/Select'
@@ -14,10 +13,10 @@ const initialSlots = Array.from({ length: 17 }, (_, i) => {
     const period = hour >= 12 ? 'PM' : 'AM'
     const formattedHour = hour > 12 ? hour - 12 : hour
     const timeStr = `${String(formattedHour).padStart(2, '0')}:00 ${period}`
-    
+
     // peak prices from 4:00 PM to 9:00 PM
     const isPeak = hour >= 16 && hour <= 21
-    
+
     let status = 'available'
     let bookedBy = ''
     if ([3, 7, 11].includes(i)) {
@@ -52,11 +51,11 @@ export default function SlotManagement() {
     const [createModal, setCreateModal] = useState(false)
     const [date, setDate] = useState('2026-03-15')
     const [selectedCourt, setSelectedCourt] = useState('turf-a')
-    
+
     // Slot action details
     const [actionModal, setActionModal] = useState(false)
     const [activeSlot, setActiveSlot] = useState(null)
-    
+
     // Create new slot state
     const [newSlot, setNewSlot] = useState({
         time: '06:00 PM',
@@ -148,25 +147,25 @@ export default function SlotManagement() {
             <Card className="p-6">
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 border-b border-surface-100 pb-6">
                     <div className="flex flex-wrap items-center gap-4">
-                        <input 
-                            type="date" 
-                            value={date} 
-                            onChange={e => setDate(e.target.value)} 
-                            className="px-4 py-2.5 bg-surface-50 border border-surface-200 rounded-2xl text-sm font-semibold outline-none focus:border-emerald-500 transition-colors shadow-soft" 
+                        <input
+                            type="date"
+                            value={date}
+                            onChange={e => setDate(e.target.value)}
+                            className="px-4 py-2.5 bg-surface-50 border border-surface-200 rounded-2xl text-sm font-semibold outline-none focus:border-emerald-500 transition-colors shadow-soft"
                         />
-                        <Select 
-                            placeholder="All Courts" 
+                        <Select
+                            placeholder="All Courts"
                             value={selectedCourt}
                             onChange={(e) => setSelectedCourt(e.target.value)}
                             options={[
-                                { value: 'turf-a', label: 'Turf A (Main Field)' }, 
-                                { value: 'turf-b', label: 'Turf B (Indoor Arena)' }, 
+                                { value: 'turf-a', label: 'Turf A (Main Field)' },
+                                { value: 'turf-b', label: 'Turf B (Indoor Arena)' },
                                 { value: 'court-1', label: 'Badminton Court 1' }
-                            ]} 
-                            className="w-56 shadow-soft" 
+                            ]}
+                            className="w-56 shadow-soft"
                         />
                     </div>
-                    
+
                     {/* Visual color legend */}
                     <div className="flex gap-4 text-xs font-semibold text-surface-500 bg-surface-50 px-4 py-2.5 rounded-2xl border border-surface-200/60 shadow-soft">
                         <span className="flex items-center gap-1.5"><span className="w-3.5 h-3.5 rounded-lg bg-white border border-surface-200" /> Available</span>
@@ -181,7 +180,7 @@ export default function SlotManagement() {
                         let bgStyle = 'bg-white border-surface-200 hover:border-emerald-500 hover:shadow-soft-md'
                         let badgeColor = 'bg-surface-50 text-surface-500 border-surface-200'
                         let statusText = '₹' + slot.price
-                        
+
                         if (slot.status === 'booked') {
                             bgStyle = 'bg-emerald-50/40 border-emerald-200 shadow-inner'
                             badgeColor = 'bg-emerald-100 text-emerald-700 border-emerald-200'
@@ -193,8 +192,8 @@ export default function SlotManagement() {
                         }
 
                         return (
-                            <div 
-                                key={slot.id} 
+                            <div
+                                key={slot.id}
                                 onClick={() => handleSelectSlot(slot)}
                                 className={`group p-4 border rounded-3xl cursor-pointer text-center transition-all duration-300 flex flex-col justify-between h-36 ${bgStyle}`}
                             >
@@ -231,14 +230,14 @@ export default function SlotManagement() {
                         <div>
                             <label className="text-xs font-bold text-surface-500 uppercase tracking-wider">Set Custom Rate (₹/hr)</label>
                             <div className="flex gap-2 mt-1.5">
-                                <Input 
-                                    type="number" 
+                                <Input
+                                    type="number"
                                     defaultValue={activeSlot.price}
                                     id="custom-price-input"
                                     placeholder="800"
                                     className="flex-1"
                                 />
-                                <Button 
+                                <Button
                                     onClick={() => {
                                         const el = document.getElementById('custom-price-input')
                                         if (el) handleUpdateSlotPrice(el.value)
@@ -274,21 +273,21 @@ export default function SlotManagement() {
             {/* Create slot modal */}
             <Modal isOpen={createModal} onClose={() => setCreateModal(false)} title="Register Custom Slot" size="sm">
                 <div className="space-y-4">
-                    <Input 
-                        label="Time Slot String" 
-                        placeholder="e.g. 09:00 PM" 
+                    <Input
+                        label="Time Slot String"
+                        placeholder="e.g. 09:00 PM"
                         value={newSlot.time}
                         onChange={(e) => setNewSlot({ ...newSlot, time: e.target.value })}
                     />
-                    <Input 
-                        label="Hourly Pricing Rate (₹)" 
-                        type="number" 
-                        placeholder="e.g. 900" 
+                    <Input
+                        label="Hourly Pricing Rate (₹)"
+                        type="number"
+                        placeholder="e.g. 900"
                         value={newSlot.price}
                         onChange={(e) => setNewSlot({ ...newSlot, price: e.target.value })}
                     />
-                    <Select 
-                        label="Apply to Field" 
+                    <Select
+                        label="Apply to Field"
                         value={newSlot.court}
                         onChange={(e) => setNewSlot({ ...newSlot, court: e.target.value })}
                         options={[
@@ -310,13 +309,13 @@ export default function SlotManagement() {
                     <div className="p-4 bg-surface-50 rounded-2xl border border-surface-200 space-y-3">
                         <h4 className="text-xs font-black uppercase text-surface-600 tracking-wider">Schedule a Holiday</h4>
                         <div className="grid grid-cols-2 gap-3">
-                            <Input 
-                                type="date" 
+                            <Input
+                                type="date"
                                 value={newHoliday.date}
                                 onChange={(e) => setNewHoliday({ ...newHoliday, date: e.target.value })}
                             />
-                            <Input 
-                                placeholder="Holi Festival" 
+                            <Input
+                                placeholder="Holi Festival"
                                 value={newHoliday.reason}
                                 onChange={(e) => setNewHoliday({ ...newHoliday, reason: e.target.value })}
                             />

@@ -38,15 +38,15 @@ import SportsManagement from './pages/owner/SportsManagement'
 import SlotManagement from './pages/owner/SlotManagement'
 import BookingManagement from './pages/owner/BookingManagement'
 import TournamentManagement from './pages/owner/TournamentManagement'
-import TeamsPlayers from './pages/owner/TeamsPlayers'
+import TeamsPlayers from './pages/owner/TeamsPlayers';
 import WalletPage from './pages/owner/WalletPage'
 import ReportsPage from './pages/owner/ReportsPage'
 import InventoryPage from './pages/owner/InventoryPage'
 import MaintenancePage from './pages/owner/MaintenancePage'
 import StaffManagement from './pages/owner/StaffManagement'
 import OwnerPOS from './pages/owner/OwnerPOS'
-import BillingHistory from './pages/owner/BillingHistory'
-import GamingZoneManager from './pages/owner/GamingZoneManager'
+import BillingHistory from './pages/owner/BillingHistory';
+import GamingZoneManager from './pages/owner/GamingZoneManager';
 
 // Staff
 import StaffDashboard from './pages/staff/StaffDashboard'
@@ -55,11 +55,13 @@ import StaffTournaments from './pages/staff/StaffTournaments'
 import StaffPOS from './pages/staff/StaffPOS'
 import StaffRefunds from './pages/staff/StaffRefunds'
 import StaffMaintenance from './pages/staff/StaffMaintenance'
+import StaffEquipment from './pages/staff/StaffEquipment'
 
 // Customer
 import CustomerDashboard from './pages/customer/CustomerDashboard'
 import CustomerBookings from './pages/customer/CustomerBookings'
 import CustomerTeams from './pages/customer/CustomerTeams'
+import CustomerMatches from './pages/customer/CustomerMatches'
 import CustomerTournaments from './pages/customer/CustomerTournaments'
 import CustomerWallet from './pages/customer/CustomerWallet'
 import CustomerProfile from './pages/customer/CustomerProfile'
@@ -114,6 +116,7 @@ export default function App() {
             <Route path="inventory" element={<InventoryPage />} />
             <Route path="maintenance" element={<MaintenancePage />} />
             <Route path="staff" element={<StaffManagement />} />
+            <Route path="pos" element={<OwnerPOS />} />
           </Route>
 
           {/* Staff Dashboard */}
@@ -124,7 +127,7 @@ export default function App() {
             <Route path="pos" element={<StaffPOS />} />
             <Route path="refunds" element={<StaffRefunds />} />
             <Route path="maintenance" element={<StaffMaintenance />} />
-            <Route path="equipment" element={<StaffMaintenance />} />
+            <Route path="equipment" element={<StaffEquipment />} />
           </Route>
 
           {/* Customer Dashboard */}
@@ -132,7 +135,7 @@ export default function App() {
             <Route index element={<CustomerDashboard />} />
             <Route path="bookings" element={<CustomerBookings />} />
             <Route path="teams" element={<CustomerTeams />} />
-            <Route path="matches" element={<CustomerTeams />} />
+            <Route path="matches" element={<CustomerMatches />} />
             <Route path="tournaments" element={<CustomerTournaments />} />
             <Route path="wallet" element={<CustomerWallet />} />
             <Route path="profile" element={<CustomerProfile />} />

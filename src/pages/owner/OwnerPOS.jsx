@@ -1,3 +1,4 @@
+
 import { useState } from 'react'
 import Card from '../../components/ui/Card'
 import Button from '../../components/ui/Button'
@@ -33,7 +34,7 @@ const inventoryOptions = [
     { id: 'item23', name: 'Dairy Milk Chocolate', price: 40, icon: '🍫', category: 'Snacks & Drinks' },
     { id: 'item24', name: 'Nicotine Pouch (Velo)', price: 120, icon: '📦', category: 'Snacks & Drinks' },
     { id: 'item25', name: 'Real Orange Juice Can', price: 30, icon: '🍹', category: 'Snacks & Drinks' },
-    
+
     { id: 'item26', name: 'Football Rental', price: 150, icon: '⚽', category: 'Gear & Rentals' },
     { id: 'item27', name: 'Cricket Bat Rental', price: 250, icon: '🏏', category: 'Gear & Rentals' },
     { id: 'item28', name: 'Badminton Racket Rental', price: 80, icon: '🏸', category: 'Gear & Rentals' },
@@ -60,7 +61,7 @@ export default function OwnerPOS() {
     const [lastBill, setLastBill] = useState(null)
     const [activeTab, setActiveTab] = useState('Sports') // Sports, Gaming, Gear & Rentals, Snacks & Drinks
     const [searchQuery, setSearchQuery] = useState('')
-    
+
     // Customer Info
     const [customer, setCustomer] = useState({ name: '', phone: '' })
 
@@ -303,29 +304,29 @@ export default function OwnerPOS() {
                                     <span>🗓️</span> Quick walk-in field reservations
                                 </h3>
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs font-semibold">
-                                    <Input 
-                                        label="Booking Date" 
-                                        type="date" 
-                                        value={booking.date} 
-                                        onChange={(e) => setBooking({...booking, date: e.target.value})} 
+                                    <Input
+                                        label="Booking Date"
+                                        type="date"
+                                        value={booking.date}
+                                        onChange={(e) => setBooking({ ...booking, date: e.target.value })}
                                     />
-                                    <Select 
-                                        label="Assigned Time Slot" 
+                                    <Select
+                                        label="Assigned Time Slot"
                                         value={booking.slot}
-                                        onChange={(e) => setBooking({...booking, slot: e.target.value})}
+                                        onChange={(e) => setBooking({ ...booking, slot: e.target.value })}
                                         options={[
-                                            { value: '06:00 AM', label: '06:00 AM' }, 
-                                            { value: '07:00 AM', label: '07:00 AM' }, 
-                                            { value: '06:00 PM', label: '06:00 PM (Peak)' }, 
+                                            { value: '06:00 AM', label: '06:00 AM' },
+                                            { value: '07:00 AM', label: '07:00 AM' },
+                                            { value: '06:00 PM', label: '06:00 PM (Peak)' },
                                             { value: '07:00 PM', label: '07:00 PM (Peak)' },
                                         ]}
                                     />
                                     <div className="md:col-span-2">
-                                        <Input 
-                                            label="Billing Rate (₹/hr)" 
-                                            type="number" 
-                                            value={booking.price} 
-                                            onChange={(e) => setBooking({...booking, price: e.target.value})} 
+                                        <Input
+                                            label="Billing Rate (₹/hr)"
+                                            type="number"
+                                            value={booking.price}
+                                            onChange={(e) => setBooking({ ...booking, price: e.target.value })}
                                         />
                                     </div>
                                 </div>
@@ -340,8 +341,8 @@ export default function OwnerPOS() {
                                     <span>🎮</span> Walk-in Gaming Session setup
                                 </h3>
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs font-semibold">
-                                    <Select 
-                                        label="Select Rig / Device" 
+                                    <Select
+                                        label="Select Rig / Device"
                                         value={gaming.device}
                                         onChange={(e) => {
                                             const val = e.target.value
@@ -358,10 +359,10 @@ export default function OwnerPOS() {
                                             { value: 'VR-01', label: 'Meta Quest 3 VR Pod (₹250/hr)' }
                                         ]}
                                     />
-                                    <Select 
-                                        label="Select Game" 
+                                    <Select
+                                        label="Select Game"
                                         value={gaming.game}
-                                        onChange={(e) => setGaming({...gaming, game: e.target.value})}
+                                        onChange={(e) => setGaming({ ...gaming, game: e.target.value })}
                                         options={[
                                             { value: 'EA FC 24', label: 'EA FC 24' },
                                             { value: 'Valorant', label: 'Valorant' },
@@ -370,10 +371,10 @@ export default function OwnerPOS() {
                                             { value: 'Beat Saber VR', label: 'Beat Saber VR' }
                                         ]}
                                     />
-                                    <Select 
-                                        label="Session Duration" 
+                                    <Select
+                                        label="Session Duration"
                                         value={gaming.duration}
-                                        onChange={(e) => setGaming({...gaming, duration: e.target.value})}
+                                        onChange={(e) => setGaming({ ...gaming, duration: e.target.value })}
                                         options={[
                                             { value: '30', label: '30 Minutes' },
                                             { value: '60', label: '1 Hour' },
@@ -381,11 +382,11 @@ export default function OwnerPOS() {
                                             { value: '180', label: '3 Hours' },
                                         ]}
                                     />
-                                    <Input 
-                                        label="Rig Hourly Rate (₹)" 
-                                        type="number" 
-                                        value={gaming.price} 
-                                        onChange={(e) => setGaming({...gaming, price: e.target.value})} 
+                                    <Input
+                                        label="Rig Hourly Rate (₹)"
+                                        type="number"
+                                        value={gaming.price}
+                                        onChange={(e) => setGaming({ ...gaming, price: e.target.value })}
                                     />
                                 </div>
                                 <div className="mt-4 p-4 bg-purple-50/50 rounded-2xl border border-purple-100 text-xs text-purple-700 space-y-1">
@@ -401,8 +402,8 @@ export default function OwnerPOS() {
                             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2.5">
                                 {(() => {
                                     const filtered = inventoryOptions.filter(
-                                        i => i.category === activeTab && 
-                                        i.name.toLowerCase().includes(searchQuery.toLowerCase())
+                                        i => i.category === activeTab &&
+                                            i.name.toLowerCase().includes(searchQuery.toLowerCase())
                                     )
                                     if (filtered.length === 0) {
                                         return (
@@ -413,8 +414,8 @@ export default function OwnerPOS() {
                                         )
                                     }
                                     return filtered.map(item => (
-                                        <div 
-                                            key={item.id} 
+                                        <div
+                                            key={item.id}
                                             onClick={() => handleAddItem(item)}
                                             className="bg-white rounded-2xl border border-surface-200/50 p-2.5 shadow-soft hover:shadow-soft-md cursor-pointer transition-all duration-300 relative group overflow-hidden flex flex-col justify-between h-28 text-left"
                                         >
@@ -441,15 +442,15 @@ export default function OwnerPOS() {
                                 <HiUser /> Walk-in customer profile
                             </h3>
                             <div className="space-y-3">
-                                <Input 
-                                    placeholder="Customer Mobile Number" 
-                                    value={customer.phone} 
-                                    onChange={(e) => setCustomer({...customer, phone: e.target.value})} 
+                                <Input
+                                    placeholder="Customer Mobile Number"
+                                    value={customer.phone}
+                                    onChange={(e) => setCustomer({ ...customer, phone: e.target.value })}
                                 />
-                                <Input 
-                                    placeholder="Customer Name" 
-                                    value={customer.name} 
-                                    onChange={(e) => setCustomer({...customer, name: e.target.value})} 
+                                <Input
+                                    placeholder="Customer Name"
+                                    value={customer.name}
+                                    onChange={(e) => setCustomer({ ...customer, name: e.target.value })}
                                 />
                             </div>
                         </Card>
@@ -515,9 +516,9 @@ export default function OwnerPOS() {
                                     <span className="text-[10px] font-black text-surface-400 uppercase tracking-wider block mb-2">Checkout settlement</span>
                                     <div className="grid grid-cols-3 gap-2">
                                         {['Cash', 'UPI', 'Card'].map(m => (
-                                            <button 
-                                                key={m} 
-                                                onClick={() => setPaymentMethod(m)} 
+                                            <button
+                                                key={m}
+                                                onClick={() => setPaymentMethod(m)}
                                                 className={`py-2 rounded-xl text-xs font-black border transition-all cursor-pointer ${paymentMethod === m ? 'bg-emerald-600 border-emerald-650 text-white shadow-md shadow-emerald-500/10' : 'bg-white border-surface-200 text-surface-600 hover:border-emerald-250 hover:bg-surface-50'}`}
                                             >
                                                 {m}
@@ -526,10 +527,10 @@ export default function OwnerPOS() {
                                     </div>
                                 </div>
 
-                                <Button 
-                                    fullWidth 
-                                    size="lg" 
-                                    onClick={handleCompletePayment} 
+                                <Button
+                                    fullWidth
+                                    size="lg"
+                                    onClick={handleCompletePayment}
                                     disabled={cart.length === 0}
                                     className="bg-emerald-600 hover:bg-emerald-700 shadow-lg shadow-emerald-600/10 cursor-pointer"
                                 >
@@ -549,7 +550,7 @@ export default function OwnerPOS() {
                         <p className="text-[10px] text-gray-500 mt-0.5">Plot 145, Scheme No. 78, Indore (M.P.)</p>
                         <p className="text-[10px] text-gray-500">Contact: +91 90000 80000</p>
                     </div>
-                    
+
                     <div className="text-[10px] space-y-1 mb-4">
                         <p><strong>INVOICE ID :</strong> {lastBill.id}</p>
                         <p><strong>DATE/TIME  :</strong> {lastBill.date}</p>
@@ -583,7 +584,7 @@ export default function OwnerPOS() {
                         <p>CGST/SGST (18%): ₹{lastBill.tax}</p>
                         <p className="text-sm font-bold mt-1">GRAND TOTAL: ₹{lastBill.total}</p>
                     </div>
-                    
+
                     <div className="text-center text-[10px] space-y-0.5 text-gray-500 uppercase tracking-widest mt-6">
                         <p>--- THANK YOU FOR SPORTING WITH US ---</p>
                         <p>Visit again soon!</p>

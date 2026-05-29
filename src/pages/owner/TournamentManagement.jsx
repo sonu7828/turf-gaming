@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import DataTable from '../../components/ui/DataTable'
 import Button from '../../components/ui/Button'
 import Badge from '../../components/ui/Badge'
@@ -37,7 +37,7 @@ export default function TournamentManagement() {
     const { addToast } = useToast()
     const [tournaments, setTournaments] = useState(initialTournaments)
     const [modal, setModal] = useState(false)
-    
+
     // Create new tournament state
     const [newTourney, setNewTourney] = useState({
         name: '',
@@ -76,8 +76,8 @@ export default function TournamentManagement() {
         { key: 'sport', label: 'Sport' },
         { key: 'date', label: 'Date' },
         { key: 'prize', label: 'Prize Pool' },
-        { 
-            key: 'teams', 
+        {
+            key: 'teams',
             label: 'Slots Filled',
             render: (_, r) => {
                 const pct = Math.round((r.registrations / r.maxTeams) * 100)
@@ -91,10 +91,10 @@ export default function TournamentManagement() {
                 )
             }
         },
-        { 
-            key: 'status', 
-            label: 'Status', 
-            render: v => <Badge variant={v === 'Active' ? 'success' : v === 'Upcoming' ? 'warning' : 'default'} dot>{v}</Badge> 
+        {
+            key: 'status',
+            label: 'Status',
+            render: v => <Badge variant={v === 'Active' ? 'success' : v === 'Upcoming' ? 'warning' : 'default'} dot>{v}</Badge>
         },
     ]
 
@@ -129,7 +129,7 @@ export default function TournamentManagement() {
                     </div>
                     <Badge variant="success">LIVE MATCH TREE</Badge>
                 </div>
-                
+
                 {/* Visual node representation */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-xs font-semibold">
                     {bracketRounds.map((round) => (
@@ -158,15 +158,15 @@ export default function TournamentManagement() {
             {/* Create Tourney Modal */}
             <Modal isOpen={modal} onClose={() => setModal(false)} title="Register Playoff Tournament" size="md">
                 <div className="space-y-4 animate-in fade-in">
-                    <Input 
-                        label="Tournament Name" 
-                        placeholder="e.g. Indore Badminton Open" 
+                    <Input
+                        label="Tournament Name"
+                        placeholder="e.g. Indore Badminton Open"
                         value={newTourney.name}
                         onChange={(e) => setNewTourney({ ...newTourney, name: e.target.value })}
                     />
                     <div className="grid grid-cols-2 gap-4">
-                        <Select 
-                            label="Sport Category" 
+                        <Select
+                            label="Sport Category"
                             value={newTourney.sport}
                             onChange={(e) => setNewTourney({ ...newTourney, sport: e.target.value })}
                             options={[
@@ -175,34 +175,34 @@ export default function TournamentManagement() {
                                 { value: 'Badminton', label: 'Badminton' },
                             ]}
                         />
-                        <Input 
-                            label="Entry Fee per Team (₹)" 
-                            type="number" 
-                            placeholder="e.g. 500" 
+                        <Input
+                            label="Entry Fee per Team (₹)"
+                            type="number"
+                            placeholder="e.g. 500"
                             value={newTourney.entryFee}
                             onChange={(e) => setNewTourney({ ...newTourney, entryFee: e.target.value })}
                         />
                     </div>
-                    
+
                     <div className="grid grid-cols-2 gap-4">
-                        <Input 
-                            label="Grand Prize Pool (₹)" 
-                            type="number" 
-                            placeholder="e.g. 50000" 
+                        <Input
+                            label="Grand Prize Pool (₹)"
+                            type="number"
+                            placeholder="e.g. 50000"
                             value={newTourney.prize}
                             onChange={(e) => setNewTourney({ ...newTourney, prize: e.target.value })}
                         />
-                        <Input 
-                            label="Max Registered Teams" 
-                            type="number" 
-                            placeholder="e.g. 16" 
+                        <Input
+                            label="Max Registered Teams"
+                            type="number"
+                            placeholder="e.g. 16"
                             value={newTourney.maxTeams}
                             onChange={(e) => setNewTourney({ ...newTourney, maxTeams: e.target.value })}
                         />
                     </div>
-                    <Input 
-                        label="Start Date" 
-                        type="date" 
+                    <Input
+                        label="Start Date"
+                        type="date"
                         value={newTourney.date}
                         onChange={(e) => setNewTourney({ ...newTourney, date: e.target.value })}
                     />
@@ -213,6 +213,16 @@ export default function TournamentManagement() {
                     </div>
                 </div>
             </Modal>
+
+            <ConfirmDialog
+                isOpen={deleteConfirm.open}
+                onClose={() => setDeleteConfirm({ open: false, id: null, name: '' })}
+                onConfirm={handleDeleteTournament}
+                title="Delete Tournament"
+                message={`Are you sure you want to delete "${deleteConfirm.name}"? This action cannot be undone.`}
+                confirmText="Delete"
+                variant="danger"
+            />
         </div>
     )
 }

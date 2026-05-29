@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import DataTable from '../../components/ui/DataTable'
 import Badge from '../../components/ui/Badge'
 import Button from '../../components/ui/Button'
@@ -20,7 +20,7 @@ export default function MaintenancePage() {
     const { addToast } = useToast()
     const [tasks, setTasks] = useState(initialTasks)
     const [modal, setModal] = useState(false)
-    
+
     // Status update drawer
     const [updateModal, setUpdateModal] = useState(false)
     const [selectedTask, setSelectedTask] = useState(null)
@@ -73,31 +73,31 @@ export default function MaintenancePage() {
         { key: 'task', label: 'Mechanical Issue / Task' },
         { key: 'area', label: 'Turf Area' },
         { key: 'assignee', label: 'Assigned Specialist' },
-        { 
-            key: 'priority', 
-            label: 'Priority Level', 
+        {
+            key: 'priority',
+            label: 'Priority Level',
             render: v => (
                 <Badge variant={v === 'Urgent' ? 'danger' : v === 'High' ? 'warning' : v === 'Medium' ? 'primary' : 'default'}>
                     {v}
                 </Badge>
-            ) 
+            )
         },
         { key: 'due', label: 'Target Payout' },
-        { 
-            key: 'status', 
-            label: 'Inspected Status', 
-            render: v => <Badge variant={v === 'Completed' ? 'success' : v === 'In Progress' ? 'primary' : v === 'Open' ? 'danger' : 'warning'} dot>{v}</Badge> 
+        {
+            key: 'status',
+            label: 'Inspected Status',
+            render: v => <Badge variant={v === 'Completed' ? 'success' : v === 'In Progress' ? 'primary' : v === 'Open' ? 'danger' : 'warning'} dot>{v}</Badge>
         },
-        { 
-            key: 'action', 
-            label: '', 
+        {
+            key: 'action',
+            label: '',
             render: (_, r) => (
                 <div className="flex gap-2">
                     <Button size="sm" variant="outline" onClick={() => handleUpdateTrigger(r)} className="cursor-pointer">
                         Update Status
                     </Button>
                 </div>
-            ) 
+            )
         },
     ]
 
@@ -139,15 +139,15 @@ export default function MaintenancePage() {
             {/* Create Task modal */}
             <Modal isOpen={modal} onClose={() => setModal(false)} title="Register Maintenance Task" size="sm">
                 <div className="space-y-4 animate-in fade-in">
-                    <Input 
-                        label="Issue / Task Description" 
-                        placeholder="e.g. Repair fence wiring" 
+                    <Input
+                        label="Issue / Task Description"
+                        placeholder="e.g. Repair fence wiring"
                         value={newTask.task}
                         onChange={(e) => setNewTask({ ...newTask, task: e.target.value })}
                     />
                     <div className="grid grid-cols-2 gap-4">
-                        <Select 
-                            label="Target Turf Location" 
+                        <Select
+                            label="Target Turf Location"
                             value={newTask.area}
                             onChange={(e) => setNewTask({ ...newTask, area: e.target.value })}
                             options={[
@@ -157,8 +157,8 @@ export default function MaintenancePage() {
                                 { value: 'Facility', label: 'Branch Facility' }
                             ]}
                         />
-                        <Select 
-                            label="Priority Risk Status" 
+                        <Select
+                            label="Priority Risk Status"
                             value={newTask.priority}
                             onChange={(e) => setNewTask({ ...newTask, priority: e.target.value })}
                             options={[
@@ -169,17 +169,17 @@ export default function MaintenancePage() {
                             ]}
                         />
                     </div>
-                    
+
                     <div className="grid grid-cols-2 gap-4">
-                        <Input 
-                            label="Assigned Inspector" 
-                            placeholder="e.g. Suresh Patil" 
+                        <Input
+                            label="Assigned Inspector"
+                            placeholder="e.g. Suresh Patil"
                             value={newTask.assignee}
                             onChange={(e) => setNewTask({ ...newTask, assignee: e.target.value })}
                         />
-                        <Input 
-                            label="Target Deadline" 
-                            type="date" 
+                        <Input
+                            label="Target Deadline"
+                            type="date"
                             value={newTask.due}
                             onChange={(e) => setNewTask({ ...newTask, due: e.target.value })}
                         />
@@ -200,8 +200,8 @@ export default function MaintenancePage() {
                             <p className="font-bold text-surface-700">Task: <span className="font-extrabold text-surface-900">{selectedTask.task}</span></p>
                             <p className="font-semibold text-surface-450 mt-1">Area: {selectedTask.area} • Priority: {selectedTask.priority}</p>
                         </div>
-                        <Select 
-                            label="Current Inspection Status" 
+                        <Select
+                            label="Current Inspection Status"
                             value={selectedStatus}
                             onChange={(e) => setSelectedStatus(e.target.value)}
                             options={[
