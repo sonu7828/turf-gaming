@@ -1,14 +1,36 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { NavLink, Outlet, useNavigate } from 'react-router-dom'
 import { HiMenu, HiX, HiLogout, HiBell, HiSearch } from 'react-icons/hi'
 import sidebarConfig from '../config/sidebarConfig'
+import { useAuth } from '../context/AuthContext'
 
 const roleLabels = { superadmin: 'Super Admin', owner: 'Owner / Admin', staff: 'Staff', customer: 'Customer' }
 
 export default function DashboardLayout({ role = 'owner' }) {
     const [sidebarOpen, setSidebarOpen] = useState(false)
+    const [dropdownOpen, setDropdownOpen] = useState(false)
     const navigate = useNavigate()
+    const { logout } = useAuth()
     const menu = sidebarConfig[role] || []
+
+    // Role-based profile/settings route map matching sidebar config paths
+    const profileRouteMap = {
+        superadmin: '/dashboard/super-admin/settings',
+        owner:      '/dashboard/owner',
+        staff:      '/dashboard/staff',
+        customer:   '/dashboard/customer/profile',
+    }
+    
+    // Close dropdown on click away
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (!event.target.closest('.profile-dropdown-container')) {
+                setDropdownOpen(false)
+            }
+        }
+        document.addEventListener('mousedown', handleClickOutside)
+        return () => document.removeEventListener('mousedown', handleClickOutside)
+    }, [])
 
     return (
         <div className="min-h-screen bg-surface-50 flex">
@@ -30,7 +52,7 @@ export default function DashboardLayout({ role = 'owner' }) {
                         <NavLink
                             key={item.path}
                             to={item.path}
-                            end={item.path === `/${role}` || item.path === '/superadmin'}
+                            end={item.path === `/dashboard/${role}` || item.path === '/dashboard/super-admin'}
                             onClick={() => setSidebarOpen(false)}
                             className={({ isActive }) => `flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 ${isActive ? 'bg-primary-600/10 text-primary-400 border border-primary-600/20 shadow-[0_0_15px_rgba(var(--color-primary-600-rgb),0.15)]' : 'text-slate-400 hover:bg-slate-800/50 hover:text-slate-200'}`}
                         >
@@ -41,7 +63,7 @@ export default function DashboardLayout({ role = 'owner' }) {
                 </nav>
 
                 <div className="p-3 border-t border-slate-800 shrink-0">
-                    <button onClick={() => navigate('/login')} className="flex items-center gap-3 w-full px-3 py-2.5 rounded-xl text-sm font-medium text-slate-400 hover:bg-red-500/10 hover:text-red-400 transition-all cursor-pointer">
+                    <button onClick={() => { logout(); navigate('/login'); }} className="flex items-center gap-3 w-full px-3 py-2.5 rounded-xl text-sm font-medium text-slate-400 hover:bg-red-500/10 hover:text-red-400 transition-all cursor-pointer">
                         <HiLogout className="text-lg" /> Logout
                     </button>
                 </div>
@@ -65,8 +87,45 @@ export default function DashboardLayout({ role = 'owner' }) {
                             <HiBell className="w-5 h-5 text-surface-500" />
                             <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-danger-500" />
                         </button>
-                        <div className="w-9 h-9 rounded-xl bg-primary-100 flex items-center justify-center text-sm font-bold text-primary-600 cursor-pointer">
-                            {role.charAt(0).toUpperCase()}
+                        {/* Dynamic User Profile Dropdown */}
+                        <div className="relative profile-dropdown-container">
+                            <button 
+                                onClick={() => setDropdownOpen(!dropdownOpen)} 
+                                className="w-9 h-9 rounded-xl bg-primary-100 flex items-center justify-center text-sm font-bold text-primary-600 hover:scale-105 active:scale-95 transition-all cursor-pointer select-none"
+                            >
+                                {role.charAt(0).toUpperCase()}
+                            </button>
+
+                            {dropdownOpen && (
+                                <div className="absolute right-0 mt-2.5 w-48 bg-white border border-surface-200 rounded-2xl shadow-xl py-2 z-50 animate-fade-in divide-y divide-surface-100">
+                                    <div className="px-4 py-2 text-xs font-semibold text-surface-500 uppercase tracking-wider">
+                                        Account Ops
+                                    </div>
+                                    <div className="py-1">
+                                        <button 
+                                            onClick={() => {
+                                                setDropdownOpen(false);
+                                                navigate(profileRouteMap[role] || `/dashboard/${role}`);
+                                            }}
+                                            className="w-full text-left px-4 py-2.5 text-sm text-surface-700 hover:bg-surface-50 transition-colors flex items-center gap-2"
+                                        >
+                                            👤 Profile Settings
+                                        </button>
+                                    </div>
+                                    <div className="py-1">
+                                        <button 
+                                            onClick={() => {
+                                                setDropdownOpen(false);
+                                                logout();
+                                                navigate('/login');
+                                            }}
+                                            className="w-full text-left px-4 py-2.5 text-sm text-red-600 hover:bg-red-50/50 transition-colors flex items-center gap-2 font-medium"
+                                        >
+                                            🚪 Sign Out
+                                        </button>
+                                    </div>
+                                </div>
+                            )}
                         </div>
                     </div>
                 </header>

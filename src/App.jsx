@@ -9,6 +9,8 @@ import DashboardLayout from './layouts/DashboardLayout'
 import LoginPage from './pages/auth/LoginPage'
 import RegisterPage from './pages/auth/RegisterPage'
 import NotFoundPage from './pages/NotFoundPage'
+import { AuthProvider } from './context/AuthContext'
+import ProtectedRoute from './routes/ProtectedRoute'
 
 // Public Website
 import HomePage from './pages/website/HomePage'
@@ -25,7 +27,6 @@ import SADashboard from './pages/superadmin/SADashboard'
 import BranchManagement from './pages/superadmin/BranchManagement'
 import OwnerManagement from './pages/superadmin/OwnerManagement'
 import SubscriptionPlans from './pages/superadmin/SubscriptionPlans'
-import CommissionSettings from './pages/superadmin/CommissionSettings'
 import GlobalAnalytics from './pages/superadmin/GlobalAnalytics'
 import UserManagement from './pages/superadmin/UserManagement'
 import PaymentLogs from './pages/superadmin/PaymentLogs'
@@ -46,7 +47,6 @@ import MaintenancePage from './pages/owner/MaintenancePage'
 import StaffManagement from './pages/owner/StaffManagement'
 import OwnerPOS from './pages/owner/OwnerPOS'
 import BillingHistory from './pages/owner/BillingHistory';
-import GamingZoneManager from './pages/owner/GamingZoneManager';
 
 // Staff
 import StaffDashboard from './pages/staff/StaffDashboard'
@@ -68,83 +68,83 @@ import CustomerProfile from './pages/customer/CustomerProfile'
 
 export default function App() {
   return (
-    <BrowserRouter>
-      <ToastProvider>
-        <Routes>
-          {/* Auth */}
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/register" element={<RegisterPage />} />
+    <AuthProvider>
+      <BrowserRouter>
+        <ToastProvider>
+          <Routes>
+            {/* Auth */}
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/register" element={<RegisterPage />} />
 
-          {/* Public Website */}
-          <Route path="/" element={<WebsiteLayout><HomePage /></WebsiteLayout>} />
-          <Route path="/turfs" element={<WebsiteLayout><AllTurfsPage /></WebsiteLayout>} />
-          <Route path="/turfs/:id" element={<WebsiteLayout><TurfDetailPage /></WebsiteLayout>} />
-          <Route path="/booking/:id" element={<WebsiteLayout><SlotBookingPage /></WebsiteLayout>} />
-          <Route path="/tournaments" element={<WebsiteLayout><TournamentListPage /></WebsiteLayout>} />
-          <Route path="/tournaments/:id" element={<WebsiteLayout><TournamentDetailPage /></WebsiteLayout>} />
-          <Route path="/membership" element={<WebsiteLayout><MembershipPage /></WebsiteLayout>} />
-          <Route path="/contact" element={<WebsiteLayout><ContactPage /></WebsiteLayout>} />
+            {/* Public Website */}
+            <Route path="/" element={<WebsiteLayout><HomePage /></WebsiteLayout>} />
+            <Route path="/turfs" element={<WebsiteLayout><AllTurfsPage /></WebsiteLayout>} />
+            <Route path="/turfs/:id" element={<WebsiteLayout><TurfDetailPage /></WebsiteLayout>} />
+            <Route path="/booking/:id" element={<WebsiteLayout><SlotBookingPage /></WebsiteLayout>} />
+            <Route path="/tournaments" element={<WebsiteLayout><TournamentListPage /></WebsiteLayout>} />
+            <Route path="/tournaments/:id" element={<WebsiteLayout><TournamentDetailPage /></WebsiteLayout>} />
+            <Route path="/membership" element={<WebsiteLayout><MembershipPage /></WebsiteLayout>} />
+            <Route path="/contact" element={<WebsiteLayout><ContactPage /></WebsiteLayout>} />
 
-          {/* Super Admin Dashboard */}
-          <Route path="/superadmin" element={<DashboardLayout role="superadmin" />}>
-            <Route index element={<SADashboard />} />
-            <Route path="branches" element={<BranchManagement />} />
-            <Route path="owners" element={<OwnerManagement />} />
-            <Route path="subscriptions" element={<SubscriptionPlans />} />
-            <Route path="commission" element={<CommissionSettings />} />
-            <Route path="analytics" element={<GlobalAnalytics />} />
-            <Route path="users" element={<UserManagement />} />
-            <Route path="payments" element={<PaymentLogs />} />
-            <Route path="disputes" element={<Disputes />} />
-            <Route path="settings" element={<SystemSettings />} />
-          </Route>
+            {/* Super Admin Dashboard */}
+            <Route path="/dashboard/super-admin" element={<ProtectedRoute allowedRoles={['SUPER_ADMIN']}><DashboardLayout role="superadmin" /></ProtectedRoute>}>
+              <Route index element={<SADashboard />} />
+              <Route path="branches" element={<BranchManagement />} />
+              <Route path="owners" element={<OwnerManagement />} />
+              <Route path="subscriptions" element={<SubscriptionPlans />} />
+              <Route path="analytics" element={<GlobalAnalytics />} />
+              <Route path="users" element={<UserManagement />} />
+              <Route path="payments" element={<PaymentLogs />} />
+              <Route path="disputes" element={<Disputes />} />
+              <Route path="settings" element={<SystemSettings />} />
+            </Route>
 
-          {/* Owner Dashboard */}
-          <Route path="/owner" element={<DashboardLayout role="owner" />}>
-            <Route index element={<OwnerDashboard />} />
-            <Route path="sports" element={<SportsManagement />} />
-            <Route path="gaming" element={<GamingZoneManager />} />
-            <Route path="slots" element={<SlotManagement />} />
-            <Route path="bookings" element={<BookingManagement />} />
-            <Route path="pos" element={<OwnerPOS />} />
-            <Route path="billing-history" element={<BillingHistory />} />
-            <Route path="tournaments" element={<TournamentManagement />} />
-            <Route path="teams" element={<TeamsPlayers />} />
-            <Route path="players" element={<TeamsPlayers />} />
-            <Route path="wallet" element={<WalletPage />} />
-            <Route path="reports" element={<ReportsPage />} />
-            <Route path="inventory" element={<InventoryPage />} />
-            <Route path="maintenance" element={<MaintenancePage />} />
-            <Route path="staff" element={<StaffManagement />} />
-            <Route path="pos" element={<OwnerPOS />} />
-          </Route>
+            {/* Owner Dashboard */}
+            <Route path="/dashboard/owner" element={<ProtectedRoute allowedRoles={['OWNER']}><DashboardLayout role="owner" /></ProtectedRoute>}>
+              <Route index element={<OwnerDashboard />} />
+              <Route path="sports" element={<SportsManagement />} />
+              <Route path="slots" element={<SlotManagement />} />
+              <Route path="bookings" element={<BookingManagement />} />
+              <Route path="pos" element={<OwnerPOS />} />
+              <Route path="billing-history" element={<BillingHistory />} />
+              <Route path="tournaments" element={<TournamentManagement />} />
+              <Route path="teams" element={<TeamsPlayers />} />
+              <Route path="players" element={<TeamsPlayers />} />
+              <Route path="wallet" element={<WalletPage />} />
+              <Route path="reports" element={<ReportsPage />} />
+              <Route path="inventory" element={<InventoryPage />} />
+              <Route path="maintenance" element={<MaintenancePage />} />
+              <Route path="staff" element={<StaffManagement />} />
+              <Route path="pos" element={<OwnerPOS />} />
+            </Route>
 
-          {/* Staff Dashboard */}
-          <Route path="/staff" element={<DashboardLayout role="staff" />}>
-            <Route index element={<StaffDashboard />} />
-            <Route path="bookings" element={<StaffBookings />} />
-            <Route path="tournaments" element={<StaffTournaments />} />
-            <Route path="pos" element={<StaffPOS />} />
-            <Route path="refunds" element={<StaffRefunds />} />
-            <Route path="maintenance" element={<StaffMaintenance />} />
-            <Route path="equipment" element={<StaffEquipment />} />
-          </Route>
+            {/* Staff Dashboard */}
+            <Route path="/dashboard/staff" element={<ProtectedRoute allowedRoles={['STAFF']}><DashboardLayout role="staff" /></ProtectedRoute>}>
+              <Route index element={<StaffDashboard />} />
+              <Route path="bookings" element={<StaffBookings />} />
+              <Route path="tournaments" element={<StaffTournaments />} />
+              <Route path="pos" element={<StaffPOS />} />
+              <Route path="refunds" element={<StaffRefunds />} />
+              <Route path="maintenance" element={<StaffMaintenance />} />
+              <Route path="equipment" element={<StaffEquipment />} />
+            </Route>
 
-          {/* Customer Dashboard */}
-          <Route path="/customer" element={<DashboardLayout role="customer" />}>
-            <Route index element={<CustomerDashboard />} />
-            <Route path="bookings" element={<CustomerBookings />} />
-            <Route path="teams" element={<CustomerTeams />} />
-            <Route path="matches" element={<CustomerMatches />} />
-            <Route path="tournaments" element={<CustomerTournaments />} />
-            <Route path="wallet" element={<CustomerWallet />} />
-            <Route path="profile" element={<CustomerProfile />} />
-          </Route>
+            {/* Customer Dashboard */}
+            <Route path="/dashboard/customer" element={<ProtectedRoute allowedRoles={['CUSTOMER']}><DashboardLayout role="customer" /></ProtectedRoute>}>
+              <Route index element={<CustomerDashboard />} />
+              <Route path="bookings" element={<CustomerBookings />} />
+              <Route path="teams" element={<CustomerTeams />} />
+              <Route path="matches" element={<CustomerMatches />} />
+              <Route path="tournaments" element={<CustomerTournaments />} />
+              <Route path="wallet" element={<CustomerWallet />} />
+              <Route path="profile" element={<CustomerProfile />} />
+            </Route>
 
-          {/* 404 */}
-          <Route path="*" element={<NotFoundPage />} />
-        </Routes>
-      </ToastProvider>
-    </BrowserRouter>
+            {/* 404 */}
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
+        </ToastProvider>
+      </BrowserRouter>
+    </AuthProvider>
   )
 }

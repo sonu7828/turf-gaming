@@ -186,7 +186,7 @@ export default function OwnerPOS() {
         window.print()
     }
 
-    const categories = ['Sports', 'Gaming', 'Gear & Rentals', 'Snacks & Drinks']
+    const categories = ['Sports', 'Gear & Rentals', 'Snacks & Drinks']
 
     return (
         <div className="space-y-8 animate-in fade-in duration-500">
@@ -278,7 +278,7 @@ export default function OwnerPOS() {
                                         }}
                                         className={`px-4 py-2 rounded-xl text-xs font-black border transition-all cursor-pointer ${activeTab === cat ? 'bg-emerald-600 border-emerald-600 text-white shadow-md shadow-emerald-500/10' : 'bg-white border-surface-150 text-surface-600 hover:bg-surface-50'}`}
                                     >
-                                        {cat === 'Sports' ? '⚽ Turf Bookings' : cat === 'Gaming' ? '🎮 Gaming Sessions' : cat === 'Gear & Rentals' ? '🏏 Gear & Rentals' : '🍔 Snacks & Drinks'}
+                                        {cat === 'Sports' ? '⚽ Turf Bookings' : cat === 'Gear & Rentals' ? '🏏 Gear & Rentals' : '🍔 Snacks & Drinks'}
                                     </button>
                                 ))}
                             </div>
@@ -332,69 +332,6 @@ export default function OwnerPOS() {
                                 </div>
                                 <Button onClick={handleAddBooking} className="mt-6 w-full cursor-pointer bg-emerald-600 hover:bg-emerald-700">
                                     <HiPlus className="mr-1 w-4 h-4" /> Add booking to checkout
-                                </Button>
-                            </Card>
-                        ) : activeTab === 'Gaming' ? (
-                            /* Visual gaming session assigner */
-                            <Card className="p-6">
-                                <h3 className="text-base font-black text-surface-900 tracking-tight mb-4 flex items-center gap-2">
-                                    <span>🎮</span> Walk-in Gaming Session setup
-                                </h3>
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs font-semibold">
-                                    <Select
-                                        label="Select Rig / Device"
-                                        value={gaming.device}
-                                        onChange={(e) => {
-                                            const val = e.target.value
-                                            let rate = '150'
-                                            if (val === 'PS5-01' || val === 'PS5-02') rate = '120'
-                                            if (val === 'VR-01') rate = '250'
-                                            setGaming({ ...gaming, device: val, price: rate })
-                                        }}
-                                        options={[
-                                            { value: 'PC-01', label: 'RTX 4090 PC 1 (₹150/hr)' },
-                                            { value: 'PC-02', label: 'RTX 4090 PC 2 (₹150/hr)' },
-                                            { value: 'PS5-01', label: 'PlayStation 5 Console 1 (₹120/hr)' },
-                                            { value: 'PS5-02', label: 'PlayStation 5 Console 2 (₹120/hr)' },
-                                            { value: 'VR-01', label: 'Meta Quest 3 VR Pod (₹250/hr)' }
-                                        ]}
-                                    />
-                                    <Select
-                                        label="Select Game"
-                                        value={gaming.game}
-                                        onChange={(e) => setGaming({ ...gaming, game: e.target.value })}
-                                        options={[
-                                            { value: 'EA FC 24', label: 'EA FC 24' },
-                                            { value: 'Valorant', label: 'Valorant' },
-                                            { value: 'GTA V', label: 'GTA V' },
-                                            { value: 'Cyberpunk 2077', label: 'Cyberpunk 2077' },
-                                            { value: 'Beat Saber VR', label: 'Beat Saber VR' }
-                                        ]}
-                                    />
-                                    <Select
-                                        label="Session Duration"
-                                        value={gaming.duration}
-                                        onChange={(e) => setGaming({ ...gaming, duration: e.target.value })}
-                                        options={[
-                                            { value: '30', label: '30 Minutes' },
-                                            { value: '60', label: '1 Hour' },
-                                            { value: '120', label: '2 Hours' },
-                                            { value: '180', label: '3 Hours' },
-                                        ]}
-                                    />
-                                    <Input
-                                        label="Rig Hourly Rate (₹)"
-                                        type="number"
-                                        value={gaming.price}
-                                        onChange={(e) => setGaming({ ...gaming, price: e.target.value })}
-                                    />
-                                </div>
-                                <div className="mt-4 p-4 bg-purple-50/50 rounded-2xl border border-purple-100 text-xs text-purple-700 space-y-1">
-                                    <p className="font-extrabold uppercase">Fare Estimate</p>
-                                    <p className="text-sm font-black">₹{Math.round((Number(gaming.duration) / 60) * Number(gaming.price))} total pricing based on selected rate.</p>
-                                </div>
-                                <Button onClick={handleAddGaming} className="mt-6 w-full cursor-pointer bg-purple-600 hover:bg-purple-700 text-white">
-                                    <HiPlus className="mr-1 w-4 h-4" /> Add gaming session to checkout
                                 </Button>
                             </Card>
                         ) : (

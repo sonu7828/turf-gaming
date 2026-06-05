@@ -1,1 +1,0 @@
-"            {/* ══════════════════════════════════════════════\n                SECTION 1 — Search Bar (No Hero Text)\n            ══════════════════════════════════════════════ */}\n            <section className=\"relative flex flex-col pt-24 pb-1 z-40\">\n                <style>{`"

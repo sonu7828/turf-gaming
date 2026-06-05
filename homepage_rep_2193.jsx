@@ -1,1 +1,0 @@
-"    /* ── Search State ── */\n    const [searchValues, setSearchValues] = useState({\n        location: '',\n        sport: '',\n        date: '',\n        time: '',\n        players: 10,\n    })\n    const [appliedFilters, setAppliedFilters] = useState({\n        location: '',\n        sport: '',\n        date: '',\n        time: '',\n        players: 10,\n    })"

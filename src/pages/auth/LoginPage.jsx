@@ -1,16 +1,119 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import Button from '../../components/ui/Button'
 import Input from '../../components/ui/Input'
+import { useAuth } from '../../context/AuthContext'
 
 export default function LoginPage() {
     const navigate = useNavigate()
+    const { login, token, user } = useAuth()
+    
     const [form, setForm] = useState({ email: '', password: '', role: 'customer' })
+    const [error, setError] = useState('')
+    const [fieldErrors, setFieldErrors] = useState({ email: '', password: '' })
+    const [isSubmitting, setIsSubmitting] = useState(false)
 
-    const handleSubmit = (e) => {
+    // Redirect already authenticated users
+    useEffect(() => {
+        if (token && user) {
+            const roleRoutes = {
+                SUPER_ADMIN: '/dashboard/super-admin',
+                OWNER: '/dashboard/owner',
+                STAFF: '/dashboard/staff',
+                CUSTOMER: '/dashboard/customer'
+            };
+            const roleUpper = (user.role || '').toUpperCase();
+            navigate(roleRoutes[roleUpper] || '/dashboard/customer');
+        }
+    }, [token, user, navigate]);
+
+    const handleEmailChange = (e) => {
+        setForm({ ...form, email: e.target.value });
+        if (fieldErrors.email) setFieldErrors(prev => ({ ...prev, email: '' }));
+        if (error) setError('');
+    };
+
+    const handlePasswordChange = (e) => {
+        setForm({ ...form, password: e.target.value });
+        if (fieldErrors.password) setFieldErrors(prev => ({ ...prev, password: '' }));
+        if (error) setError('');
+    };
+
+    const handleRoleChange = (role) => {
+        const credentials = {
+            superadmin: { email: 'superadmin@gmail.com', password: '123456' },
+            owner: { email: 'owner@gmail.com', password: '123456' },
+            staff: { email: 'staff@gmail.com', password: '123' },
+            customer: { email: 'customer@gmail.com', password: '123' }
+        };
+
+        const selectedCreds = credentials[role] || { email: '', password: '' };
+
+        setForm({ 
+            email: selectedCreds.email, 
+            password: selectedCreds.password, 
+            role 
+        });
+
+        // Clear field validation errors and general errors
+        setFieldErrors({ email: '', password: '' });
+        if (error) setError('');
+    };
+
+    const handleSubmit = async (e) => {
         e.preventDefault()
-        const routes = { superadmin: '/superadmin', owner: '/owner', staff: '/staff', customer: '/customer' }
-        navigate(routes[form.role] || '/customer')
+        setError('')
+        
+        let hasErrors = false;
+        const newFieldErrors = { email: '', password: '' };
+
+        // 1. Email validation
+        if (!form.email) {
+            newFieldErrors.email = 'Email address is required';
+            hasErrors = true;
+        } else if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(form.email)) {
+            newFieldErrors.email = 'Please enter a valid email address';
+            hasErrors = true;
+        }
+
+        // 2. Password validation
+        if (!form.password) {
+            newFieldErrors.password = 'Password is required';
+            hasErrors = true;
+        } else if (form.password.length < 3) {
+            newFieldErrors.password = 'Password must be at least 3 characters long';
+            hasErrors = true;
+        }
+
+        if (hasErrors) {
+            setFieldErrors(newFieldErrors);
+            return;
+        }
+
+        setIsSubmitting(true)
+        
+        try {
+            const authenticatedUser = await login(form.email, form.password, form.role)
+            
+            const roleRoutes = {
+                SUPER_ADMIN: '/dashboard/super-admin',
+                OWNER: '/dashboard/owner',
+                STAFF: '/dashboard/staff',
+                CUSTOMER: '/dashboard/customer'
+            };
+
+            // Success Redirect
+            const roleUpper = (authenticatedUser.role || '').toUpperCase();
+            navigate(roleRoutes[roleUpper] || '/dashboard/customer')
+        } catch (err) {
+            // Handle error messages returned from backend or role mismatch
+            if (err.response && err.response.data && err.response.data.message) {
+                setError(err.response.data.message);
+            } else {
+                setError(err.message || 'An error occurred during sign in');
+            }
+            setIsSubmitting(false)
+        }
     }
 
     return (
@@ -46,21 +149,54 @@ export default function LoginPage() {
                     <p className="text-surface-500 text-sm mb-8">Enter your credentials to access your dashboard</p>
 
                     <form onSubmit={handleSubmit} className="space-y-5">
-                        <Input label="Email" id="email" type="email" placeholder="name@company.com" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} />
-                        <Input label="Password" id="password" type="password" placeholder="••••••••" value={form.password} onChange={(e) => setForm({ ...form, password: e.target.value })} />
+                        <Input 
+                            label="Email" 
+                            id="email" 
+                            type="email" 
+                            placeholder="name@company.com" 
+                            value={form.email} 
+                            onChange={handleEmailChange}
+                            error={fieldErrors.email}
+                            disabled={isSubmitting}
+                        />
+                        
+                        <Input 
+                            label="Password" 
+                            id="password" 
+                            type="password" 
+                            placeholder="••••••••" 
+                            value={form.password} 
+                            onChange={handlePasswordChange}
+                            error={fieldErrors.password}
+                            disabled={isSubmitting}
+                        />
 
                         <div>
                             <label className="block text-sm font-medium text-surface-700 mb-1.5">Login as</label>
                             <div className="grid grid-cols-2 gap-2">
                                 {[{ k: 'owner', l: 'Owner' }, { k: 'staff', l: 'Staff' }, { k: 'customer', l: 'Customer' }, { k: 'superadmin', l: 'Super Admin' }].map((r) => (
-                                    <button key={r.k} type="button" onClick={() => setForm({ ...form, role: r.k })} className={`px-4 py-2.5 rounded-xl text-sm font-medium border transition-all cursor-pointer ${form.role === r.k ? 'bg-primary-50 border-primary-300 text-primary-600' : 'bg-white border-surface-200 text-surface-600 hover:border-surface-300'}`}>
+                                    <button 
+                                        key={r.k} 
+                                        type="button" 
+                                        disabled={isSubmitting}
+                                        onClick={() => handleRoleChange(r.k)} 
+                                        className={`px-4 py-2.5 rounded-xl text-sm font-medium border transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed ${form.role === r.k ? 'bg-primary-50 border-primary-300 text-primary-600' : 'bg-white border-surface-200 text-surface-600 hover:border-surface-300'}`}
+                                    >
                                         {r.l}
                                     </button>
                                 ))}
                             </div>
                         </div>
 
-                        <Button type="submit" fullWidth size="lg">Sign In</Button>
+                        <Button type="submit" fullWidth size="lg" disabled={isSubmitting}>
+                            {isSubmitting ? 'Signing In...' : 'Sign In'}
+                        </Button>
+                        
+                        {error && (
+                            <div className="p-3 bg-danger-50 border border-danger-200 text-danger-600 rounded-xl text-sm font-medium text-center">
+                                {error}
+                            </div>
+                        )}
                     </form>
 
                     <p className="text-center text-sm text-surface-500 mt-6">
