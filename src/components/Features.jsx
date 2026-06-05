@@ -72,8 +72,7 @@ export default function Features() {
                 </h2>
                 <GreenDivider className="!my-4" />
                 <p className="text-slate-400 text-lg max-w-2xl mx-auto">
-                    A comprehensive suite of tools designed for sports turfs, gaming arenas,
-                    and esports facilities.
+                    A comprehensive suite of tools designed for sports turfs.
                 </p>
             </div>
 

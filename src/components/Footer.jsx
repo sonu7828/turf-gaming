@@ -1,11 +1,16 @@
+import { useNavigate } from 'react-router-dom'
+
 const footerLinks = {
     Product: ['Features', 'Modules', 'Pricing', 'Integrations', 'Changelog'],
-    Company: ['About', 'Careers', 'Blog', 'Press', 'Contact'],
+    Subscription: ['7-Day Free Trial', 'Basic Plan', 'Premium Plan'],
+    Company: ['About', 'Careers', 'Blog', 'Press', 'Membership', 'Contact'],
     Resources: ['Documentation', 'API Reference', 'Help Center', 'Community', 'Status'],
     Legal: ['Privacy Policy', 'Terms of Service', 'Cookie Policy', 'GDPR'],
 }
 
 export default function Footer() {
+    const navigate = useNavigate()
+    
     const scrollTo = (id) => {
         document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
     }
@@ -13,15 +18,14 @@ export default function Footer() {
     return (
         <footer className="border-t border-white/5 bg-slate-950">
             <div className="max-w-7xl mx-auto px-6 py-16">
-                <div className="grid md:grid-cols-2 lg:grid-cols-6 gap-12">
+                <div className="grid md:grid-cols-2 lg:grid-cols-7 gap-8">
                     <div className="lg:col-span-2 space-y-5">
                         <div className="flex items-center gap-2.5 mb-6">
                             <div className="w-10 h-10 rounded-xl bg-primary-600 flex items-center justify-center font-bold text-white text-sm">SM</div>
                             <span className="text-lg font-bold text-white tracking-tight">SportMatrix</span>
                         </div>
                         <p className="text-sm text-slate-400 leading-relaxed max-w-xs">
-                            The complete digital operating system for sports turfs, gaming arenas,
-                            and esports facilities. Manage everything from one platform.
+                            The complete digital operating system for sports turfs. Manage everything from one platform.
                         </p>
                         <div className="flex gap-4">
                             {['X', 'in', 'gh', 'yt'].map((social) => (
@@ -43,10 +47,15 @@ export default function Footer() {
                                     <li key={link}>
                                         <button
                                             onClick={() => {
-                                                const id = link.toLowerCase().replace(/\s+/g, '-')
-                                                scrollTo(id)
+                                                if (category === 'Subscription') {
+                                                    navigate('/membership')
+                                                    window.scrollTo({ top: 0, behavior: 'smooth' })
+                                                } else {
+                                                    const id = link.toLowerCase().replace(/\s+/g, '-')
+                                                    scrollTo(id)
+                                                }
                                             }}
-                                            className="text-sm text-slate-500 hover:text-emerald-400 transition-colors duration-200 cursor-pointer"
+                                            className="text-sm text-slate-500 hover:text-emerald-400 transition-colors duration-200 cursor-pointer text-left"
                                         >
                                             {link}
                                         </button>
@@ -62,7 +71,7 @@ export default function Footer() {
                         © {new Date().getFullYear()} SportMatrix. All rights reserved.
                     </p>
                     <p className="text-sm text-slate-600">
-                        Sports & Gaming Business Operating System
+                        Sports Business Operating System
                     </p>
                 </div>
             </div>

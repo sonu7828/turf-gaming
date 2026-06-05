@@ -3,12 +3,16 @@ import { useNavigate } from 'react-router-dom'
 import { HiLightningBolt, HiCalendar } from 'react-icons/hi'
 
 const tournaments = [
-    { id: 1, name: 'Premier Cricket League', sport: 'Cricket', date: 'Mar 15, 2026', prize: '50,000', entryFee: '500', teams: 16, spotsLeft: 4, status: 'Registration Open', image: 'https://images.unsplash.com/photo-1540747913346-19e32fc3e97e?auto=format&fit=crop&q=80&w=800' },
+    { id: 1, name: 'Premier Cricket League', sport: 'Cricket', date: 'Mar 15, 2026', prize: '50,000', entryFee: '500', teams: 16, spotsLeft: 4, status: 'Registration Open', image: 'https://images.unsplash.com/photo-1531415074968-036ba1b575da?auto=format&fit=crop&q=80&w=800' },
     { id: 2, name: 'Urban Football Cup', sport: 'Football', date: 'Mar 22, 2026', prize: '30,000', entryFee: '400', teams: 16, spotsLeft: 2, status: 'Registration Open', image: 'https://images.unsplash.com/photo-1543326727-cf6c39e8f84c?auto=format&fit=crop&q=80&w=800' },
-    { id: 3, name: 'Cyber Cup Championship', sport: 'Esports', date: 'Apr 5, 2026', prize: '1,00,000', entryFee: '1000', teams: 32, spotsLeft: 8, status: 'Registration Open', image: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&q=80&w=800' },
-    { id: 4, name: 'Gaming Warzone Masters', sport: 'Gaming Zone', date: 'Apr 12, 2026', prize: '1,50,000', entryFee: '1500', teams: 32, spotsLeft: 0, status: 'Registration Closed', image: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&q=80&w=800' },
-    { id: 5, name: 'Football Super Cup', sport: 'Football', date: 'Apr 20, 2026', prize: '25,000', entryFee: '600', teams: 8, spotsLeft: 3, status: 'Registration Open', image: 'https://images.unsplash.com/photo-1575361204480-aadea25e6e68?auto=format&fit=crop&q=80&w=800' },
-    { id: 6, name: 'Box Cricket Elite Clash', sport: 'Box Cricket', date: 'May 1, 2026', prize: '20,000', entryFee: '500', teams: 32, spotsLeft: 15, status: 'Upcoming', image: 'https://images.unsplash.com/photo-1624526267942-ab0ff8a3e972?auto=format&fit=crop&q=80&w=800' },
+    { id: 3, name: 'Football Super Cup', sport: 'Football', date: 'Apr 20, 2026', prize: '25,000', entryFee: '600', teams: 8, spotsLeft: 3, status: 'Registration Open', image: 'https://images.unsplash.com/photo-1575361204480-aadea25e6e68?auto=format&fit=crop&q=80&w=800' },
+    { id: 4, name: 'Championship Turf League', sport: 'Cricket', date: 'May 5, 2026', prize: '60,000', entryFee: '800', teams: 12, spotsLeft: 5, status: 'Registration Open', image: 'https://images.unsplash.com/photo-1531415074968-036ba1b575da?auto=format&fit=crop&q=80&w=800' },
+    { id: 5, name: 'Metro Football Series', sport: 'Football', date: 'May 12, 2026', prize: '40,000', entryFee: '500', teams: 16, spotsLeft: 10, status: 'Registration Open', image: 'https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&q=80&w=800' },
+    { id: 6, name: 'Deccan Cricket Challenge', sport: 'Cricket', date: 'Jun 1, 2026', prize: '1,00,000', entryFee: '1,200', teams: 24, spotsLeft: 14, status: 'Registration Open', image: 'https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&q=80&w=800' },
+    { id: 7, name: 'National Turf Football Cup', sport: 'Football', date: 'Jun 18, 2026', prize: '80,000', entryFee: '1,000', teams: 20, spotsLeft: 8, status: 'Registration Open', image: 'https://images.unsplash.com/photo-1543326727-cf6c39e8f84c?auto=format&fit=crop&q=80&w=800' },
+    { id: 8, name: 'Golden Bat Invitational', sport: 'Cricket', date: 'Jul 4, 2026', prize: '35,000', entryFee: '400', teams: 12, spotsLeft: 0, status: 'Registration Closed', image: 'https://images.unsplash.com/photo-1624526267942-ab0ff8a3e972?auto=format&fit=crop&q=80&w=800' },
+    { id: 9, name: 'Champions Arena Cup', sport: 'Football', date: 'Jul 24, 2026', prize: '45,000', entryFee: '550', teams: 16, spotsLeft: 6, status: 'Registration Open', image: 'https://images.unsplash.com/photo-1518063319789-7217e6706b04?auto=format&fit=crop&q=80&w=800' },
+    { id: 10, name: 'Apex Cricket Trophy', sport: 'Cricket', date: 'Aug 10, 2026', prize: '75,000', entryFee: '900', teams: 12, spotsLeft: 8, status: 'Registration Open', image: 'https://images.unsplash.com/photo-1608245449230-4ac19066d2d0?auto=format&fit=crop&q=80&w=800' },
 ]
 
 export default function TournamentListPage() {
@@ -34,7 +38,7 @@ export default function TournamentListPage() {
                 <div className="absolute inset-0 bg-gradient-to-b from-slate-950/20 via-slate-950/90 to-slate-950" />
             </div>
 
-            <div className="max-w-[1400px] mx-auto px-4 sm:px-6 relative z-10">
+            <div className="w-full px-5 md:px-10 lg:px-20 relative z-10">
                 {/* Header section with inline filters */}
                 <div className="mb-12 flex flex-col lg:flex-row lg:items-end justify-between border-b border-white/10 pb-8 gap-8">
                     <div className="shrink-0">
@@ -47,12 +51,12 @@ export default function TournamentListPage() {
                     </div>
 
                     {/* Filter Pills */}
-                    <div className="flex flex-wrap items-center gap-2 bg-slate-900/60 p-1.5 rounded-sm border border-white/10 backdrop-blur-xl">
+                    <div className="flex flex-wrap items-center gap-2 bg-slate-900/60 p-1.5 rounded-full border border-white/10 backdrop-blur-xl">
                         {['All', 'Open', 'Closed'].map(f => (
                             <button
                                 key={f}
                                 onClick={() => setFilter(f)}
-                                className={`px-5 py-2 rounded-sm text-[10px] font-black tracking-widest uppercase transition-all duration-300 ${filter === f
+                                className={`px-5 py-2.5 rounded-full text-[10px] font-black tracking-widest uppercase transition-all duration-300 ${filter === f
                                     ? 'bg-emerald-500 text-slate-950 shadow-[0_0_15px_rgba(16,185,129,0.3)]'
                                     : 'text-slate-400 hover:text-white hover:bg-white/5'
                                     }`}
@@ -64,7 +68,7 @@ export default function TournamentListPage() {
                 </div>
 
                 {/* Tournament Grid */}
-                <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6 lg:gap-8">
+                <div className="grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-4">
                     {filtered.map(t => {
                         const isOpen = t.status === 'Registration Open'
 
@@ -72,69 +76,53 @@ export default function TournamentListPage() {
                             <div
                                 key={t.id}
                                 onClick={() => navigate(`/tournaments/${t.id}`)}
-                                className="group relative bg-slate-900 border border-white/10 rounded-sm overflow-hidden cursor-pointer transition-all duration-500 hover:-translate-y-2 hover:border-emerald-500/30 hover:shadow-[0_20px_40px_rgba(0,0,0,0.4),0_0_20px_rgba(16,185,129,0.1)] flex flex-col h-full"
+                                className="group relative bg-slate-950/40 backdrop-blur-xl border border-white/10 rounded-2xl overflow-hidden cursor-pointer transition-all duration-500 hover:-translate-y-2 hover:border-emerald-500/35 hover:shadow-[0_20px_40px_rgba(0,0,0,0.6),0_0_20px_rgba(16,185,129,0.08)] flex flex-col h-full"
                             >
                                 {/* Top Image Banner */}
-                                <div className="h-48 relative overflow-hidden shrink-0">
-                                    <img src={t.image} alt={t.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-90 group-hover:opacity-100" />
-                                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent" />
+                                <div className="h-40 relative overflow-hidden shrink-0">
+                                    <img src={t.image} alt={t.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-90 group-hover:opacity-100" />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent" />
 
                                     {/* Status Badge */}
-                                    <div className={`absolute top-4 right-4 flex items-center gap-1.5 px-3 py-1.5 backdrop-blur-md rounded-sm border ${isOpen
+                                    <div className={`absolute top-3.5 right-3.5 flex items-center gap-1 px-2.5 py-0.5 backdrop-blur-md rounded-md border text-[8px] font-black tracking-widest uppercase ${isOpen
                                         ? 'bg-emerald-500/20 border-emerald-500/50 text-emerald-400'
                                         : 'bg-slate-950/60 border-white/20 text-slate-400'
                                         }`}>
-                                        {isOpen && <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />}
-                                        <span className="text-[9px] font-black tracking-widest uppercase">{t.status}</span>
+                                        {isOpen && <div className="w-1 h-1 rounded-full bg-emerald-400 animate-pulse" />}
+                                        {t.status}
                                     </div>
 
                                     {/* Sport Badge */}
-                                    <div className="absolute top-4 left-4 bg-slate-950/80 backdrop-blur border border-white/10 px-3 py-1.5 rounded-sm">
-                                        <span className="text-[9px] font-black tracking-widest text-white uppercase">{t.sport}</span>
-                                    </div>
-
-                                    {/* Tournament Title inside Image */}
-                                    <div className="absolute bottom-4 left-5 right-5">
-                                        <h3 className="text-xl font-black text-white italic tracking-tighter uppercase leading-tight line-clamp-1 group-hover:text-emerald-400 transition-colors drop-shadow-md">
-                                            {t.name}
-                                        </h3>
-                                        <div className="flex items-center gap-1.5 text-xs text-amber-400 font-bold mt-1.5 drop-shadow-md">
-                                            <HiCalendar className="w-3.5 h-3.5" />
-                                            {t.date}
-                                        </div>
+                                    <div className="absolute top-3.5 left-3.5 bg-slate-950/80 backdrop-blur border border-white/10 px-2.5 py-0.5 rounded-md">
+                                        <span className="text-[8px] font-black tracking-widest text-white uppercase">{t.sport}</span>
                                     </div>
                                 </div>
 
                                 {/* Card Body */}
-                                <div className="p-5 flex flex-col flex-1 relative bg-slate-900 z-10">
-                                    {/* Stats Grid */}
-                                    <div className="grid grid-cols-3 gap-3 mb-6">
-                                        <div className="bg-slate-950/50 border border-white/5 rounded-sm p-3 text-center group-hover:border-amber-500/20 transition-colors">
-                                            <p className="text-[8px] font-bold text-slate-500 uppercase tracking-widest mb-1.5">Prize Pool</p>
-                                            <p className="text-base font-black text-amber-400 tabular-nums">₹{t.prize}</p>
-                                        </div>
-                                        <div className="bg-slate-950/50 border border-white/5 rounded-sm p-3 text-center group-hover:border-emerald-500/20 transition-colors">
-                                            <p className="text-[8px] font-bold text-slate-500 uppercase tracking-widest mb-1.5">Spots Left</p>
-                                            <p className={`text-base font-black tabular-nums ${isOpen ? 'text-emerald-400' : 'text-red-400'}`}>
-                                                {t.spotsLeft}/{t.teams}
-                                            </p>
-                                        </div>
-                                        <div className="bg-slate-950/50 border border-white/5 rounded-sm p-3 text-center group-hover:border-emerald-500/20 transition-colors">
-                                            <p className="text-[8px] font-bold text-slate-500 uppercase tracking-widest mb-1.5">Entry Fee</p>
-                                            <p className="text-base font-black text-white tabular-nums">₹{t.entryFee}</p>
-                                        </div>
+                                <div className="p-4 flex flex-col flex-1 relative z-10">
+                                    <h3 className="text-base font-black text-white italic tracking-tighter uppercase leading-tight line-clamp-1 group-hover:text-emerald-400 transition-colors mb-1.5">
+                                        {t.name}
+                                    </h3>
+                                    
+                                    <div className="flex items-center gap-1.5 text-[10px] text-slate-400 font-bold mb-4">
+                                        <HiCalendar className="w-3.5 h-3.5 text-emerald-500" />
+                                        {t.date}
+                                        <span className="text-slate-600 font-normal">|</span>
+                                        <span className={`font-black uppercase tracking-wider text-[8px] ${isOpen ? 'text-emerald-400' : 'text-slate-500'}`}>
+                                            {t.spotsLeft}/{t.teams} spots left
+                                        </span>
                                     </div>
 
-                                    <div className="mt-auto">
-                                        <button
-                                            disabled={!isOpen}
-                                            className={`w-full py-3.5 text-xs font-black italic tracking-widest uppercase rounded-sm border transition-all duration-300 ${isOpen
-                                                ? 'bg-transparent border-emerald-500/50 text-emerald-400 group-hover:bg-emerald-500 group-hover:text-slate-950 group-hover:border-emerald-400 group-hover:shadow-[0_0_15px_rgba(16,185,129,0.3)] cursor-pointer'
-                                                : 'bg-slate-950/50 border-white/5 text-slate-600 cursor-not-allowed'
-                                                }`}
-                                        >
-                                            {isOpen ? 'ENTER TOURNAMENT' : 'REGISTRATION CLOSED'}
-                                        </button>
+                                    {/* Simple Clean Bottom Info */}
+                                    <div className="flex justify-between items-center mt-auto pt-3.5 border-t border-white/5">
+                                        <div className="flex flex-col">
+                                            <span className="text-[7.5px] font-black text-slate-500 uppercase tracking-widest leading-none mb-0.5">Grand Prize</span>
+                                            <span className="text-sm font-black text-amber-400">₹{t.prize}</span>
+                                        </div>
+                                        <div className="flex flex-col text-right">
+                                            <span className="text-[7.5px] font-black text-slate-500 uppercase tracking-widest leading-none mb-0.5">Entry Fee</span>
+                                            <span className="text-sm font-black text-white">₹{t.entryFee}</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -143,7 +131,7 @@ export default function TournamentListPage() {
                 </div>
 
                 {filtered.length === 0 && (
-                    <div className="text-center py-20 bg-slate-900/30 border border-white/5 rounded-sm">
+                    <div className="text-center py-20 bg-slate-900/30 border border-white/5 rounded-2xl">
                         <HiLightningBolt className="w-12 h-12 text-slate-600 mx-auto mb-4 opacity-50" />
                         <p className="text-slate-400 font-bold uppercase tracking-widest text-sm">No tournaments currently available for this filter.</p>
                     </div>

@@ -44,7 +44,7 @@ export default function Hero() {
                         </div>
 
                         <p className="text-lg sm:text-xl text-slate-300 max-w-xl font-light leading-relaxed drop-shadow-md">
-                            The ultimate operating system for sports turfs and gaming arenas. Connect players, automate bookings, and scale your sports business like never before.
+                            The ultimate operating system for sports turfs. Connect players, automate bookings, and scale your sports business like never before.
                         </p>
 
                         <div className="flex flex-wrap gap-5 pt-2">

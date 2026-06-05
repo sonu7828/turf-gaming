@@ -14,7 +14,9 @@ function useReveal() {
     const ref = useRef(null)
     const [v, setV] = useState(false)
     useEffect(() => {
-        const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) { setV(true); obs.unobserve(e.target) } }, { threshold: 0.1 })
+        const obs = new IntersectionObserver(([e]) => { 
+            setV(e.isIntersecting) 
+        }, { threshold: 0.1 })
         if (ref.current) obs.observe(ref.current)
         return () => obs.disconnect()
     }, [])
@@ -25,32 +27,27 @@ function useReveal() {
 const sports = [
     { name: 'Football', slug: 'Football', icon: '⚽', venues: 120 },
     { name: 'Cricket', slug: 'Cricket', icon: '🏏', venues: 95 },
-    { name: 'Box Cricket', slug: 'Box Cricket', icon: '🏟️', venues: 80 },
-    { name: 'Gaming Zone', slug: 'Gaming Zone', icon: '🎮', venues: 40 },
 ]
 
 const allTurfs = [
-    { id: 1, name: 'Green Arena Football Turf', location: 'Andheri West, Mumbai', city: 'Mumbai', rating: 4.8, price: 1200, image: 'https://images.unsplash.com/photo-1575361204480-aadea25e6e68?auto=format&fit=crop&q=80&w=800', sports: ['Football', 'Box Cricket'], amenities: ['Floodlights', 'Parking', 'Washroom'], lat: 19.1136, lng: 72.8697 },
-    { id: 2, name: 'Champion Cricket Academy', location: 'Koramangala, Bangalore', city: 'Bangalore', rating: 4.9, price: 1500, image: 'https://images.unsplash.com/photo-1531415074968-036ba1b575da?auto=format&fit=crop&q=80&w=800', sports: ['Cricket', 'Box Cricket'], amenities: ['Floodlights', 'Seating', 'Drinking Water'], lat: 12.9352, lng: 77.6245 },
-    { id: 3, name: 'Golden Strike Box Cricket', location: 'Andheri East, Mumbai', city: 'Mumbai', rating: 4.7, price: 900, image: 'https://images.unsplash.com/photo-1624526267942-ab0ff8a3e972?auto=format&fit=crop&q=80&w=800', sports: ['Box Cricket'], amenities: ['Floodlights', 'Parking', 'Washroom'], lat: 19.1155, lng: 72.8755 },
-    { id: 4, name: 'Elite Sports Complex', location: 'Whitefield, Bangalore', city: 'Bangalore', rating: 4.6, price: 2000, image: 'https://images.unsplash.com/photo-1504450758481-7338eba7524a?auto=format&fit=crop&q=80&w=800', sports: ['Football', 'Cricket'], amenities: ['Floodlights', 'Parking', 'Seating', 'Washroom'], lat: 12.9698, lng: 77.7500 },
-    { id: 5, name: 'ProPlay Arena', location: 'Vashi, Navi Mumbai', city: 'Mumbai', rating: 4.5, price: 1000, image: 'https://images.unsplash.com/photo-1459865264687-595d652de67e?auto=format&fit=crop&q=80&w=800', sports: ['Football', 'Box Cricket'], amenities: ['Floodlights', 'Parking'], lat: 19.0330, lng: 73.0297 },
-    { id: 6, name: 'Royal Cricket Ground', location: 'Vijay Nagar, Indore', city: 'Indore', rating: 4.7, price: 600, image: 'https://images.unsplash.com/photo-1543351611-58f69d7c1781?auto=format&fit=crop&q=80&w=800', sports: ['Cricket', 'Box Cricket'], amenities: ['Floodlights', 'Parking', 'Drinking Water'], lat: 22.7533, lng: 75.8937 },
-    { id: 7, name: 'Velocity Gaming Arena', location: 'Palasia, Indore', city: 'Indore', rating: 4.8, price: 400, image: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&q=80&w=800', sports: ['Gaming Zone'], amenities: ['AC', 'Snacks', 'High-speed Internet'], lat: 22.7244, lng: 75.8839 },
-    { id: 8, name: 'Elite Gamer\'s Hub', location: 'Bandra, Mumbai', city: 'Mumbai', rating: 4.9, price: 500, image: 'https://images.unsplash.com/photo-1593305841991-05c297ba4525?auto=format&fit=crop&q=80&w=800', sports: ['Gaming Zone'], amenities: ['AC', 'Pro Gear', 'Cafe'], lat: 19.0596, lng: 72.8295 },
-    { id: 9, name: 'Skyline Football Turf', location: 'Powai, Mumbai', city: 'Mumbai', rating: 4.6, price: 1400, image: 'https://images.unsplash.com/photo-1529900245041-3560295ef247?auto=format&fit=crop&q=80&w=800', sports: ['Football'], amenities: ['Floodlights', 'Washroom'], lat: 19.1176, lng: 72.9060 },
-    { id: 10, name: 'Cyber Strike Pune', location: 'Kothrud, Pune', city: 'Pune', rating: 4.7, price: 350, image: 'https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&q=80&w=800', sports: ['Gaming Zone'], amenities: ['AC', 'VR Zone'], lat: 18.5074, lng: 73.8077 },
-    { id: 11, name: 'Master Blaster Cricket', location: 'Saket, Delhi', city: 'Delhi', rating: 4.8, price: 1100, image: 'https://images.unsplash.com/photo-1531415074968-036ba1b575da?auto=format&fit=crop&q=80&w=800', sports: ['Cricket'], amenities: ['Floodlights', 'Equipment'], lat: 28.5244, lng: 77.2167 },
-    { id: 12, name: 'Level Up Gaming', location: 'Electronic City, Bangalore', city: 'Bangalore', rating: 4.7, price: 450, image: 'https://images.unsplash.com/photo-1533158326339-7f3cf2404354?auto=format&fit=crop&q=80&w=800', sports: ['Gaming Zone'], amenities: ['AC', 'Consoles'], lat: 12.8399, lng: 77.6770 },
-    { id: 13, name: 'Spike Football Turf', location: 'Bhawarkua, Indore', city: 'Indore', rating: 4.6, price: 500, image: 'https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&q=80&w=800', sports: ['Football', 'Box Cricket'], amenities: ['Floodlights', 'Parking', 'Washroom'], lat: 22.6953, lng: 75.8690 },
-    { id: 14, name: 'Indore Sports Arena', location: 'LIG Colony, Indore', city: 'Indore', rating: 4.9, price: 800, image: 'https://images.unsplash.com/photo-1504450758481-7338eba7524a?auto=format&fit=crop&q=80&w=800', sports: ['Football', 'Cricket'], amenities: ['Floodlights', 'Parking', 'Seating', 'Washroom', 'AC'], lat: 22.7380, lng: 75.8916 },
-    { id: 15, name: 'Rajiv Gandhi Stadium Turf', location: 'Navlakha, Indore', city: 'Indore', rating: 4.5, price: 700, image: 'https://images.unsplash.com/photo-1575361204480-aadea25e6e68?auto=format&fit=crop&q=80&w=800', sports: ['Football', 'Cricket'], amenities: ['Floodlights', 'Parking', 'Seating', 'Drinking Water'], lat: 22.7000, lng: 75.8752 },
-    { id: 16, name: 'PowerPlay Box Cricket', location: 'Nipania, Indore', city: 'Indore', rating: 4.8, price: 900, image: 'https://images.unsplash.com/photo-1531415074968-036ba1b575da?auto=format&fit=crop&q=80&w=800', sports: ['Box Cricket'], amenities: ['Floodlights', 'Parking', 'AC', 'Drinking Water'], lat: 22.7663, lng: 75.8950 },
+    { id: 1, name: 'Green Arena Football Turf', location: 'Andheri West, Mumbai', city: 'Mumbai', rating: 4.8, price: 1200, image: 'https://images.unsplash.com/photo-1575361204480-aadea25e6e68?w=800&q=80&fit=crop', sports: ['Football'], amenities: ['Floodlights', 'Parking', 'Washroom'], lat: 19.1136, lng: 72.8697 },
+    { id: 2, name: 'Champion Cricket Academy', location: 'Koramangala, Bangalore', city: 'Bangalore', rating: 4.9, price: 1500, image: 'https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?w=800&q=80&fit=crop', sports: ['Cricket'], amenities: ['Floodlights', 'Seating', 'Drinking Water'], lat: 12.9352, lng: 77.6245 },
+    { id: 4, name: 'Elite Sports Complex', location: 'Whitefield, Bangalore', city: 'Bangalore', rating: 4.6, price: 2000, image: 'https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=800&q=80&fit=crop', sports: ['Football', 'Cricket'], amenities: ['Floodlights', 'Parking', 'Seating', 'Washroom'], lat: 12.9698, lng: 77.7500 },
+    { id: 5, name: 'ProPlay Arena', location: 'Vashi, Navi Mumbai', city: 'Mumbai', rating: 4.5, price: 1000, image: 'https://images.unsplash.com/photo-1551958219-acbc608c6377?w=800&q=80&fit=crop', sports: ['Football'], amenities: ['Floodlights', 'Parking'], lat: 19.0330, lng: 73.0297 },
+    { id: 6, name: 'Royal Cricket Ground', location: 'Vijay Nagar, Indore', city: 'Indore', rating: 4.7, price: 600, image: 'https://images.unsplash.com/photo-1531415074968-036ba1b575da?w=800&q=80&fit=crop', sports: ['Cricket'], amenities: ['Floodlights', 'Parking', 'Drinking Water'], lat: 22.7533, lng: 75.8937 },
+    { id: 9, name: 'Skyline Football Turf', location: 'Powai, Mumbai', city: 'Mumbai', rating: 4.6, price: 1400, image: 'https://images.unsplash.com/photo-1556056504-5c7696c4c28d?w=800&q=80&fit=crop', sports: ['Football'], amenities: ['Floodlights', 'Washroom'], lat: 19.1176, lng: 72.9060 },
+    { id: 11, name: 'Master Blaster Cricket', location: 'Saket, Delhi', city: 'Delhi', rating: 4.8, price: 1100, image: 'https://images.unsplash.com/photo-1587280501635-68a0e82cd5ff?w=800&q=80&fit=crop', sports: ['Cricket'], amenities: ['Floodlights', 'Equipment'], lat: 28.5244, lng: 77.2167 },
+    { id: 13, name: 'Spike Football Turf', location: 'Bhawarkua, Indore', city: 'Indore', rating: 4.6, price: 500, image: 'https://images.unsplash.com/photo-1553778263-73a83bab9b0c?w=800&q=80&fit=crop', sports: ['Football'], amenities: ['Floodlights', 'Parking', 'Washroom'], lat: 22.6953, lng: 75.8690 },
+    { id: 14, name: 'Indore Sports Arena', location: 'LIG Colony, Indore', city: 'Indore', rating: 4.9, price: 800, image: 'https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=800&q=80&fit=crop', sports: ['Football', 'Cricket'], amenities: ['Floodlights', 'Parking', 'Seating', 'Washroom', 'AC'], lat: 22.7380, lng: 75.8916 },
+    { id: 15, name: 'Rajiv Gandhi Stadium Turf', location: 'Navlakha, Indore', city: 'Indore', rating: 4.5, price: 700, image: 'https://images.unsplash.com/photo-1459865264687-595d652de67e?w=800&q=80&fit=crop', sports: ['Football', 'Cricket'], amenities: ['Floodlights', 'Parking', 'Seating', 'Drinking Water'], lat: 22.7000, lng: 75.8752 },
 ]
 
 export default function HomePage() {
     const navigate = useNavigate()
     const resultsRef = useRef(null)
+    const subReveal = useReveal()
+    const tourneyReveal = useReveal()
+    const ecosystemReveal = useReveal()
 
     /* ── Search State ── */
     const [searchValues, setSearchValues] = useState({
@@ -211,79 +208,12 @@ export default function HomePage() {
             ══════════════════════════════════════════════ */}
             <div ref={resultsRef} className="relative z-30">
                 <TurfResultsGrid
-                    turfs={showResults ? filteredTurfs : filteredTurfs.slice(0, 4)}
+                    turfs={showResults ? filteredTurfs : filteredTurfs.slice(0, 8)}
                     searchValues={searchValues}
                     recentSearches={recentSearches}
                     onClear={clearFilters}
                 />
             </div>
-
-            {/* ══════════════════════════════════════════════
-                SECTION 1: FEATURED GAMING EXPERIENCES
-            ══════════════════════════════════════════════ */}
-            <section className="py-16 bg-[#050b18] border-t border-white/5 relative overflow-hidden">
-                {/* Visual Glow */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] bg-purple-600/5 rounded-full blur-[140px] pointer-events-none" />
-
-                <div className="max-w-[1400px] mx-auto px-6 relative z-10">
-                    <div className="text-center mb-12">
-                        <span className="text-purple-500 text-[10px] font-black uppercase tracking-[0.25em] bg-purple-500/10 border border-purple-500/25 px-4 py-1.5 rounded-full">Cyber Ecosystem</span>
-                        <h2 className="text-2xl md:text-4xl font-black italic uppercase tracking-tight text-white mt-3 mb-1.5">
-                            Featured <span className="text-purple-500">Gaming</span> Experiences
-                        </h2>
-                        <p className="text-xs text-slate-400 max-w-lg mx-auto font-semibold">Enter the ultimate cyber arena equipped with elite level RTX rigs, high-res VR headsets, and professional console zones</p>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                        {[
-                            {
-                                title: 'RTX 4090 VIP Rigs',
-                                desc: 'High-refresh dual displays, fully custom mechanical accessories, and premium ergonomic gaming chairs for elite tactical play.',
-                                image: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&q=80&w=600',
-                                badge: '🎮 360Hz Pro Arena'
-                            },
-                            {
-                                title: 'VIP Console Lounges',
-                                desc: 'Experience next-gen PS5 & Xbox Series X systems on immersive high-contrast displays with cozy leather squad couches.',
-                                image: 'https://images.unsplash.com/photo-1593305841991-05c297ba4525?auto=format&fit=crop&q=80&w=600',
-                                badge: '🛋️ 4K Co-Op Rooms'
-                            },
-                            {
-                                title: 'Esports Arena Stage',
-                                desc: 'Engineered 5v5 esports stage setups configured for local bootcamps, division registrations, and livestream broadcast production.',
-                                image: 'https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&q=80&w=600',
-                                badge: '🏆 Broadcast Ready'
-                            },
-                            {
-                                title: 'Tactical VR Combat',
-                                desc: 'Vibrant wireless VR hardware supporting full physical tracking coordinates for deep team-based shooter operations.',
-                                image: 'https://images.unsplash.com/photo-1533158326339-7f3cf2404354?auto=format&fit=crop&q=80&w=600',
-                                badge: '🕶️ VR Tacticals'
-                            }
-                        ].map((exp, idx) => (
-                            <div 
-                                key={idx} 
-                                className="group relative bg-[#0B0F19]/60 border border-purple-950/60 rounded-2xl overflow-hidden shadow-[inset_0_0_30px_rgba(168,85,247,0.03)] hover:border-purple-500/30 hover:shadow-[0_15px_40px_rgba(0,0,0,0.5),0_0_20px_rgba(168,85,247,0.15)] transition-all duration-500 flex flex-col h-full backdrop-blur-xl"
-                            >
-                                <div className="h-[160px] relative overflow-hidden">
-                                    <img src={exp.image} alt={exp.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
-                                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950 to-transparent opacity-80" />
-                                    <div className="absolute bottom-3 left-3 bg-purple-950/90 border border-purple-500/40 text-purple-400 text-[8px] font-black uppercase tracking-wider px-2 py-0.5 rounded">
-                                        {exp.badge}
-                                    </div>
-                                </div>
-                                <div className="p-5 flex flex-col flex-1">
-                                    <h3 className="text-md font-black uppercase tracking-tight text-white mb-2 italic group-hover:text-purple-400 transition-colors">{exp.title}</h3>
-                                    <p className="text-[11px] text-slate-400 font-semibold leading-relaxed mb-6 flex-1">{exp.desc}</p>
-                                    <button onClick={() => navigate('/booking/7')} className="w-full py-2 border border-purple-500/35 hover:border-purple-500 hover:bg-purple-500/10 text-purple-400 hover:text-white text-[9px] font-black uppercase tracking-widest rounded-lg transition-all">
-                                        Explore Sessions
-                                    </button>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
 
             {/* ══════════════════════════════════════════════
                 SECTION 2: ENERGETIC UPCOMING TOURNAMENTS
@@ -301,7 +231,12 @@ export default function HomePage() {
                         <p className="text-xs text-slate-400 max-w-lg mx-auto font-semibold">Bring your squad, dominate division tables, and earn high-stakes victory across the region</p>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div 
+                        ref={tourneyReveal.ref}
+                        className={`grid grid-cols-1 md:grid-cols-2 max-w-4xl mx-auto gap-8 transition-all duration-[1000ms] ease-out ${
+                            tourneyReveal.visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-16'
+                        }`}
+                    >
                         {[
                             {
                                 name: 'Matrix Football League',
@@ -314,34 +249,14 @@ export default function HomePage() {
                                 color: 'from-blue-600 to-indigo-600'
                             },
                             {
-                                name: 'Cyber Strike Cup',
-                                sport: 'Valorant (5v5 LAN)',
-                                prize: '₹35,000 Cash Pool',
-                                fee: 'FREE ENTRY',
-                                slots: '12 / 32 SLOTS REMAINING',
+                                name: 'Indore Turf Cricket Cup',
+                                sport: 'Cricket (11v11)',
+                                prize: '₹75,000 Cash Pool',
+                                fee: '₹3,000 / SQUAD',
+                                slots: '6 / 12 SLOTS REMAINING',
                                 status: 'Registration Open',
                                 statusColor: 'border-emerald-500/35 bg-emerald-500/5 text-emerald-400',
-                                color: 'from-purple-600 to-pink-600'
-                            },
-                            {
-                                name: 'Box Cricket Super Series',
-                                sport: 'Box Cricket (6v6)',
-                                prize: '₹25,000 Cash Pool',
-                                fee: '₹1,500 / SQUAD',
-                                slots: '2 / 12 SLOTS REMAINING',
-                                status: 'Closing Soon',
-                                statusColor: 'border-red-500/35 bg-red-500/5 text-red-400',
-                                color: 'from-blue-600 to-indigo-600'
-                            },
-                            {
-                                name: 'Apex Legends Duos Clash',
-                                sport: 'Apex Legends Duos',
-                                prize: '₹15,000 Cash Pool',
-                                fee: '₹500 / TEAM',
-                                slots: '8 / 20 SLOTS REMAINING',
-                                status: 'Starts This Weekend',
-                                statusColor: 'border-blue-500/35 bg-blue-500/5 text-blue-400',
-                                color: 'from-purple-600 to-pink-600'
+                                color: 'from-emerald-600 to-teal-600'
                             }
                         ].map((t, idx) => (
                             <div 
@@ -379,62 +294,103 @@ export default function HomePage() {
                     </div>
                 </div>
             </section>
-
             {/* ══════════════════════════════════════════════
-                SECTION 3: WHY CHOOSE SPORTMATRIX (ECOSYSTEM STORYTELLING)
+                NEW SECTION: PREMIUM SUBSCRIPTION PLANS
             ══════════════════════════════════════════════ */}
-            <section className="py-16 bg-[#050b18] border-t border-white/5 relative overflow-hidden">
-                <div className="max-w-7xl mx-auto px-6 relative z-10">
-                    <div className="text-center mb-14">
-                        <span className="text-blue-500 text-[10px] font-black uppercase tracking-[0.25em] bg-blue-500/10 border border-blue-500/25 px-4 py-1.5 rounded-full">Ecosystem Integration</span>
+            <section id="subscription" className="py-20 bg-[#030712] border-t border-white/5 relative overflow-hidden">
+                {/* Stunning Radial Glow */}
+                <div className="absolute top-[30%] left-[20%] w-[45vw] h-[45vw] bg-emerald-500/5 blur-[130px] rounded-full pointer-events-none" />
+                <div className="absolute bottom-[20%] right-[10%] w-[35vw] h-[35vw] bg-blue-500/5 blur-[120px] rounded-full pointer-events-none" />
+
+                <div className="max-w-[1400px] mx-auto px-6 relative z-10">
+                    <div className="text-center mb-16">
+                        <span className="text-[#16a34a] text-[10px] font-black uppercase tracking-[0.25em] bg-[#16a34a]/10 border border-[#16a34a]/25 px-4 py-1.5 rounded-full">Membership Access</span>
                         <h2 className="text-2xl md:text-4xl font-black italic uppercase tracking-tight text-white mt-3 mb-1.5">
-                            Why Choose <span className="text-blue-500">SportMatrix</span>
+                            Subscription <span className="text-[#16a34a]">Plans</span>
                         </h2>
-                        <p className="text-xs text-slate-400 max-w-lg mx-auto font-semibold">The complete operational digital ecosystem for next-generation sports turfs and elite cyber spaces</p>
+                        <p className="text-xs text-slate-400 max-w-lg mx-auto font-semibold">Elevate your game. Unlock unlimited field bookings, priority access, and tactical squad advantages.</p>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+                    <div 
+                        ref={subReveal.ref}
+                        className={`grid grid-cols-1 md:grid-cols-3 max-w-5xl mx-auto gap-8 items-start transition-all duration-[1000ms] ease-out ${
+                            subReveal.visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-16'
+                        }`}
+                    >
                         {[
                             {
-                                title: 'Smart Booking Engine',
-                                desc: 'Realtime session scheduler, dynamic pricing structures, and automatic weather booking options.',
-                                icon: MdStadium,
-                                accent: 'border-blue-500/20 shadow-[inset_0_0_15px_rgba(59,130,246,0.02)]'
+                                name: '7-Day Free Trial',
+                                price: '0',
+                                period: '/7 DAYS',
+                                desc: 'NO CREDIT CARD REQUIRED',
+                                color: 'from-slate-500 to-slate-700',
+                                accent: 'slate',
+                                features: ['Full platform access for 7 days', 'Book up to 1 field / court', 'Join 1 open tournament free', 'Standard customer service']
                             },
                             {
-                                title: 'Sports & Cyber Hub',
-                                desc: 'Dual architecture coordinating athletic physical turfs and competitive virtual lounges on a single ledger.',
-                                icon: IoGameController,
-                                accent: 'border-purple-500/20 shadow-[inset_0_0_15px_rgba(168,85,247,0.02)]'
+                                name: 'Basic Plan',
+                                price: '499',
+                                period: '/MO',
+                                desc: 'RECOMMENDED FOR REGULARS',
+                                color: 'from-blue-500 to-indigo-600',
+                                accent: 'blue',
+                                features: ['10 Field Bookings / Month', 'Squad / Team Authorization', 'Tournament entry access', 'Priority customer service']
                             },
                             {
-                                title: 'POS Powered Billing',
-                                desc: 'Integrated cash splits, canteen orders, hardware rentals, and instant checkout split engines.',
-                                icon: MdPayments,
-                                accent: 'border-blue-500/20 shadow-[inset_0_0_15px_rgba(59,130,246,0.02)]'
-                            },
-                            {
-                                title: 'QR Access Controls',
-                                desc: 'Contactless slot verification, secure locker systems, and automated session-duration checks.',
-                                icon: MdQrCodeScanner,
-                                accent: 'border-blue-500/20 shadow-[inset_0_0_15px_rgba(59,130,246,0.02)]'
-                            },
-                            {
-                                title: 'Bracket Engine',
-                                desc: 'Automated tournament scheduling, squad division bracket makers, and live leaderboard trackers.',
-                                icon: RiTrophyFill,
-                                accent: 'border-purple-500/20 shadow-[inset_0_0_15px_rgba(168,85,247,0.02)]'
+                                name: 'Premium Plan',
+                                price: '1,499',
+                                period: '/MO',
+                                desc: 'ELITE UNLIMITED OPERATIONS',
+                                color: 'from-[#16a34a] to-emerald-600',
+                                accent: 'emerald',
+                                popular: true,
+                                features: ['Unlimited Tactical Bookings', 'Full Arena & Court Access', '24/7 VIP Dedicated Link', 'Private Tournament Hosting']
                             }
-                        ].map((item, idx) => (
-                            <div 
-                                key={idx} 
-                                className={`bg-slate-950/40 border rounded-2xl p-6 flex flex-col items-center text-center transition-all duration-300 hover:-translate-y-1 hover:border-slate-800 ${item.accent} backdrop-blur-xl`}
+                        ].map((p, idx) => (
+                            <div
+                                key={idx}
+                                className={`relative group flex flex-col bg-slate-900 border transition-all duration-300 hover:-translate-y-1.5 rounded-2xl p-6 h-full ${p.popular
+                                    ? 'border-[#16a34a]/30 shadow-[0_20px_40px_rgba(0,0,0,0.5),0_0_20px_rgba(22,163,74,0.1)] z-20'
+                                    : 'border-white/5 hover:border-slate-800'
+                                    }`}
                             >
-                                <div className="w-12 h-12 bg-slate-900 border border-white/5 rounded-xl flex items-center justify-center text-blue-400 mb-6 shadow-lg">
-                                    <item.icon className="w-6 h-6 text-slate-300" />
+                                {p.popular && (
+                                    <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 z-30">
+                                        <span className="bg-[#16a34a] text-white text-[9px] font-black px-3.5 py-1 rounded-full shadow-lg tracking-widest uppercase italic">
+                                            MOST POPULAR
+                                        </span>
+                                    </div>
+                                )}
+                                <h3 className="text-lg font-black text-white italic tracking-tighter uppercase mb-1">{p.name}</h3>
+                                <p className="text-[9px] font-bold text-slate-500 tracking-wider mb-4 uppercase">{p.desc}</p>
+                                
+                                <div className="flex items-baseline gap-1 mb-6 pb-6 border-b border-white/5">
+                                    <span className="text-[9px] font-black text-slate-500 uppercase tracking-widest">INR</span>
+                                    <span className="text-3xl font-black text-white">{p.price}</span>
+                                    <span className="text-[9px] font-black text-slate-500 uppercase tracking-widest">{p.period}</span>
                                 </div>
-                                <h3 className="text-xs font-black uppercase text-white tracking-widest mb-3 leading-tight">{item.title}</h3>
-                                <p className="text-[10px] text-slate-400 font-semibold leading-relaxed">{item.desc}</p>
+
+                                <ul className="space-y-3 mb-8">
+                                    {p.features.map((f, fidx) => (
+                                        <li key={fidx} className="flex items-center gap-2.5">
+                                            <span className="w-1.5 h-1.5 rounded-full bg-[#16a34a]" />
+                                            <span className="text-[10px] font-semibold text-slate-400 uppercase tracking-wide">{f}</span>
+                                        </li>
+                                    ))}
+                                </ul>
+
+                                <button
+                                    onClick={() => navigate('/membership')}
+                                    className={`w-full py-3.5 text-[10px] font-black italic tracking-[0.2em] uppercase rounded-xl border transition-all duration-300 cursor-pointer ${
+                                        p.accent === 'slate'
+                                            ? 'bg-white/5 border-white/10 text-white hover:bg-white/10 hover:border-white/30 hover:shadow-[0_0_20px_rgba(255,255,255,0.05)]'
+                                            : p.accent === 'blue'
+                                                ? 'bg-gradient-to-r from-blue-600 to-indigo-600 border-blue-500/20 text-white hover:from-blue-500 hover:to-indigo-500 hover:shadow-[0_0_20px_rgba(59,130,246,0.3)]'
+                                                : 'bg-gradient-to-r from-emerald-500 to-[#16a34a] border-emerald-500/20 text-white hover:from-emerald-400 hover:to-green-500 hover:shadow-[0_0_20px_rgba(22,163,74,0.3)]'
+                                    }`}
+                                >
+                                    GET STARTED
+                                </button>
                             </div>
                         ))}
                     </div>
@@ -442,92 +398,83 @@ export default function HomePage() {
             </section>
 
             {/* ══════════════════════════════════════════════
-                SECTION 4: MEMBERSHIPS & PREMIUM PASSES
+                SECTION 3: WHY CHOOSE SPORTMATRIX (ECOSYSTEM STORYTELLING)
             ══════════════════════════════════════════════ */}
-            <section className="py-16 bg-[#020617] border-t border-white/5 relative overflow-hidden">
-                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[300px] bg-blue-600/5 rounded-full blur-[140px] pointer-events-none" />
+            <section className="py-16 bg-[#050b18] border-t border-white/5 relative overflow-hidden">
+                {/* Ambient Glow Effects */}
+                <div className="absolute top-[10%] left-[5%] w-[50vw] h-[50vw] bg-blue-600/[0.04] blur-[150px] rounded-full pointer-events-none" />
+                <div className="absolute bottom-[10%] right-[5%] w-[40vw] h-[40vw] bg-emerald-500/[0.03] blur-[130px] rounded-full pointer-events-none" />
+                <div className="absolute top-[40%] left-[50%] w-[30vw] h-[30vw] bg-purple-600/[0.03] blur-[120px] rounded-full pointer-events-none -translate-x-1/2" />
 
-                <div className="max-w-6xl mx-auto px-6 relative z-10">
+                <div className="max-w-7xl mx-auto px-6 relative z-10">
                     <div className="text-center mb-14">
-                        <span className="text-blue-400 text-[10px] font-black uppercase tracking-[0.25em] bg-blue-500/10 border border-blue-500/25 px-4 py-1.5 rounded-full">Clearance Levels</span>
-                        <h2 className="text-2xl md:text-4xl font-black italic uppercase tracking-tight text-white mt-3 mb-1.5">
-                            Premium <span className="text-blue-500">Membership</span> Passes
+                        <h2 className="text-2xl md:text-3xl lg:text-4xl font-black uppercase tracking-tight text-white mb-3 leading-[1.1]">
+                            Why Choose{' '}
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-500 drop-shadow-[0_0_30px_rgba(59,130,246,0.3)]">SportMatrix</span>
                         </h2>
-                        <p className="text-xs text-slate-400 max-w-lg mx-auto font-semibold">Select your operational pass clearance. Unlock priority scheduling limits and elite match deals</p>
+                        <div className="w-16 h-0.5 bg-gradient-to-r from-blue-500 to-cyan-400 mx-auto rounded-full shadow-[0_0_10px_rgba(59,130,246,0.4)]" />
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div 
+                        ref={ecosystemReveal.ref}
+                        className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-5 transition-all duration-[1000ms] ease-out ${
+                            ecosystemReveal.visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-16'
+                        }`}
+                    >
                         {[
                             {
-                                name: 'Bronze Pass',
-                                price: '₹499',
-                                desc: 'ENTRY MATCH PASS',
-                                border: 'border-slate-800',
-                                glow: '',
-                                label: 'DEEP ATHLETIC',
-                                features: ['5 Turf Sessions / Month', 'Standard Booking Priority', 'Basic Match Scheduler', 'Digital Hub Access', 'Canteen Split System']
+                                title: 'Smart Booking Engine',
+                                desc: 'Realtime session scheduler with dynamic pricing, peak-hour management, and weather-based auto-adjustments.',
+                                icon: MdStadium,
+                                gradient: 'from-blue-500 to-cyan-500',
+                                borderGlow: 'hover:border-blue-500/40 hover:shadow-[0_8px_30px_rgba(59,130,246,0.15),inset_0_0_20px_rgba(59,130,246,0.05)]',
+                                iconBg: 'bg-gradient-to-br from-blue-500/20 to-cyan-500/10 border-blue-500/20'
                             },
                             {
-                                name: 'Silver Arena',
-                                price: '₹999',
-                                desc: 'OPERATOR COMMAND PASS',
-                                border: 'border-blue-500/40 shadow-[0_0_25px_rgba(37,99,235,0.15)]',
-                                glow: 'from-blue-600 to-indigo-600',
-                                label: 'POPULAR CHOICE',
-                                active: true,
-                                features: ['15 Turf Sessions / Month', '1 Free Tournament Entry Pass', 'Priority Booking Windows', '10% Cafe & Shop Discount', 'Squad Management Hub']
+                                title: 'Multi-Sport Turf Hub',
+                                desc: 'Central architecture coordinating grass, clay, and turf-based athletic fields on a unified management ledger.',
+                                icon: GiCricketBat,
+                                gradient: 'from-emerald-500 to-green-500',
+                                borderGlow: 'hover:border-emerald-500/40 hover:shadow-[0_8px_30px_rgba(16,185,129,0.15),inset_0_0_20px_rgba(16,185,129,0.05)]',
+                                iconBg: 'bg-gradient-to-br from-emerald-500/20 to-green-500/10 border-emerald-500/20'
                             },
                             {
-                                name: 'Gold Elite',
-                                price: '₹1,999',
-                                desc: 'TACTICAL COMMAND CLEARANCE',
-                                border: 'border-purple-500/40 shadow-[0_0_25px_rgba(168,85,247,0.15)]',
-                                glow: 'from-purple-600 to-indigo-600',
-                                label: 'ELITE SELECTION',
-                                features: ['UNLIMITED Turf Sessions', '3 Free Tournament Passes', '24/7 Priority Venue Slots', '20% Canteen & Shop Discount', 'VIP Pro Lounge Access', 'Automatic Bracket Seats']
+                                title: 'POS Powered Billing',
+                                desc: 'Integrated cash splits, canteen orders, hardware rentals, and instant checkout with split payment engines.',
+                                icon: MdPayments,
+                                gradient: 'from-violet-500 to-purple-500',
+                                borderGlow: 'hover:border-violet-500/40 hover:shadow-[0_8px_30px_rgba(139,92,246,0.15),inset_0_0_20px_rgba(139,92,246,0.05)]',
+                                iconBg: 'bg-gradient-to-br from-violet-500/20 to-purple-500/10 border-violet-500/20'
+                            },
+                            {
+                                title: 'QR Access Controls',
+                                desc: 'Contactless slot verification, secure locker systems, and automated session-duration tracking checks.',
+                                icon: MdQrCodeScanner,
+                                gradient: 'from-amber-500 to-orange-500',
+                                borderGlow: 'hover:border-amber-500/40 hover:shadow-[0_8px_30px_rgba(245,158,11,0.15),inset_0_0_20px_rgba(245,158,11,0.05)]',
+                                iconBg: 'bg-gradient-to-br from-amber-500/20 to-orange-500/10 border-amber-500/20'
+                            },
+                            {
+                                title: 'Bracket Engine',
+                                desc: 'Automated tournament scheduling, squad bracket generators, and live leaderboard tracking systems.',
+                                icon: RiTrophyFill,
+                                gradient: 'from-rose-500 to-pink-500',
+                                borderGlow: 'hover:border-rose-500/40 hover:shadow-[0_8px_30px_rgba(244,63,94,0.15),inset_0_0_20px_rgba(244,63,94,0.05)]',
+                                iconBg: 'bg-gradient-to-br from-rose-500/20 to-pink-500/10 border-rose-500/20'
                             }
-                        ].map((pass, idx) => (
+                        ].map((item, idx) => (
                             <div 
                                 key={idx} 
-                                className={`relative group flex flex-col bg-slate-900 border transition-all duration-500 hover:-translate-y-2 rounded-2xl overflow-hidden ${pass.border}`}
+                                className={`group bg-slate-950/60 border border-white/[0.06] rounded-2xl p-7 flex flex-col items-center text-center transition-all duration-500 hover:-translate-y-2 backdrop-blur-xl ${item.borderGlow}`}
                             >
-                                {pass.active && (
-                                    <div className="absolute top-3 right-4 z-20">
-                                        <span className="bg-blue-500 text-white text-[8px] font-black tracking-widest px-3 py-1 rounded-full shadow-[0_0_15px_rgba(37,99,235,0.3)]">
-                                            {pass.label}
-                                        </span>
-                                    </div>
-                                )}
-
-                                <div className="p-8">
-                                    <h3 className="text-2xl font-black text-white italic tracking-tighter uppercase mb-1">{pass.name}</h3>
-                                    <p className="text-[9px] font-bold text-slate-500 tracking-wider mb-6">{pass.desc}</p>
-                                    
-                                    <div className="flex items-baseline gap-1 pb-6 border-b border-white/5">
-                                        <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">INR</span>
-                                        <span className="text-4xl font-black text-white tracking-tighter">{pass.price}</span>
-                                        <span className="text-[10px] text-slate-500 font-bold ml-1 uppercase">/mo</span>
-                                    </div>
-
-                                    <ul className="space-y-4 my-8 flex-1">
-                                        {pass.features.map((f, i) => (
-                                            <li key={i} className="flex items-center gap-3">
-                                                <HiShieldCheck className={`w-4.5 h-4.5 shrink-0 ${pass.active ? 'text-blue-400' : 'text-slate-600'}`} />
-                                                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wide">{f}</span>
-                                            </li>
-                                        ))}
-                                    </ul>
-
-                                    <button 
-                                        onClick={() => navigate('/membership')} 
-                                        className={`w-full py-3.5 text-[9px] font-black italic tracking-widest uppercase rounded-xl border transition-all duration-300 ${pass.active 
-                                            ? 'bg-gradient-to-r from-blue-600 to-indigo-600 border-none text-white hover:from-blue-500 hover:to-indigo-500 shadow-[0_4px_15px_rgba(37,99,235,0.25)]' 
-                                            : 'bg-transparent border-white/10 text-white hover:bg-white hover:text-slate-950 hover:border-white'
-                                        }`}
-                                    >
-                                        Authorize {pass.name}
-                                    </button>
+                                {/* Icon Container */}
+                                <div className={`w-14 h-14 ${item.iconBg} border rounded-2xl flex items-center justify-center mb-6 shadow-lg transition-all duration-500 group-hover:scale-110 group-hover:shadow-xl relative`}>
+                                    <item.icon className="w-7 h-7 text-white/80 group-hover:text-white transition-colors duration-300" />
                                 </div>
+                                <h3 className="text-sm font-black uppercase text-white tracking-wider mb-3 leading-tight">{item.title}</h3>
+                                <p className="text-xs text-slate-400 font-medium leading-relaxed">{item.desc}</p>
+                                {/* Bottom accent line */}
+                                <div className={`w-8 h-0.5 bg-gradient-to-r ${item.gradient} rounded-full mt-5 opacity-40 group-hover:opacity-100 group-hover:w-12 transition-all duration-500`} />
                             </div>
                         ))}
                     </div>
@@ -552,19 +499,16 @@ export default function HomePage() {
                         </span>
                         
                         <h2 className="text-2xl sm:text-4xl font-black italic uppercase text-white tracking-tight mb-4">
-                            “Run Your Turf or Gaming Arena Professionally”
+                            “Run Your Turf Professionally”
                         </h2>
                         
                         <p className="text-sm text-slate-400 max-w-2xl mx-auto leading-relaxed mb-10 font-semibold">
-                            Scale your business with SportMatrix. Oversee match bookings, coordinate gaming zones, handle cashless POS billing, launch tournaments, set subscription membership passes, and audit multi-branch operations within a unified command dashboard.
+                            Scale your business with SportMatrix. Oversee match bookings, handle cashless POS billing, launch tournaments, set subscription membership passes, and audit multi-branch operations within a unified command dashboard.
                         </p>
 
-                        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                            <button onClick={() => navigate('/owner')} className="px-10 py-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-black text-xs uppercase tracking-widest rounded-xl hover:from-blue-500 hover:to-indigo-500 shadow-[0_10px_25px_rgba(37,99,235,0.4)] hover:scale-[1.03] transition-all">
-                                Onboard Venue & Owners
-                            </button>
-                            <button onClick={() => navigate('/contact')} className="px-8 py-4 bg-slate-800 border border-white/10 hover:border-white/20 text-white font-black text-xs uppercase tracking-widest rounded-xl hover:bg-slate-700 transition-all">
-                                Request Demo
+                        <div className="flex justify-center items-center">
+                            <button onClick={() => navigate('/contact')} className="px-12 py-4 bg-gradient-to-r from-emerald-500 to-[#16a34a] hover:from-emerald-400 hover:to-green-500 text-white font-black text-xs uppercase tracking-widest rounded-xl hover:shadow-[0_0_30px_rgba(22,163,74,0.3)] transition-all transform hover:scale-[1.02] active:scale-[0.98] cursor-pointer">
+                                Request Demo & Onboard
                             </button>
                         </div>
                     </div>
