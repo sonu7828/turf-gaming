@@ -31,14 +31,17 @@ export default function OwnerManagement() {
             navigate('/login')
             return
         }
-        if (user && user.role !== 'SUPER_ADMIN') {
-            const roleRoutes = {
-                OWNER: '/dashboard/owner',
-                STAFF: '/dashboard/staff',
-                CUSTOMER: '/dashboard/customer'
+        if (user) {
+            const normalizeRole = (r) => (r || '').toUpperCase().replace(/[-_]/g, '');
+            const rNorm = normalizeRole(user.role);
+            if (rNorm !== 'SUPERADMIN') {
+                const roleRoutes = {
+                    OWNER: '/dashboard/owner',
+                    STAFF: '/dashboard/staff',
+                    CUSTOMER: '/dashboard/customer'
+                }
+                navigate(roleRoutes[rNorm] || '/dashboard/customer')
             }
-            const roleUpper = (user.role || '').toUpperCase()
-            navigate(roleRoutes[roleUpper] || '/dashboard/customer')
         }
     }, [user, token, navigate])
 

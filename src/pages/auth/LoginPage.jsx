@@ -4,7 +4,7 @@ import { useAuth } from '../../context/AuthContext'
 
 export default function LoginPage() {
     const navigate = useNavigate()
-    const { login, token, user } = useAuth()
+    const { login, logout, token, user } = useAuth()
     
     const [form, setForm] = useState({ email: '', password: '', role: 'customer' })
     const [error, setError] = useState('')
@@ -14,16 +14,22 @@ export default function LoginPage() {
     // Redirect already authenticated users
     useEffect(() => {
         if (token && user) {
+            const normalizeRole = (r) => (r || '').toUpperCase().replace(/[-_]/g, '');
+            const rNorm = normalizeRole(user.role);
             const roleRoutes = {
-                SUPER_ADMIN: '/dashboard/super-admin',
+                SUPERADMIN: '/dashboard/super-admin',
                 OWNER: '/dashboard/owner',
                 STAFF: '/dashboard/staff',
                 CUSTOMER: '/dashboard/customer'
             };
-            const roleUpper = (user.role || '').toUpperCase();
-            navigate(roleRoutes[roleUpper] || '/dashboard/customer');
+            if (roleRoutes[rNorm]) {
+                navigate(roleRoutes[rNorm]);
+            } else {
+                console.warn('Unknown user role:', user.role);
+                logout();
+            }
         }
-    }, [token, user, navigate]);
+    }, [token, user, navigate, logout]);
 
     const handleEmailChange = (e) => {
         setForm({ ...form, email: e.target.value });
@@ -91,18 +97,8 @@ export default function LoginPage() {
         setIsSubmitting(true)
         
         try {
-            const authenticatedUser = await login(form.email, form.password, form.role)
-            
-            const roleRoutes = {
-                SUPER_ADMIN: '/dashboard/super-admin',
-                OWNER: '/dashboard/owner',
-                STAFF: '/dashboard/staff',
-                CUSTOMER: '/dashboard/customer'
-            };
-
-            // Success Redirect
-            const roleUpper = (authenticatedUser.role || '').toUpperCase();
-            navigate(roleRoutes[roleUpper] || '/dashboard/customer')
+            await login(form.email, form.password, form.role)
+            // Success redirect is handled reactively by the useEffect hook on token/user state change
         } catch (err) {
             // Handle error messages returned from backend or role mismatch
             if (err.response && err.response.data && err.response.data.message) {
@@ -128,7 +124,7 @@ export default function LoginPage() {
                 <div className="relative z-10 text-white max-w-md">
                     <div className="flex items-center gap-3 mb-8">
                         <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center font-black text-slate-950 text-xl shadow-[0_0_30px_rgba(16,185,129,0.4)] border border-emerald-300/50">
-                            <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                            <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zm0 15l10 5 10-5M2 12l10 5 10-5"/></svg>
                         </div>
                         <span className="text-2xl font-black uppercase tracking-widest italic text-transparent bg-clip-text bg-gradient-to-r from-white to-slate-400">SportMatrix</span>
                     </div>
@@ -150,7 +146,7 @@ export default function LoginPage() {
                 <div className="w-full max-w-md">
                     <div className="flex flex-col items-center mb-8">
                         <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center font-black text-slate-950 text-lg shadow-[0_0_25px_rgba(16,185,129,0.3)] mb-4 border border-emerald-300/50">
-                            <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                            <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zm0 15l10 5 10-5M2 12l10 5 10-5"/></svg>
                         </div>
                         <span className="text-2xl font-black uppercase tracking-widest italic text-transparent bg-clip-text bg-gradient-to-r from-white to-slate-400">SportMatrix</span>
                     </div>
@@ -215,7 +211,6 @@ export default function LoginPage() {
                             </div>
                         )}
                     </form>
-
 
                     <p className="text-center text-sm text-slate-500 font-medium mt-8">
                         Don&apos;t have an account?{' '}

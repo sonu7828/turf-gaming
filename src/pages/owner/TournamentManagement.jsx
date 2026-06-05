@@ -7,6 +7,7 @@ import Modal from '../../components/ui/Modal'
 import Input from '../../components/ui/Input'
 import Select from '../../components/ui/Select'
 import BracketComponent from '../../components/ui/BracketComponent'
+import ConfirmDialog from '../../components/ui/ConfirmDialog'
 import { useToast } from '../../components/ui/Toast'
 import { HiPlus, HiCalendar, HiCurrencyRupee, HiUsers, HiLightningBolt } from 'react-icons/hi'
 import { HiTrophy } from 'react-icons/hi2'
@@ -47,6 +48,14 @@ export default function TournamentManagement() {
         maxTeams: '16',
         date: ''
     })
+
+    const [deleteConfirm, setDeleteConfirm] = useState({ open: false, id: null, name: '' })
+
+    const handleDeleteTournament = () => {
+        setTournaments(prev => prev.filter(t => t.id !== deleteConfirm.id))
+        setDeleteConfirm({ open: false, id: null, name: '' })
+        addToast({ title: 'Tournament Deleted', message: `${deleteConfirm.name} has been removed`, type: 'success' })
+    }
 
     const handleCreateTournament = () => {
         if (!newTourney.name || !newTourney.entryFee || !newTourney.prize || !newTourney.date) {
@@ -95,6 +104,20 @@ export default function TournamentManagement() {
             key: 'status',
             label: 'Status',
             render: v => <Badge variant={v === 'Active' ? 'success' : v === 'Upcoming' ? 'warning' : 'default'} dot>{v}</Badge>
+        },
+        { 
+            key: 'action', 
+            label: '', 
+            render: (_, r) => (
+                <div className="flex justify-end">
+                    <button 
+                        onClick={() => setDeleteConfirm({ open: true, id: r.id, name: r.name })} 
+                        className="p-1.5 text-surface-400 hover:text-danger-600 hover:bg-danger-50 rounded-lg transition-colors cursor-pointer"
+                    >
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+                    </button>
+                </div>
+            ) 
         },
     ]
 

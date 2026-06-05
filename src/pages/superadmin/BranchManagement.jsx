@@ -34,11 +34,15 @@ export default function BranchManagement() {
         if (!authLoading) {
             if (!user) {
                 navigate('/login')
-            } else if (user.role !== 'SUPER_ADMIN') {
-                if (user.role === 'OWNER') navigate('/dashboard/owner')
-                else if (user.role === 'STAFF') navigate('/dashboard/staff')
-                else if (user.role === 'CUSTOMER') navigate('/dashboard/customer')
-                else navigate('/login')
+            } else {
+                const normalizeRole = (r) => (r || '').toUpperCase().replace(/[-_]/g, '');
+                const rNorm = normalizeRole(user.role);
+                if (rNorm !== 'SUPERADMIN') {
+                    if (rNorm === 'OWNER') navigate('/dashboard/owner')
+                    else if (rNorm === 'STAFF') navigate('/dashboard/staff')
+                    else if (rNorm === 'CUSTOMER') navigate('/dashboard/customer')
+                    else navigate('/login')
+                }
             }
         }
     }, [user, authLoading, navigate])

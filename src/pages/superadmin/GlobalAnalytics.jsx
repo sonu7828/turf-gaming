@@ -41,13 +41,17 @@ export default function GlobalAnalytics() {
         if (!authLoading) {
             if (!user) {
                 navigate('/login')
-            } else if (user.role !== 'SUPER_ADMIN') {
-                const routesMap = {
-                    OWNER: '/dashboard/owner',
-                    STAFF: '/dashboard/staff',
-                    CUSTOMER: '/dashboard/customer'
+            } else {
+                const normalizeRole = (r) => (r || '').toUpperCase().replace(/[-_]/g, '');
+                const rNorm = normalizeRole(user.role);
+                if (rNorm !== 'SUPERADMIN') {
+                    const routesMap = {
+                        OWNER: '/dashboard/owner',
+                        STAFF: '/dashboard/staff',
+                        CUSTOMER: '/dashboard/customer'
+                    }
+                    navigate(routesMap[rNorm] || '/login')
                 }
-                navigate(routesMap[user.role] || '/login')
             }
         }
     }, [user, authLoading, navigate])

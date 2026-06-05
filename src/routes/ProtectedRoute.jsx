@@ -23,17 +23,18 @@ export default function ProtectedRoute({ children, allowedRoles }) {
 
     // Redirect to unauthorized user dashboard if role is not permitted
     if (allowedRoles && user) {
-        const userRoleUpper = (user.role || '').toUpperCase();
-        const allowedRolesUpper = allowedRoles.map(r => r.toUpperCase());
-        
-        if (!allowedRolesUpper.includes(userRoleUpper)) {
+        const normalizeRole = (r) => (r || '').toUpperCase().replace(/[-_]/g, '');
+        const userRoleNorm = normalizeRole(user.role);
+        const allowedRolesNorm = allowedRoles.map(r => normalizeRole(r));
+
+        if (!allowedRolesNorm.includes(userRoleNorm)) {
             const roleRoutes = {
-                SUPER_ADMIN: '/dashboard/super-admin',
+                SUPERADMIN: '/dashboard/super-admin',
                 OWNER: '/dashboard/owner',
                 STAFF: '/dashboard/staff',
                 CUSTOMER: '/dashboard/customer',
             };
-            const targetRoute = roleRoutes[userRoleUpper] || '/login';
+            const targetRoute = roleRoutes[userRoleNorm] || '/login';
             return <Navigate to={targetRoute} replace />;
         }
     }

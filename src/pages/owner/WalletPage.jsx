@@ -182,7 +182,7 @@ export default function WalletPage() {
             </Modal>
 
             {/* Success withdrawal alert */}
-            {lastBill === null && successModal && (
+            {successModal && (
                 <Modal isOpen={successModal} onClose={() => setSuccessModal(false)} title="Payout Processing" size="sm">
                     <div className="text-center py-6 space-y-4 animate-in zoom-in duration-300">
                         <div className="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto text-3xl">

@@ -3,10 +3,12 @@ import DataTable from '../../components/ui/DataTable'
 import Badge from '../../components/ui/Badge'
 import Button from '../../components/ui/Button'
 import Modal from '../../components/ui/Modal'
+import Card from '../../components/ui/Card'
 import Input from '../../components/ui/Input'
 import Select from '../../components/ui/Select'
 import { useToast } from '../../components/ui/Toast'
-import { HiUsers, HiPlus, HiPencil, HiTrash, HiCheckCircle, HiBan, HiOutlineClock } from 'react-icons/hi'
+import { HiOutlineClock, HiUsers, HiPlus, HiPencil, HiTrash, HiCheckCircle, HiBan } from 'react-icons/hi'
+import ConfirmDialog from '../../components/ui/ConfirmDialog'
 
 const initialStaff = [
     { id: 1, name: 'Ravi Kumar', email: 'ravi@email.com', role: 'Manager', phone: '+91 98765 43210', shift: 'Morning', status: 'Active' },
@@ -20,6 +22,7 @@ export default function StaffManagement() {
     const [staff, setStaff] = useState(initialStaff)
     const [modal, setModal] = useState(false)
     const [editMode, setEditMode] = useState(false)
+    const [deleteConfirm, setDeleteConfirm] = useState({ open: false, id: null, name: '' })
 
     // Form inputs state
     const [currentStaff, setCurrentStaff] = useState({
@@ -62,8 +65,9 @@ export default function StaffManagement() {
         setModal(true)
     }
 
-    const handleDelete = (id) => {
-        setStaff(staff.filter(s => s.id !== id))
+    const handleRemove = () => {
+        setStaff(staff.filter(s => s.id !== deleteConfirm.id))
+        setDeleteConfirm({ open: false, id: null, name: '' })
         addToast({ title: 'Staff Deleted', message: 'Employee details deleted from database records', type: 'info' })
     }
 
@@ -101,7 +105,7 @@ export default function StaffManagement() {
                     <button onClick={() => handleToggleStatus(r.id)} className={`p-1.5 rounded-xl border border-surface-200 cursor-pointer ${r.status === 'Active' ? 'hover:bg-red-50 text-red-500' : 'hover:bg-emerald-50 text-emerald-500'}`}>
                         {r.status === 'Active' ? <HiBan className="w-4 h-4" /> : <HiCheckCircle className="w-4 h-4" />}
                     </button>
-                    <button onClick={() => handleDelete(r.id)} className="p-1.5 rounded-xl border border-surface-200 hover:bg-red-50 text-red-650 cursor-pointer">
+                    <button onClick={() => setDeleteConfirm({ open: true, id: r.id, name: r.name })} className="p-1.5 rounded-xl border border-surface-200 hover:bg-red-50 text-red-650 cursor-pointer">
                         <HiTrash className="w-4 h-4" />
                     </button>
                 </div>
